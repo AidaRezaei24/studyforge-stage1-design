@@ -1,0 +1,5 @@
+Stage 1 project repository:
+https://github.com/AidaRezaei24/studyforge-stage1-design
+
+Stage 1 PDF:
+https://github.com/AidaRezaei24/studyforge-stage1-design/blob/main/StudyForge_Stage1_Project_Design_Report.pdf
