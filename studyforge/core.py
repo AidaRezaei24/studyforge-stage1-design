@@ -199,3 +199,98 @@ class CalendarAdapter:
         Path(path).write_bytes(('\r\n'.join(folded) + '\r\n').encode())
         return str(Path(path).resolve())
 
+
+class SessionState:
+    def handle(self, session, action):
+        raise ValueError(f'Cannot {action} a {session["state"]} session.')
+
+
+class ActiveState(SessionState):
+    def handle(self, session, action):
+        if action == 'pause':
+            session['resume_state'], session['state'] = session['state'], 'paused'
+        elif action == 'stop':
+            session['state'] = 'stopped'
+        elif action in {'advance', 'skip'}:
+            return True
+        else:
+            return super().handle(session, action)
+        return False
+
+
+class PausedState(SessionState):
+    def handle(self, session, action):
+        if action == 'resume':
+            session['state'] = session.pop('resume_state', 'learn')
+        elif action == 'stop':
+            session['state'] = 'stopped'
+        else:
+            return super().handle(session, action)
+        return False
+
+
+class TerminalState(SessionState):
+    pass
+
+
+class ToolRegistry:
+    def __init__(self, **tools):
+        self.tools = tools
+
+    def execute(self, name, **kwargs):
+        if name not in self.tools:
+            raise ValueError('Unknown session tool.')
+        return self.tools[name](**kwargs)
+
+
+class AgentOrchestrator:
+    states = {'learn': ActiveState(), 'practice': ActiveState(), 'review': ActiveState(),
+              'paused': PausedState(), 'completed': TerminalState(), 'stopped': TerminalState()}
+
+    def __init__(self, repo, learning, events):
+        self.repo, self.learning, self.events = repo, learning, events
+        self.tools = ToolRegistry(explain=learning.ask, practice=learning.quiz)
+
+    def start(self, course, goal, minutes):
+        if not isinstance(goal, str) or not goal.strip() or type(minutes) is not int or not 5 <= minutes <= 120:
+            raise ValueError('A goal and session duration of 5-120 minutes are required.')
+        self.repo.get(course, 'course')
+        return self.repo.save('session', course, {'goal': goal.strip(), 'minutes': minutes, 'state': 'learn',
+                              'started_at': now(), 'results': [], 'steps': ['learn', 'practice', 'review'], 'step': 0})
+
+    def run(self, session_id, action):
+        session = self.repo.get(session_id, 'session')
+        execute = self.states[session['state']].handle(session, action)
+        if execute and datetime.now(tz.utc) >= datetime.fromisoformat(session['started_at']) + timedelta(minutes=session['minutes']):
+            session['state'] = 'completed'
+            session['completion_reason'] = 'Time budget reached.'
+            saved = self.repo.save('session', session['course'], session)
+            self.events.publish('SessionAdvanced', {'course': session['course'], 'session_id': session_id, 'state': 'completed'})
+            return saved
+        if execute:
+            state = session['state']
+            try:
+                if action == 'skip':
+                    result = {'skipped': state}
+                elif state == 'learn':
+                    result = self.tools.execute('explain', course=session['course'], question=session['goal'])
+                elif state == 'practice':
+                    progress = ProgressService(self.repo).get_snapshot(session['course'])
+                    weak = sorted(progress['topics'], key=lambda t: t['mastery'])
+                    topic = weak[0]['topic'] if weak else session['goal']
+                    difficulty = 'introductory' if weak and weak[0]['mastery'] < .4 else 'intermediate'
+                    result = self.tools.execute('practice', course=session['course'], topic=topic, count=2, difficulty=difficulty)
+                else:
+                    result = {'summary': 'Session activities completed. Review saved explanations and submit the generated quiz for feedback.',
+                              'progress': ProgressService(self.repo).get_snapshot(session['course'])}
+                session['results'].append({'step': state, 'result': result})
+                session['step'] += 1
+                session['state'] = session['steps'][session['step']] if session['step'] < len(session['steps']) else 'completed'
+                session.pop('error', None)
+            except (ValueError, OSError):
+                session['resume_state'], session['state'] = state, 'paused'
+                session['error'] = 'Activity failed. Check model configuration or evidence, then resume and retry.'
+        saved = self.repo.save('session', session['course'], session)
+        self.events.publish('SessionAdvanced', {'course': session['course'], 'session_id': session_id, 'state': session['state']})
+        return saved
+
