@@ -230,3 +230,141 @@ class ConceptGraphStrategy(GenerationStrategy):
                 edges.append(candidate)
         return {"nodes": list(nodes.values()), "edges": edges}
 
+
+class FlashcardStrategy(GenerationStrategy):
+    task = "flashcards"
+    instructions = 'Return {"cards":[{"front":"question", "back":"answer", "topic":"concept", "citations":["chunk-id"]}]}. Match requested count with distinct evidence-grounded cards.'
+
+    def validate(self, result, evidence, payload):
+        items = result.get("cards")
+        if not isinstance(items, list) or len(items) != payload["count"]:
+            raise LearningError("Flashcard count does not match the request.")
+        seen = set()
+        for item in items:
+            _mapping(item)
+            for field in ("front", "back", "topic"):
+                item[field] = _text(item.get(field), field)
+            normalized = " ".join(item["front"].casefold().split())
+            if normalized in seen:
+                raise LearningError("Duplicate flashcard question.")
+            seen.add(normalized)
+            self.verifier.verify(item.get("citations"), evidence)
+            item.update(id=uuid.uuid4().hex, due=date.today().isoformat(), interval=0)
+        return {"cards": items}
+
+
+class QuizStrategy(GenerationStrategy):
+    task = "quiz"
+    instructions = 'Return {"items":[{"question":"question", "type":"choice|free", "options":["choice text"], "answer":"exact correct option text or reference answer", "rubric":"grading criteria", "topic":"concept", "citations":["chunk-id"]}]}. Use distinct questions. Choice questions require 2-6 unique options and answer equal to one option. Free-response requires a nonempty rubric. Match requested count.'
+
+    def validate(self, result, evidence, payload):
+        items = result.get("items")
+        if not isinstance(items, list) or len(items) != payload["count"]:
+            raise LearningError("Quiz count does not match the request.")
+        seen = set()
+        for item in items:
+            _mapping(item)
+            for field in ("question", "answer", "topic"):
+                item[field] = _text(item.get(field), field)
+            key = " ".join(item["question"].casefold().split())
+            if key in seen:
+                raise LearningError("Duplicate quiz question.")
+            seen.add(key)
+            if item.get("type") == "choice":
+                options = item.get("options")
+                if not isinstance(options, list) or not 2 <= len(options) <= 6:
+                    raise LearningError("Choice questions require 2-6 options.")
+                options = [_text(option, "option") for option in options]
+                if len(set(options)) != len(options) or item["answer"] not in options:
+                    raise LearningError("Choice answer must match a unique option.")
+                item["options"] = options
+            elif item.get("type") == "free":
+                item["rubric"] = _text(item.get("rubric"), "rubric")
+            else:
+                raise LearningError("Quiz question type must be choice or free.")
+            self.verifier.verify(item.get("citations"), evidence)
+            item["id"] = uuid.uuid4().hex
+        return {"items": items}
+
+
+class LearningService:
+    def __init__(self, repository, gateway, events):
+        self.repository, self.gateway, self.events = repository, gateway, events
+        self.ingest = DocumentIngestTool(repository, events)
+        self.retrieval = RetrievalTool(repository)
+
+    def import_materials(self, course, paths):
+        if not paths:
+            raise LearningError("Select at least one material file.")
+        return self.ingest.execute(course, paths)
+
+    def _generate(self, strategy, kind, course, query="", material=None, **payload):
+        evidence = self.retrieval.execute(course, query, material)
+        total = sum(len(m["chunks"]) for m in self.repository.list("material", course)
+                    if material is None or m["id"] == material)
+        coverage = {"retrieved_chunks": len(evidence), "available_chunks": total,
+                    "partial": len(evidence) < total,
+                    "note": "Generation covers the displayed retrieved excerpts only."}
+        result = strategy(self.gateway).generate(evidence, dict(payload, coverage=coverage))
+        result.update(evidence=evidence, coverage=coverage, **payload)
+        return self.repository.save(kind, course, result)
+
+    def summarize(self, course, material=None, detail="concise", focus=""):
+        if detail not in {"concise", "detailed"}:
+            raise LearningError("Detail must be concise or detailed.")
+        return self._generate(SummaryStrategy, "summary", course, query=focus, material=material, detail=detail, focus=focus)
+
+    def concepts(self, course, material=None, topic=""):
+        return self._generate(ConceptGraphStrategy, "graph", course, query=topic, material=material, topic=topic)
+
+    def ask(self, course, question):
+        question = _text(question, "question")
+        history = self.repository.list("conversation", course)[-4:]
+        memory = [{"question": item["question"], "text": item["text"]} for item in history]
+        return self._generate(GroundedAnswerStrategy, "conversation", course, query=question,
+                              question=question, memory=memory,
+                              plan=["retrieve scoped evidence", "answer from evidence", "verify citations", "remember turn"])
+
+    def flashcards(self, course, topic="", count=5, difficulty="mixed"):
+        self._count(count)
+        self._difficulty(difficulty)
+        return self._generate(FlashcardStrategy, "deck", course, query=topic, topic=topic, count=count, difficulty=difficulty)
+
+    def quiz(self, course, topic="", count=5, difficulty="mixed"):
+        self._count(count)
+        self._difficulty(difficulty)
+        return self._generate(QuizStrategy, "quiz", course, query=topic, topic=topic, count=count, difficulty=difficulty)
+
+    def card_update(self, course, deck_id, card_id, front=None, back=None, reject=False):
+        deck = self.repository.get(deck_id, "deck")
+        if deck.get("course") != course:
+            raise LearningError("Deck does not belong to this course.")
+        card = next((c for c in deck["cards"] if c["id"] == card_id), None)
+        if card is None:
+            raise LearningError("Card not found in this deck.")
+        for field, value in (("front", front), ("back", back)):
+            if value is not None:
+                card[field] = _text(value, field)
+                card["user_edited"] = True
+        if not isinstance(reject, bool):
+            raise LearningError("Reject must be true or false.")
+        card["rejected"] = reject
+        return self.repository.save("deck", course, deck)
+
+    def due_queue(self, course, deck_id=None, on_date=None):
+        day = date.fromisoformat(on_date) if on_date else date.today()
+        return {"date": day.isoformat(), "cards": [dict(c, deck_id=d["id"])
+                for d in self.repository.list("deck", course)
+                if deck_id is None or d["id"] == deck_id
+                for c in d["cards"] if not c.get("rejected") and
+                date.fromisoformat(c["due"][:10]) <= day]}
+
+    @staticmethod
+    def _count(count):
+        if isinstance(count, bool) or not isinstance(count, int) or not 1 <= count <= 20:
+            raise LearningError("Count must be an integer between 1 and 20.")
+
+    @staticmethod
+    def _difficulty(difficulty):
+        if difficulty not in {"mixed", "introductory", "intermediate", "advanced"}:
+            raise LearningError("Difficulty must be mixed, introductory, intermediate, or advanced.")
