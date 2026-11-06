@@ -197,7 +197,7 @@ class GroundedAnswerStrategy(SummaryStrategy):
 
 class ConceptGraphStrategy(GenerationStrategy):
     task = "concepts"
-    instructions = 'Return {"nodes":[{"name":"concept", "confidence":0.9, "citations":["chunk-id"]}], "edges":[{"source":"concept name", "target":"concept name", "type":"prerequisite|related-to", "confidence":0.8, "citations":["chunk-id"]}]}. Confidence must be in [0,1]. All relations must be supported by evidence.'
+    instructions = 'Return {"nodes":[{"name":"concept", "confidence":0.9, "citations":["chunk-id"]}], "edges":[{"source":"concept name", "target":"concept name", "type":"prerequisite|related-to", "confidence":0.8, "citations":["chunk-id"]}]}. Confidence must be in [0,1]. Emit an edge only when a cited passage explicitly states a relationship between its endpoints. Co-occurrence, a common category, adjacent sections, or document order are not relationship evidence. Do not infer prerequisites. Return edges:[] when no relationships are explicit.'
 
     def validate(self, result, evidence, payload):
         nodes = {}
