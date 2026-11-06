@@ -147,7 +147,7 @@ def footer(c, doc):
     c.setFont('Helvetica', 8)
     c.setFillColor(ACCENT)
     c.drawString(55, h - 31, 'STUDYFORGE  /  STAGE 2 IMPLEMENTATION')
-    c.drawString(55, 31, 'EECS3311  |  November 12, 2026  |  Live sample validated; videos pending')
+    c.drawString(55, 31, 'EECS3311  |  November 15, 2026  |  Video timestamps supplied')
     c.drawRightString(w - 55, 31, str(doc.page))
 
 
@@ -157,6 +157,7 @@ def build():
     feature_map = (ROOT / 'docs/feature-map.md').read_text()
     live = json.loads((ROOT / 'docs/live-verification.json').read_text())
     usage = json.loads((ROOT / 'docs/runtime-usage.json').read_text())
+    demos = json.loads((ROOT / 'docs/demo-index.json').read_text())
     test_count = unittest.defaultTestLoader.discover(str(ROOT / 'tests')).countTestCases()
     log = subprocess.run(['git', 'log', 'ee6d35a..HEAD', '--format=%H%x09%aI%x09%s'], cwd=ROOT,
                          capture_output=True, text=True, check=True).stdout
@@ -167,7 +168,7 @@ def build():
     overview = '''# StudyForge
 ## Stage 2 Implementation Report
 
-EECS3311 Software Design / Fall 2026 / Prepared November 12, 2026, Toronto local time.
+EECS3311 Software Design / Fall 2026 / Prepared November 12, 2026; updated November 15, 2026, Toronto local time.
 
 ### 1 Project overview and implementation status
 
@@ -199,8 +200,8 @@ reminders before that final run. Acceptance covers the bundled sample, not every
 possible future input. The key remains private in ignored local configuration.
 
 Submission is not complete. The owner will review the application and generated
-output, record and upload all feature demonstrations, add accessible
-timestamped links, supply measured AI usage/cost accounting and submit the course
+output, verify access and coverage of the supplied timestamped demonstration
+recording, supply measured AI usage/cost accounting and submit the course
 repository URL. Historical weekly activity is absent in the original repository;
 current commits do not establish development or pushes in the required past periods.
 The original November 10 deadline has passed. No grade or on-time status is claimed.
@@ -371,11 +372,12 @@ Sections 2-4 account for every original feature and affected class/pattern.
     markdown('## Current implementation commits\nThese are actual implementation commits available when this report was generated, not substitutes for missing historical activity. The report-packaging commit itself is not listed.\n' + '\n\n'.join(commit_paragraphs), story)
     markdown('## Reproduction and remaining gates\nRun python -m unittest discover -s tests -v and make check after installing with python -m pip install -e . . The suite passed ' + str(test_count) + ' tests at the final verification recorded for this report. Python compilation, JavaScript syntax, credential scanning, package installation and PDF visual checks are separate release checks. No Stage 3 KUMA validation is claimed.\n\nA production launch without credentials must show a configuration error; test fixtures are never accepted as live LLM evidence. Record actual live results before claiming final feature acceptance. Confirm all source/report files are pushed to the public repository and verify video access signed out before course submission.', story)
     story.append(PageBreak())
-    markdown('# 7 Demonstration index\nThe owner selected the recording-guide workflow. No videos have yet been recorded or supplied in this session. All twelve rows remain pending; no accessible link or real timestamp is invented. docs/demonstrations.md contains exact GUI/CLI invocation, input, expected result, alternative/error and AI explanation for each segment. docs/demo-index.json is the machine-readable index to update after uploading.\n\nA combined recording is acceptable only when each feature has a direct timestamped link. Record the running application with the real provider and show both GUI and CLI collectively; screenshots, this report and test fixtures are not video demonstrations. Avoid recording .env or account credentials.', story)
-    for i in range(1, 13):
-        feature = re.search(r'^## (F%02d .+)$' % i, feature_map, re.M).group(1)
-        markdown('### ' + feature + '\nStatus: awaiting owner recording and upload. Video link: not supplied. Actual timestamp: not supplied. Planned segment: F%02d. See the same feature heading in docs/demonstrations.md.' % i, story)
-    markdown('## References and final ownership\nStage 1 source: StudyForge_Stage1_Project_Design_Report.pdf (40 pages, unchanged). Stage 2 requirements: Project-Stage2-Instruction.pdf (5 pages, supplied locally; not republished without need).\n\nOfficial API contract: [Structured model outputs](https://developers.openai.com/api/docs/guides/structured-outputs). JSON mode guarantees JSON shape only; application validators provide feature-level checks.\n\nThe student must review and understand the code, verify model output and billing, complete recordings and submit the repository through the course system. This report describes verified source and explicit limitations rather than claiming every submission gate has passed.', story)
+    markdown('# 7 Demonstration index\nThe owner supplied a combined YouTube recording and all twelve feature start times on November 15, 2026. The links below use those supplied times. Playback access and feature coverage have not been independently verified. F11 starts before F10 in the supplied recording order. docs/demonstrations.md retains the reproduction guide; docs/demo-index.json is the source for this index.', story)
+    for entry in demos['features']:
+        feature = re.search(r'^## (' + entry['feature_id'] + r' .+)$', feature_map, re.M).group(1)
+        markdown('### ' + feature + '\nOwner-reported recording. Start: ' + entry['timestamp']
+                 + '. [Watch this feature](' + entry['video_url'] + '). Playback and coverage await independent verification.', story)
+    markdown('## References and final ownership\nStage 1 source: StudyForge_Stage1_Project_Design_Report.pdf (40 pages, unchanged). Stage 2 requirements: Project-Stage2-Instruction.pdf (5 pages, supplied locally; not republished without need).\n\nOfficial API contract: [Structured model outputs](https://developers.openai.com/api/docs/guides/structured-outputs). JSON mode guarantees JSON shape only; application validators provide feature-level checks.\n\nThe student must review and understand the code, verify model output and billing, verify the supplied recordings and submit the repository through the course system. This report describes verified source and explicit limitations rather than claiming every submission gate has passed.', story)
     doc = SimpleDocTemplate(str(ROOT / 'stage2-report.pdf'), pagesize=A4, leftMargin=55, rightMargin=55,
                             topMargin=60, bottomMargin=55, title='StudyForge Stage 2 Implementation Report',
                             author='StudyForge project / AidaRezaei24')

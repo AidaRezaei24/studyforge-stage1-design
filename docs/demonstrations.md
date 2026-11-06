@@ -1,11 +1,27 @@
 # Recording the Stage 2 demonstrations
 
-**Status: awaiting owner recording and upload.** No video has been recorded or
-verified by the implementation agent. The segment order below is a recording
-plan, not an assertion that a demonstration exists. Populate
-[`demo-index.json`](demo-index.json) with actual public or instructor-accessible
-video URLs and actual start timestamps after recording. One combined recording
-is acceptable if every feature has a clearly identified segment.
+**Status: owner supplied the recording and all twelve feature start times.**
+
+Recording: [StudyForge Stage 2 demonstration](https://youtu.be/vovxVKUw2TE).
+The owner supplied the recording and timestamps on November 15, 2026. Playback
+access and feature coverage have not been independently verified. F11 appears
+before F10 in the supplied recording order. The guide below remains available
+for reproducing the demonstrations.
+
+| Feature | Start | Direct video link |
+| --- | --- | --- |
+| F01 Material Ingestion and Indexing | 0:32 | [Watch](https://youtu.be/vovxVKUw2TE?t=32) |
+| F02 Grounded Material Summaries | 1:30 | [Watch](https://youtu.be/vovxVKUw2TE?t=90) |
+| F03 Concept Extraction and Knowledge Map | 2:10 | [Watch](https://youtu.be/vovxVKUw2TE?t=130) |
+| F04 Grounded Question Answering | 2:56 | [Watch](https://youtu.be/vovxVKUw2TE?t=176) |
+| F05 Personalized Study Plan | 4:20 | [Watch](https://youtu.be/vovxVKUw2TE?t=260) |
+| F06 Flashcard Generation and Review | 5:35 | [Watch](https://youtu.be/vovxVKUw2TE?t=335) |
+| F07 Quiz Generation | 7:00 | [Watch](https://youtu.be/vovxVKUw2TE?t=420) |
+| F08 Automatic Grading and Explanations | 8:20 | [Watch](https://youtu.be/vovxVKUw2TE?t=500) |
+| F09 Weak-Topic Diagnosis and Adaptive Practice | 9:47 | [Watch](https://youtu.be/vovxVKUw2TE?t=587) |
+| F10 Progress and Mastery Analytics | 11:30 | [Watch](https://youtu.be/vovxVKUw2TE?t=690) |
+| F11 Study Scheduling and Reminders | 10:40 | [Watch](https://youtu.be/vovxVKUw2TE?t=640) |
+| F12 Orchestrated Focused Study Session | 12:10 | [Watch](https://youtu.be/vovxVKUw2TE?t=730) |
 
 Use the submitted application with the real configured LLM provider. Test-only
 model fixtures are not demonstration responses. Read and assess generated output

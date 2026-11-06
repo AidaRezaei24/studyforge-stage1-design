@@ -17,8 +17,8 @@ This checklist distinguishes implemented source from evidence still required.
 | Updated diagrams | Class/use-case views and 9 sequence diagrams cover original 11 interaction shapes | Prepared |
 | AI collaboration log and total costs | Collaboration log; runtime token ledger and explicit price estimate | Measured account charges and development-tool usage export still needed |
 | Weekly code commits and links | Real history audited for Toronto reporting periods; current implementation links in report | Historical minimum not met; new dates not substituted |
-| Every feature demonstrated on video | `demonstrations.md` gives all 12 recording scripts; `demo-index.json` has explicit pending entries | Owner recording/upload pending |
-| Video access and timestamps | Verify each real uploaded link signed out; add direct segment timestamps | Pending |
+| Every feature demonstrated on video | Owner supplied [a YouTube recording](https://youtu.be/vovxVKUw2TE); all twelve owner-supplied timestamps are indexed | Feature coverage awaiting independent verification |
+| Video access and timestamps | Direct segment links recorded in `demo-index.json`; verify signed-out playback | Timestamps supplied; playback access awaiting verification |
 | Final course submission | Submit the repository URL through the course system | Owner action pending |
 
 Before final submission, configure the ignored local `.env`, run each AI feature

@@ -1,14 +1,15 @@
 {
-  "status": "awaiting_owner_recording_and_upload",
-  "description": "Suggested segment order only. No recordings or timestamps have been verified.",
+  "status": "owner_supplied_recording_and_timestamps",
+  "recording_url": "https://youtu.be/vovxVKUw2TE",
+  "description": "Recording and feature start times supplied by the owner on 2026-11-15. Playback access and feature coverage await independent verification.",
   "features": [
     {
       "feature_id": "F01",
       "name": "Material Ingestion and Indexing",
       "suggested_segment": 1,
-      "status": "awaiting_recording",
-      "video_url": null,
-      "timestamp": null,
+      "status": "owner_reported_recorded",
+      "video_url": "https://youtu.be/vovxVKUw2TE?t=32",
+      "timestamp": "0:32",
       "interfaces_to_show": [
         "GUI",
         "CLI"
@@ -19,9 +20,9 @@
       "feature_id": "F02",
       "name": "Grounded Material Summaries",
       "suggested_segment": 2,
-      "status": "awaiting_recording",
-      "video_url": null,
-      "timestamp": null,
+      "status": "owner_reported_recorded",
+      "video_url": "https://youtu.be/vovxVKUw2TE?t=90",
+      "timestamp": "1:30",
       "interfaces_to_show": [
         "GUI",
         "CLI"
@@ -32,9 +33,9 @@
       "feature_id": "F03",
       "name": "Concept Extraction and Knowledge Map",
       "suggested_segment": 3,
-      "status": "awaiting_recording",
-      "video_url": null,
-      "timestamp": null,
+      "status": "owner_reported_recorded",
+      "video_url": "https://youtu.be/vovxVKUw2TE?t=130",
+      "timestamp": "2:10",
       "interfaces_to_show": [
         "GUI",
         "CLI"
@@ -45,9 +46,9 @@
       "feature_id": "F04",
       "name": "Grounded Question Answering",
       "suggested_segment": 4,
-      "status": "awaiting_recording",
-      "video_url": null,
-      "timestamp": null,
+      "status": "owner_reported_recorded",
+      "video_url": "https://youtu.be/vovxVKUw2TE?t=176",
+      "timestamp": "2:56",
       "interfaces_to_show": [
         "GUI",
         "CLI"
@@ -58,9 +59,9 @@
       "feature_id": "F05",
       "name": "Personalized Study Plan",
       "suggested_segment": 5,
-      "status": "awaiting_recording",
-      "video_url": null,
-      "timestamp": null,
+      "status": "owner_reported_recorded",
+      "video_url": "https://youtu.be/vovxVKUw2TE?t=260",
+      "timestamp": "4:20",
       "interfaces_to_show": [
         "GUI",
         "CLI"
@@ -71,9 +72,9 @@
       "feature_id": "F06",
       "name": "Flashcard Generation and Review",
       "suggested_segment": 6,
-      "status": "awaiting_recording",
-      "video_url": null,
-      "timestamp": null,
+      "status": "owner_reported_recorded",
+      "video_url": "https://youtu.be/vovxVKUw2TE?t=335",
+      "timestamp": "5:35",
       "interfaces_to_show": [
         "GUI",
         "CLI"
@@ -84,9 +85,9 @@
       "feature_id": "F07",
       "name": "Quiz Generation",
       "suggested_segment": 7,
-      "status": "awaiting_recording",
-      "video_url": null,
-      "timestamp": null,
+      "status": "owner_reported_recorded",
+      "video_url": "https://youtu.be/vovxVKUw2TE?t=420",
+      "timestamp": "7:00",
       "interfaces_to_show": [
         "GUI",
         "CLI"
@@ -97,9 +98,9 @@
       "feature_id": "F08",
       "name": "Automatic Grading and Explanations",
       "suggested_segment": 8,
-      "status": "awaiting_recording",
-      "video_url": null,
-      "timestamp": null,
+      "status": "owner_reported_recorded",
+      "video_url": "https://youtu.be/vovxVKUw2TE?t=500",
+      "timestamp": "8:20",
       "interfaces_to_show": [
         "GUI",
         "CLI"
@@ -110,9 +111,9 @@
       "feature_id": "F09",
       "name": "Weak-Topic Diagnosis and Adaptive Practice",
       "suggested_segment": 9,
-      "status": "awaiting_recording",
-      "video_url": null,
-      "timestamp": null,
+      "status": "owner_reported_recorded",
+      "video_url": "https://youtu.be/vovxVKUw2TE?t=587",
+      "timestamp": "9:47",
       "interfaces_to_show": [
         "GUI",
         "CLI"
@@ -123,9 +124,9 @@
       "feature_id": "F10",
       "name": "Progress and Mastery Analytics",
       "suggested_segment": 10,
-      "status": "awaiting_recording",
-      "video_url": null,
-      "timestamp": null,
+      "status": "owner_reported_recorded",
+      "video_url": "https://youtu.be/vovxVKUw2TE?t=690",
+      "timestamp": "11:30",
       "interfaces_to_show": [
         "GUI",
         "CLI"
@@ -136,9 +137,9 @@
       "feature_id": "F11",
       "name": "Study Scheduling and Reminders",
       "suggested_segment": 11,
-      "status": "awaiting_recording",
-      "video_url": null,
-      "timestamp": null,
+      "status": "owner_reported_recorded",
+      "video_url": "https://youtu.be/vovxVKUw2TE?t=640",
+      "timestamp": "10:40",
       "interfaces_to_show": [
         "GUI",
         "CLI"
@@ -149,9 +150,9 @@
       "feature_id": "F12",
       "name": "Orchestrated Focused Study Session",
       "suggested_segment": 12,
-      "status": "awaiting_recording",
-      "video_url": null,
-      "timestamp": null,
+      "status": "owner_reported_recorded",
+      "video_url": "https://youtu.be/vovxVKUw2TE?t=730",
+      "timestamp": "12:10",
       "interfaces_to_show": [
         "GUI",
         "CLI"
