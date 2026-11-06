@@ -15,7 +15,7 @@ This checklist distinguishes implemented source from evidence still required.
 | Stage 2 report PDF | `stage2-report.pdf`, rebuildable with `scripts/build_report.py`, 7 required sections | Prepared and visually checked; evidence gaps explicit |
 | Feature/class/pattern/change mapping | `feature-map.md`, `architecture.md`, report | All F01-F12 accounted for |
 | Updated diagrams | Class/use-case views and 9 sequence diagrams cover original 11 interaction shapes | Prepared |
-| AI collaboration log and total costs | Collaboration log; runtime token ledger and explicit price estimate | Owner reports USD 0.014 API spend; complete API tokens and Codex token/cost totals still needed |
+| AI collaboration log and total costs | Collaboration log; runtime token ledger and explicit price estimate | Dashboard screenshot: 52,645 tokens, 59 requests, USD 0.04 displayed spend, Oct 26-Nov 16; Codex token/cost totals still unavailable |
 | Weekly code commits and links | Real history audited for Toronto reporting periods; current implementation links in report | Historical minimum not met; new dates not substituted |
 | Every feature demonstrated on video | Owner supplied [a YouTube recording](https://youtu.be/vovxVKUw2TE); all twelve owner-supplied timestamps are indexed | Feature coverage awaiting independent verification |
 | Video access and timestamps | Direct segment links recorded in `demo-index.json`; video played in a signed-out browser session | Access verified; full recording review remains |

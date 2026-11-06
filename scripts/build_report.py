@@ -364,7 +364,11 @@ Sections 2-4 account for every original feature and affected class/pattern.
                   + '. The estimate uses USD 0.40 per million input tokens and USD 1.60 per million output tokens. '
                   + 'It is not a measured bill and excludes cache discounts, tax, unrelated activity and rejected setup attempts without returned usage. '
                   + 'See docs/runtime-usage.json and [official model pricing](https://developers.openai.com/api/docs/models/gpt-4.1-mini). '
-                  + 'The owner reports USD ' + str(usage['owner_reported_account_usage']['total_spend_usd']) + ' Total spend on the OpenAI Usage page as of November 15, 2026. Dashboard date range and complete API token totals were not supplied; this is owner-reported, not an independently checked billing export. Codex development-tool token/money totals remain unavailable.\n\n'
+                  + 'The owner-supplied dashboard screenshot shows ' + format(usage['owner_reported_account_usage']['total_tokens'], ',')
+                  + ' total tokens, ' + str(usage['owner_reported_account_usage']['total_requests']) + ' requests and USD '
+                  + format(usage['owner_reported_account_usage']['total_spend_usd'], '.2f')
+                  + ' displayed total spend for ' + usage['owner_reported_account_usage']['dashboard_date_range']
+                  + ', Default project, all API sources/models/users; captured November 15, 2026. This supersedes the earlier USD 0.014 owner report. Spend is displayed rounded; input/output split and dashboard timezone are not shown. The aggregate has not been independently reconciled against a billing export or attributed exclusively to StudyForge. It includes a broader scope than the validation-only ledger above. Codex development-tool token/money totals remain unavailable.\n\n'
                   + 'Initial live review found two defects despite passing structural checks: an unsupported relationship inferred from adjacent source sections, and same-day reminders in the past. '
                   + 'Both were corrected and independently reviewed before the final live run. Targeted graph regression returned no unsupported edge; final reminders occur after run completion and preserve IDs on retry.')
     markdown(live_text, story)
