@@ -14,6 +14,14 @@ def make_handler(controller, token=None):
     csrf = token or secrets.token_urlsafe(32)
 
     class Handler(BaseHTTPRequestHandler):
+        def handle(self):
+            try:
+                super().handle()
+            except (BrokenPipeError, ConnectionResetError):
+                # Reloading or leaving a page can close its socket mid-response.
+                # There is no remaining client to notify or action to repeat.
+                self.close_connection = True
+
         def log_message(self, format, *args):
             # Request bodies and model failures are never written to server logs.
             pass
@@ -63,6 +71,9 @@ def make_handler(controller, token=None):
                     raise ValueError("Expected action and parameter object")
                 result = controller.handle(payload["action"], **payload.get("params", {}))
                 self.send(200, {"result": result})
+            except (BrokenPipeError, ConnectionResetError):
+                # Let the request boundary handle disconnects, not send again.
+                raise
             except (ValueError, KeyError, TypeError) as error:
                 self.send(400, {"error": str(error)})
             except (OSError, RuntimeError) as error:
