@@ -1,0 +1,162 @@
+{
+  "status": "awaiting_owner_recording_and_upload",
+  "description": "Suggested segment order only. No recordings or timestamps have been verified.",
+  "features": [
+    {
+      "feature_id": "F01",
+      "name": "Material Ingestion and Indexing",
+      "suggested_segment": 1,
+      "status": "awaiting_recording",
+      "video_url": null,
+      "timestamp": null,
+      "interfaces_to_show": [
+        "GUI",
+        "CLI"
+      ],
+      "guide_section": "Segment 1 \u2014 F01 Material Ingestion and Indexing"
+    },
+    {
+      "feature_id": "F02",
+      "name": "Grounded Material Summaries",
+      "suggested_segment": 2,
+      "status": "awaiting_recording",
+      "video_url": null,
+      "timestamp": null,
+      "interfaces_to_show": [
+        "GUI",
+        "CLI"
+      ],
+      "guide_section": "Segment 2 \u2014 F02 Grounded Material Summaries"
+    },
+    {
+      "feature_id": "F03",
+      "name": "Concept Extraction and Knowledge Map",
+      "suggested_segment": 3,
+      "status": "awaiting_recording",
+      "video_url": null,
+      "timestamp": null,
+      "interfaces_to_show": [
+        "GUI",
+        "CLI"
+      ],
+      "guide_section": "Segment 3 \u2014 F03 Concept Extraction and Knowledge Map"
+    },
+    {
+      "feature_id": "F04",
+      "name": "Grounded Question Answering",
+      "suggested_segment": 4,
+      "status": "awaiting_recording",
+      "video_url": null,
+      "timestamp": null,
+      "interfaces_to_show": [
+        "GUI",
+        "CLI"
+      ],
+      "guide_section": "Segment 4 \u2014 F04 Grounded Question Answering"
+    },
+    {
+      "feature_id": "F05",
+      "name": "Personalized Study Plan",
+      "suggested_segment": 5,
+      "status": "awaiting_recording",
+      "video_url": null,
+      "timestamp": null,
+      "interfaces_to_show": [
+        "GUI",
+        "CLI"
+      ],
+      "guide_section": "Segment 5 \u2014 F05 Personalized Study Plan"
+    },
+    {
+      "feature_id": "F06",
+      "name": "Flashcard Generation and Review",
+      "suggested_segment": 6,
+      "status": "awaiting_recording",
+      "video_url": null,
+      "timestamp": null,
+      "interfaces_to_show": [
+        "GUI",
+        "CLI"
+      ],
+      "guide_section": "Segment 6 \u2014 F06 Flashcard Generation and Review"
+    },
+    {
+      "feature_id": "F07",
+      "name": "Quiz Generation",
+      "suggested_segment": 7,
+      "status": "awaiting_recording",
+      "video_url": null,
+      "timestamp": null,
+      "interfaces_to_show": [
+        "GUI",
+        "CLI"
+      ],
+      "guide_section": "Segment 7 \u2014 F07 Quiz Generation"
+    },
+    {
+      "feature_id": "F08",
+      "name": "Automatic Grading and Explanations",
+      "suggested_segment": 8,
+      "status": "awaiting_recording",
+      "video_url": null,
+      "timestamp": null,
+      "interfaces_to_show": [
+        "GUI",
+        "CLI"
+      ],
+      "guide_section": "Segment 8 \u2014 F08 Automatic Grading and Explanations"
+    },
+    {
+      "feature_id": "F09",
+      "name": "Weak-Topic Diagnosis and Adaptive Practice",
+      "suggested_segment": 9,
+      "status": "awaiting_recording",
+      "video_url": null,
+      "timestamp": null,
+      "interfaces_to_show": [
+        "GUI",
+        "CLI"
+      ],
+      "guide_section": "Segment 9 \u2014 F09 Weak-Topic Diagnosis and Adaptive Practice"
+    },
+    {
+      "feature_id": "F10",
+      "name": "Progress and Mastery Analytics",
+      "suggested_segment": 10,
+      "status": "awaiting_recording",
+      "video_url": null,
+      "timestamp": null,
+      "interfaces_to_show": [
+        "GUI",
+        "CLI"
+      ],
+      "guide_section": "Segment 10 \u2014 F10 Progress and Mastery Analytics"
+    },
+    {
+      "feature_id": "F11",
+      "name": "Study Scheduling and Reminders",
+      "suggested_segment": 11,
+      "status": "awaiting_recording",
+      "video_url": null,
+      "timestamp": null,
+      "interfaces_to_show": [
+        "GUI",
+        "CLI"
+      ],
+      "guide_section": "Segment 11 \u2014 F11 Study Scheduling and Reminders"
+    },
+    {
+      "feature_id": "F12",
+      "name": "Orchestrated Focused Study Session",
+      "suggested_segment": 12,
+      "status": "awaiting_recording",
+      "video_url": null,
+      "timestamp": null,
+      "interfaces_to_show": [
+        "GUI",
+        "CLI"
+      ],
+      "guide_section": "Segment 12 \u2014 F12 Orchestrated Focused Study Session"
+    }
+  ]
+}
