@@ -324,10 +324,14 @@ class StudyAgentFacade:
     def materials(self, course):
         return self.repo.list('material', course)
 
-    def plan_create(self, course, goal, deadline, minutes_per_day=30, session_minutes=25, approve=False, replace=False):
+    def plan_create(self, course, goal, deadline, minutes_per_day=30, session_minutes=25, approve=False, replace=False, start_date=None):
+        today = date.today()
         end = date.fromisoformat(deadline)
-        if end < date.today() or end > date.today() + timedelta(days=366):
+        if end < today or end > today + timedelta(days=366):
             raise ValueError('Deadline must be today through one year from today.')
+        first = date.fromisoformat(start_date) if start_date else today + timedelta(days=int(end > today))
+        if not today <= first <= end:
+            raise ValueError('Start date must be today or later and no later than the deadline.')
         if type(minutes_per_day) is not int or not 5 <= minutes_per_day <= 480 or type(session_minutes) is not int or not 5 <= session_minutes <= minutes_per_day:
             raise ValueError('Choose 5-480 available daily minutes and a session length within that availability.')
         if not isinstance(goal, str) or not goal.strip():
@@ -350,13 +354,13 @@ class StudyAgentFacade:
         if len({t.casefold().strip() for t in topics}) != len(topics):
             raise ValueError('The model returned duplicate plan topics.')
         slots = minutes_per_day // session_minutes
-        days = (end - date.today()).days + 1
+        days = (end - first).days + 1
         if len(topics) > days * slots:
             raise ValueError(f'Infeasible plan: {len(topics)} sessions require more time than your {days * slots} available slots. Extend deadline or increase availability.')
         sessions = [{'id': uid(), 'topic': topic, 'minutes': session_minutes,
-                     'date': (date.today() + timedelta(days=i // slots)).isoformat(), 'daily_slot': i % slots}
+                     'date': (first + timedelta(days=i // slots)).isoformat(), 'daily_slot': i % slots}
                     for i, topic in enumerate(topics)]
-        plan = self.repo.save('plan', course, {'goal': goal, 'deadline': deadline, 'sessions': sessions,
+        plan = self.repo.save('plan', course, {'goal': goal, 'deadline': deadline, 'start_date': first.isoformat(), 'sessions': sessions,
                     'minutes_per_day': minutes_per_day, 'status': 'draft', 'evidence': evidence})
         return self.plan_approve(plan['id'], replace=replace) if approve else plan
 
@@ -423,6 +427,7 @@ class StudyAgentFacade:
             raise ValueError('Use HH:MM start time and a valid IANA timezone.') from None
         candidates = []
         existing = self.repo.list('reminder')
+        current_time = datetime.now(tz.utc)
         for item in plan['sessions']:
             key = 'reminder-' + item['id']
             duplicate = next((e for e in existing if e['id'] == key), None)
@@ -432,6 +437,8 @@ class StudyAgentFacade:
             start = datetime.combine(date.fromisoformat(item['date']), datetime.min.time(), zone).replace(hour=hour, minute=minute)
             start += timedelta(minutes=item['daily_slot'] * item['minutes'])
             end = start + timedelta(minutes=item['minutes'])
+            if start <= current_time:
+                raise ValueError('A reminder would start in the past. Create and approve a plan with a future start date or choose a later start time.')
             if end.date() != start.date():
                 raise ValueError('Sessions would cross midnight. Choose an earlier start.')
             # Reject nonexistent local wall times at DST transitions.

@@ -1,5 +1,6 @@
 import io
 import json
+from contextlib import contextmanager
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -9,7 +10,23 @@ import urllib.error
 
 from studyforge.core import (SQLiteRepository, StudyAgentFacade, StudyController,
                              ReviewScheduler, CalendarAdapter, EventBus)
-from studyforge.model import OpenAIModelAdapter, ModelError
+from studyforge.model import OpenAIModelAdapter, ModelError, InvalidModelOutput
+
+
+@contextmanager
+def frozen_clock(instant):
+    class FixedDate(date):
+        @classmethod
+        def today(cls):
+            return instant.date()
+
+    class FixedDatetime(datetime):
+        @classmethod
+        def now(cls, zone=None):
+            return instant.astimezone(zone) if zone else instant.replace(tzinfo=None)
+
+    with patch('studyforge.core.date', FixedDate), patch('studyforge.core.datetime', FixedDatetime):
+        yield
 
 
 class FakeModel:
@@ -62,6 +79,46 @@ class CoreTests(unittest.TestCase):
             self.facade.plan_create(self.course, 'patterns', date.today().isoformat(), 25, 25)
         with self.assertRaises(ValueError):
             self.facade.plan_create(self.course, 'patterns', (date.today() - timedelta(days=1)).isoformat())
+
+    def test_plans_default_to_tomorrow_and_preserve_explicit_start(self):
+        instant = datetime(2026, 11, 12, 23, 40, tzinfo=timezone.utc)
+        with frozen_clock(instant):
+            tomorrow = self.facade.plan_create(self.course, 'patterns', '2026-11-15')
+            self.assertEqual('2026-11-13', tomorrow['start_date'])
+            self.assertEqual(['2026-11-13', '2026-11-14'], [s['date'] for s in tomorrow['sessions']])
+            later = self.facade.plan_create(self.course, 'patterns', '2026-11-15', start_date='2026-11-14')
+            self.assertEqual('2026-11-14', later['start_date'])
+            today = self.facade.plan_create(self.course, 'patterns', '2026-11-12', minutes_per_day=60)
+            self.assertEqual('2026-11-12', today['start_date'])
+            explicit_today = self.facade.plan_create(self.course, 'patterns', '2026-11-15', start_date='2026-11-12')
+            self.assertEqual('2026-11-12', explicit_today['start_date'])
+            for first in ['2026-11-11', '2026-11-16']:
+                with self.assertRaisesRegex(ValueError, 'Start date'):
+                    self.facade.plan_create(self.course, 'patterns', '2026-11-15', start_date=first)
+            with self.assertRaisesRegex(ValueError, 'Infeasible'):
+                self.facade.plan_create(self.course, 'patterns', '2026-11-15', start_date='2026-11-15')
+
+    def test_new_past_reminders_are_rejected_without_shifting_approved_plan(self):
+        # At 23:40 Toronto, the same day's default 18:00 has already passed.
+        instant = datetime(2026, 11, 13, 4, 40, tzinfo=timezone.utc)
+        plan = self.repo.save('plan', self.course, {'status': 'approved', 'sessions': [
+            {'id': 'past-slot', 'topic': 'Observer', 'date': '2026-11-12', 'daily_slot': 0, 'minutes': 25}]})
+        with frozen_clock(instant):
+            for confirm in [False, True]:
+                with self.assertRaisesRegex(ValueError, 'past'):
+                    self.facade.schedule(plan['id'], start_time='18:00', confirm=confirm)
+                self.assertEqual([], self.repo.list('reminder', self.course))
+                self.assertEqual(plan, self.repo.get(plan['id'], 'plan'))
+            future = self.repo.save('plan', self.course, {'status': 'approved', 'sessions': [
+                {'id': 'future-slot', 'topic': 'Observer', 'date': '2026-11-13', 'daily_slot': 0, 'minutes': 25}]})
+            saved = self.facade.schedule(future['id'], start_time='18:00', confirm=True)
+            self.assertEqual(1, len(saved['reminders']))
+        # Retrying an existing reminder after its date is historical inspection,
+        # not silently creating or shifting a new schedule.
+        with frozen_clock(instant + timedelta(days=2)):
+            repeated = self.facade.schedule(future['id'], start_time='18:00', confirm=True)
+            self.assertEqual(saved['reminders'], repeated['reminders'])
+            self.assertEqual(1, len(self.repo.list('reminder', self.course)))
 
     def test_review_intervals_and_observer_progress(self):
         self.repo.save('deck', self.course, {'cards': [{'id': 'card1', 'front': 'x', 'back': 'y', 'topic': 'Observer'}]})
@@ -270,6 +327,8 @@ class AdapterTests(unittest.TestCase):
                                  str(raised.exception))
                 self.assertNotIn('test-private-key', str(raised.exception))
                 self.assertNotIn('provider-private-message', str(raised.exception))
+
+
 
     def test_missing_key_and_safe_http_error(self):
         with self.assertRaisesRegex(ModelError, 'OPENAI_API_KEY'):
