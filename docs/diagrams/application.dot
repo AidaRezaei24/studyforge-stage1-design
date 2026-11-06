@@ -1,0 +1,19 @@
+digraph application {
+ graph [rankdir=TB,bgcolor="white",pad="0.15",nodesep="0.18",ranksep="0.35",fontname="Helvetica",fontsize=18,label="Application and persistence",labelloc=t];
+ node [shape=record,fontname="Helvetica",fontsize=14,style=filled,fillcolor="#f1f5ef",color="#425c48"];
+ edge [color="#667a6b",arrowsize=0.8];
+  CLI [label="{CLI module / HTTP boundary|main() / make_handler()}"];
+  StudyController [label="{StudyController|handle(command_name, params)}"];
+  CommandFactory [label="{CommandFactory|create(facade, action, params)}"];
+  StudyCommand [label="{StudyCommand|receiver; params|execute()}"];
+  StudyAgentFacade [label="{StudyAgentFacade|plan_create(); plan_approve()\lreview(); grade(); adapt()\lprogress(); schedule()\lsession_start(); session_action()\l}"];
+  SQLiteRepository [label="{SQLiteRepository|save(); get(); list()\ltransaction(); close()\l}"];
+  AssessmentService [label="{AssessmentService|grade()}"];
+  CalendarAdapter [label="{CalendarAdapter|export()}"];
+  ReviewScheduler [label="{ReviewScheduler|schedule_next()}"];
+  ProgressService [label="{ProgressService|get_snapshot()}"];
+CLI -> StudyController -> CommandFactory -> StudyCommand -> StudyAgentFacade;
+ StudyAgentFacade -> {AssessmentService CalendarAdapter ReviewScheduler ProgressService};
+ StudyAgentFacade -> SQLiteRepository;
+ AssessmentService -> SQLiteRepository; ProgressService -> SQLiteRepository;
+}

@@ -1,0 +1,15 @@
+digraph strategies {
+ graph [rankdir=TB,bgcolor="white",pad="0.15",nodesep="0.18",ranksep="0.35",fontname="Helvetica",fontsize=18,label="Generation strategies and provider adapter",labelloc=t];
+ node [shape=record,fontname="Helvetica",fontsize=14,style=filled,fillcolor="#f1f5ef",color="#425c48"];
+ edge [color="#667a6b",arrowsize=0.8];
+  GenerationStrategy [label="{GenerationStrategy|generate(); validate()}"];
+  SummaryStrategy [label="{SummaryStrategy|validate()}"];
+  GroundedAnswerStrategy [label="{GroundedAnswerStrategy|validate()}"];
+  ConceptGraphStrategy [label="{ConceptGraphStrategy|validate()}"];
+  FlashcardStrategy [label="{FlashcardStrategy|validate()}"];
+  QuizStrategy [label="{QuizStrategy|validate()}"];
+  ModelGateway [label="{«protocol» ModelGateway|generate(task, evidence, payload)}"];
+  OpenAIModelAdapter [label="{OpenAIModelAdapter|generate(); usage}"];
+  CitationVerifier [label="{CitationVerifier|verify(citations, evidence)}"];
+SummaryStrategy -> GenerationStrategy [arrowhead=empty]; GroundedAnswerStrategy -> SummaryStrategy [arrowhead=empty]; ConceptGraphStrategy -> GenerationStrategy [arrowhead=empty]; FlashcardStrategy -> GenerationStrategy [arrowhead=empty]; QuizStrategy -> GenerationStrategy [arrowhead=empty]; GenerationStrategy -> {ModelGateway CitationVerifier}; OpenAIModelAdapter -> ModelGateway [style=dashed,arrowhead=empty];
+}

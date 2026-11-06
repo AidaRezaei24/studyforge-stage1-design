@@ -1,0 +1,11 @@
+digraph learning {
+ graph [rankdir=TB,bgcolor="white",pad="0.15",nodesep="0.18",ranksep="0.35",fontname="Helvetica",fontsize=18,label="Learning services and source storage",labelloc=t];
+ node [shape=record,fontname="Helvetica",fontsize=14,style=filled,fillcolor="#f1f5ef",color="#425c48"];
+ edge [color="#667a6b",arrowsize=0.8];
+  LearningService [label="{LearningService|import_materials(); summarize()\lconcepts(); ask(); flashcards(); quiz()\lcard_update(); due_queue(); _generate()\l}"];
+  DocumentIngestTool [label="{DocumentIngestTool|execute(); _extract()}"];
+  RetrievalTool [label="{RetrievalTool|execute()}"];
+  SQLiteRepository [label="{SQLiteRepository|save(); get(); list()\ltransaction(); close()\l}"];
+  EventBus [label="{EventBus|subscribe(); publish()}"];
+LearningService -> {DocumentIngestTool RetrievalTool}; DocumentIngestTool -> {SQLiteRepository EventBus}; RetrievalTool -> SQLiteRepository; LearningService -> SQLiteRepository;
+}
