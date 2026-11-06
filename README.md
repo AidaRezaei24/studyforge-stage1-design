@@ -120,6 +120,18 @@ make check
 python scripts/activity_audit.py
 ```
 
+After configuring local API access and credit, run the optional paid live check:
+
+```sh
+python scripts/verify_live.py --output tmp/live-verification.json
+```
+
+This makes real provider requests using only the bundled sample course, runs in an
+isolated temporary database, and stops on the first provider/configuration failure.
+Its report labels synthetic learner inputs and records API-reported token counts.
+Review generated claims against their sources; a passing script does not replace
+feature demonstration videos or human evaluation of answer quality.
+
 Tests inject fake model responses **only in tests** to verify deterministic
 constraints, citation validation, persistence, failure recovery, and provider
 contracts without incurring API charges. Production never substitutes canned
