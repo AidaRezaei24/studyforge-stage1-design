@@ -1,0 +1,1300 @@
+{
+  "status": "PASS",
+  "started_at": "2026-11-13T04:45:49.277842+00:00",
+  "learner_data": "Synthetic acceptance inputs: two forgot card ratings and reference-answer quiz submissions. No real learner performance is claimed.",
+  "scope": "Real model execution through application services; does not record GUI/CLI videos or establish semantic correctness of every model statement.",
+  "manual_fixture_used": false,
+  "steps": [
+    {
+      "feature": "F01",
+      "check": "Import safe sample and verify traceable chunks",
+      "status": "PASS",
+      "result": {
+        "imported": [
+          {
+            "id": "b909f86606b84f3b8e1db783b6939765",
+            "title": "design-patterns",
+            "filename": "design-patterns.md",
+            "sha256": "dd18af94fbc13da5ab85d91d6ac47552829525b027f977caff5554b305a32da7",
+            "chunks": [
+              {
+                "id": "b909f86606b84f3b8e1db783b6939765:1",
+                "text": "# Software Design: Design Patterns\n\n## Strategy\nThe Strategy pattern defines a family of algorithms behind a common interface.\nA context delegates an operation to a selected strategy. A strategy can change at\nruntime without changing the context. For example, a learning service can select\na flashcard generation strategy or a quiz generation strategy.\n\n## Observer\nThe Observer pattern lets a subject notify subscribed observers when an event\noccurs. Publishers do not need to know the concrete observers. For example, a\ncompleted quiz can publish an AttemptRecorded event. A progress projector observes\nthat event and updates mastery statistics.\n\n## Adapter\nThe Adapter pattern translates an existing interface into the interface a client\nexpects. An OpenAI adapter converts a provider-neutral generation request into an\nHTTP request and converts the response back into a domain result.\n\n## State\nThe State pattern represents state-specific behavior in separate objects. A\ncontext delegates legal transitions to its current state. A paused study session\ncan resume, while a completed session cannot resume. This prevents inconsistent\ncombinations of boolean flags.\n\n## Command\nThe Command pattern e",
+                "location": "design-patterns.md, text, characters 1-1200",
+                "material_id": "b909f86606b84f3b8e1db783b6939765"
+              },
+              {
+                "id": "b909f86606b84f3b8e1db783b6939765:2",
+                "text": "ransitions to its current state. A paused study session\ncan resume, while a completed session cannot resume. This prevents inconsistent\ncombinations of boolean flags.\n\n## Command\nThe Command pattern encapsulates a request as an object. An invoker executes the\ncommand, which delegates to a receiver. Both a graphical interface and a command\nline can submit the same command without duplicating the operation's rules.\n\n## Facade and MVC\nA Facade provides a simple entry point to a group of collaborating subsystems.\nModel View Controller separates presentation, request coordination, and application\ndata. Together they keep a graphical interface and a command line consistent.",
+                "location": "design-patterns.md, text, characters 1001-1676",
+                "material_id": "b909f86606b84f3b8e1db783b6939765"
+              }
+            ],
+            "tags": [
+              "design",
+              "patterns"
+            ],
+            "course": "0dbd3a369d6e4a6e863724c8d30863d1",
+            "created_at": "2026-11-13T04:45:49.289417+00:00"
+          }
+        ],
+        "duplicates": [],
+        "errors": []
+      }
+    },
+    {
+      "feature": "F01",
+      "check": "Duplicate import is detected",
+      "status": "PASS",
+      "result": {
+        "imported": [],
+        "duplicates": [
+          {
+            "path": "samples/design-patterns.md",
+            "id": "b909f86606b84f3b8e1db783b6939765"
+          }
+        ],
+        "errors": []
+      }
+    },
+    {
+      "feature": "F02",
+      "check": "Real grounded summary and citation resolution",
+      "status": "PASS",
+      "result": {
+        "text": "The document explains several design patterns: Strategy defines a family of algorithms behind a common interface, allowing runtime selection without changing the context; Observer lets a subject notify subscribed observers of events without knowing them concretely; Adapter translates one interface to another, such as converting provider-neutral requests to HTTP and back; State encapsulates state-specific behavior in objects to manage valid transitions and avoid inconsistent flags; Command encapsulates requests as objects to unify operation submission via different interfaces; Facade provides a simple entry point to subsystems, while MVC separates presentation, coordination, and data to keep interfaces consistent.",
+        "citations": [
+          "b909f86606b84f3b8e1db783b6939765:1",
+          "b909f86606b84f3b8e1db783b6939765:2"
+        ],
+        "evidence": [
+          {
+            "id": "b909f86606b84f3b8e1db783b6939765:1",
+            "text": "# Software Design: Design Patterns\n\n## Strategy\nThe Strategy pattern defines a family of algorithms behind a common interface.\nA context delegates an operation to a selected strategy. A strategy can change at\nruntime without changing the context. For example, a learning service can select\na flashcard generation strategy or a quiz generation strategy.\n\n## Observer\nThe Observer pattern lets a subject notify subscribed observers when an event\noccurs. Publishers do not need to know the concrete observers. For example, a\ncompleted quiz can publish an AttemptRecorded event. A progress projector observes\nthat event and updates mastery statistics.\n\n## Adapter\nThe Adapter pattern translates an existing interface into the interface a client\nexpects. An OpenAI adapter converts a provider-neutral generation request into an\nHTTP request and converts the response back into a domain result.\n\n## State\nThe State pattern represents state-specific behavior in separate objects. A\ncontext delegates legal transitions to its current state. A paused study session\ncan resume, while a completed session cannot resume. This prevents inconsistent\ncombinations of boolean flags.\n\n## Command\nThe Command pattern e",
+            "location": "design-patterns.md, text, characters 1-1200",
+            "material_id": "b909f86606b84f3b8e1db783b6939765"
+          },
+          {
+            "id": "b909f86606b84f3b8e1db783b6939765:2",
+            "text": "ransitions to its current state. A paused study session\ncan resume, while a completed session cannot resume. This prevents inconsistent\ncombinations of boolean flags.\n\n## Command\nThe Command pattern encapsulates a request as an object. An invoker executes the\ncommand, which delegates to a receiver. Both a graphical interface and a command\nline can submit the same command without duplicating the operation's rules.\n\n## Facade and MVC\nA Facade provides a simple entry point to a group of collaborating subsystems.\nModel View Controller separates presentation, request coordination, and application\ndata. Together they keep a graphical interface and a command line consistent.",
+            "location": "design-patterns.md, text, characters 1001-1676",
+            "material_id": "b909f86606b84f3b8e1db783b6939765"
+          }
+        ],
+        "coverage": {
+          "retrieved_chunks": 2,
+          "available_chunks": 2,
+          "partial": false,
+          "note": "Generation covers the displayed retrieved excerpts only."
+        },
+        "detail": "concise",
+        "focus": "",
+        "id": "04ef16296eb14eb3ba553bc7301240e7",
+        "course": "0dbd3a369d6e4a6e863724c8d30863d1",
+        "created_at": "2026-11-13T04:45:52.776696+00:00"
+      }
+    },
+    {
+      "feature": "F03",
+      "check": "Real concept graph, supported edges and confidence",
+      "status": "PASS",
+      "result": {
+        "nodes": [
+          {
+            "name": "Strategy pattern",
+            "confidence": 0.9,
+            "citations": [
+              "b909f86606b84f3b8e1db783b6939765:1"
+            ],
+            "needs_review": false
+          },
+          {
+            "name": "Observer pattern",
+            "confidence": 0.9,
+            "citations": [
+              "b909f86606b84f3b8e1db783b6939765:1"
+            ],
+            "needs_review": false
+          },
+          {
+            "name": "Adapter pattern",
+            "confidence": 0.9,
+            "citations": [
+              "b909f86606b84f3b8e1db783b6939765:1"
+            ],
+            "needs_review": false
+          },
+          {
+            "name": "State pattern",
+            "confidence": 0.9,
+            "citations": [
+              "b909f86606b84f3b8e1db783b6939765:1",
+              "b909f86606b84f3b8e1db783b6939765:2"
+            ],
+            "needs_review": false
+          },
+          {
+            "name": "Command pattern",
+            "confidence": 0.9,
+            "citations": [
+              "b909f86606b84f3b8e1db783b6939765:2"
+            ],
+            "needs_review": false
+          },
+          {
+            "name": "Facade",
+            "confidence": 0.9,
+            "citations": [
+              "b909f86606b84f3b8e1db783b6939765:2"
+            ],
+            "needs_review": false
+          },
+          {
+            "name": "Model View Controller (MVC)",
+            "confidence": 0.9,
+            "citations": [
+              "b909f86606b84f3b8e1db783b6939765:2"
+            ],
+            "needs_review": false
+          }
+        ],
+        "edges": [],
+        "evidence": [
+          {
+            "id": "b909f86606b84f3b8e1db783b6939765:1",
+            "text": "# Software Design: Design Patterns\n\n## Strategy\nThe Strategy pattern defines a family of algorithms behind a common interface.\nA context delegates an operation to a selected strategy. A strategy can change at\nruntime without changing the context. For example, a learning service can select\na flashcard generation strategy or a quiz generation strategy.\n\n## Observer\nThe Observer pattern lets a subject notify subscribed observers when an event\noccurs. Publishers do not need to know the concrete observers. For example, a\ncompleted quiz can publish an AttemptRecorded event. A progress projector observes\nthat event and updates mastery statistics.\n\n## Adapter\nThe Adapter pattern translates an existing interface into the interface a client\nexpects. An OpenAI adapter converts a provider-neutral generation request into an\nHTTP request and converts the response back into a domain result.\n\n## State\nThe State pattern represents state-specific behavior in separate objects. A\ncontext delegates legal transitions to its current state. A paused study session\ncan resume, while a completed session cannot resume. This prevents inconsistent\ncombinations of boolean flags.\n\n## Command\nThe Command pattern e",
+            "location": "design-patterns.md, text, characters 1-1200",
+            "material_id": "b909f86606b84f3b8e1db783b6939765"
+          },
+          {
+            "id": "b909f86606b84f3b8e1db783b6939765:2",
+            "text": "ransitions to its current state. A paused study session\ncan resume, while a completed session cannot resume. This prevents inconsistent\ncombinations of boolean flags.\n\n## Command\nThe Command pattern encapsulates a request as an object. An invoker executes the\ncommand, which delegates to a receiver. Both a graphical interface and a command\nline can submit the same command without duplicating the operation's rules.\n\n## Facade and MVC\nA Facade provides a simple entry point to a group of collaborating subsystems.\nModel View Controller separates presentation, request coordination, and application\ndata. Together they keep a graphical interface and a command line consistent.",
+            "location": "design-patterns.md, text, characters 1001-1676",
+            "material_id": "b909f86606b84f3b8e1db783b6939765"
+          }
+        ],
+        "coverage": {
+          "retrieved_chunks": 2,
+          "available_chunks": 2,
+          "partial": false,
+          "note": "Generation covers the displayed retrieved excerpts only."
+        },
+        "topic": "",
+        "id": "8da2cd9a994142a2bd4eff7555ad9372",
+        "course": "0dbd3a369d6e4a6e863724c8d30863d1",
+        "created_at": "2026-11-13T04:45:58.445784+00:00"
+      }
+    },
+    {
+      "feature": "F04",
+      "check": "Real answer grounded in Strategy source",
+      "status": "PASS",
+      "result": {
+        "text": "The Strategy pattern supports interchangeable algorithms by defining a family of algorithms behind a common interface. A context delegates an operation to a selected strategy, and this strategy can be changed at runtime without altering the context. This allows different algorithms to be swapped in and out flexibly as needed.",
+        "citations": [
+          "b909f86606b84f3b8e1db783b6939765:1"
+        ],
+        "confidence": "high",
+        "follow_ups": [
+          "Can you provide an example of where the Strategy pattern might be used?"
+        ],
+        "evidence": [
+          {
+            "id": "b909f86606b84f3b8e1db783b6939765:1",
+            "text": "# Software Design: Design Patterns\n\n## Strategy\nThe Strategy pattern defines a family of algorithms behind a common interface.\nA context delegates an operation to a selected strategy. A strategy can change at\nruntime without changing the context. For example, a learning service can select\na flashcard generation strategy or a quiz generation strategy.\n\n## Observer\nThe Observer pattern lets a subject notify subscribed observers when an event\noccurs. Publishers do not need to know the concrete observers. For example, a\ncompleted quiz can publish an AttemptRecorded event. A progress projector observes\nthat event and updates mastery statistics.\n\n## Adapter\nThe Adapter pattern translates an existing interface into the interface a client\nexpects. An OpenAI adapter converts a provider-neutral generation request into an\nHTTP request and converts the response back into a domain result.\n\n## State\nThe State pattern represents state-specific behavior in separate objects. A\ncontext delegates legal transitions to its current state. A paused study session\ncan resume, while a completed session cannot resume. This prevents inconsistent\ncombinations of boolean flags.\n\n## Command\nThe Command pattern e",
+            "location": "design-patterns.md, text, characters 1-1200",
+            "material_id": "b909f86606b84f3b8e1db783b6939765"
+          },
+          {
+            "id": "b909f86606b84f3b8e1db783b6939765:2",
+            "text": "ransitions to its current state. A paused study session\ncan resume, while a completed session cannot resume. This prevents inconsistent\ncombinations of boolean flags.\n\n## Command\nThe Command pattern encapsulates a request as an object. An invoker executes the\ncommand, which delegates to a receiver. Both a graphical interface and a command\nline can submit the same command without duplicating the operation's rules.\n\n## Facade and MVC\nA Facade provides a simple entry point to a group of collaborating subsystems.\nModel View Controller separates presentation, request coordination, and application\ndata. Together they keep a graphical interface and a command line consistent.",
+            "location": "design-patterns.md, text, characters 1001-1676",
+            "material_id": "b909f86606b84f3b8e1db783b6939765"
+          }
+        ],
+        "coverage": {
+          "retrieved_chunks": 2,
+          "available_chunks": 2,
+          "partial": false,
+          "note": "Generation covers the displayed retrieved excerpts only."
+        },
+        "question": "How does the Strategy pattern support interchangeable algorithms?",
+        "plan": [
+          "retrieve scoped evidence",
+          "answer from evidence",
+          "verify citations",
+          "remember turn"
+        ],
+        "id": "8fc95c962379459e9a2e017aa57c5bf0",
+        "course": "0dbd3a369d6e4a6e863724c8d30863d1",
+        "created_at": "2026-11-13T04:45:59.792787+00:00"
+      }
+    },
+    {
+      "feature": "F05",
+      "check": "Generate and approve feasible seven-day plan",
+      "status": "PASS",
+      "result": {
+        "goal": "Study Strategy and Observer design patterns",
+        "deadline": "2026-11-19",
+        "start_date": "2026-11-13",
+        "sessions": [
+          {
+            "id": "b1b87e0e04ec46af843ff2f32c673e60",
+            "topic": "Strategy pattern",
+            "minutes": 25,
+            "date": "2026-11-13",
+            "daily_slot": 0
+          },
+          {
+            "id": "d53d790422144aa883373cf03d076c5a",
+            "topic": "Observer pattern",
+            "minutes": 25,
+            "date": "2026-11-13",
+            "daily_slot": 1
+          }
+        ],
+        "minutes_per_day": 60,
+        "status": "approved",
+        "evidence": [
+          {
+            "id": "b909f86606b84f3b8e1db783b6939765:1",
+            "text": "# Software Design: Design Patterns\n\n## Strategy\nThe Strategy pattern defines a family of algorithms behind a common interface.\nA context delegates an operation to a selected strategy. A strategy can change at\nruntime without changing the context. For example, a learning service can select\na flashcard generation strategy or a quiz generation strategy.\n\n## Observer\nThe Observer pattern lets a subject notify subscribed observers when an event\noccurs. Publishers do not need to know the concrete observers. For example, a\ncompleted quiz can publish an AttemptRecorded event. A progress projector observes\nthat event and updates mastery statistics.\n\n## Adapter\nThe Adapter pattern translates an existing interface into the interface a client\nexpects. An OpenAI adapter converts a provider-neutral generation request into an\nHTTP request and converts the response back into a domain result.\n\n## State\nThe State pattern represents state-specific behavior in separate objects. A\ncontext delegates legal transitions to its current state. A paused study session\ncan resume, while a completed session cannot resume. This prevents inconsistent\ncombinations of boolean flags.\n\n## Command\nThe Command pattern e",
+            "location": "design-patterns.md, text, characters 1-1200",
+            "material_id": "b909f86606b84f3b8e1db783b6939765"
+          },
+          {
+            "id": "b909f86606b84f3b8e1db783b6939765:2",
+            "text": "ransitions to its current state. A paused study session\ncan resume, while a completed session cannot resume. This prevents inconsistent\ncombinations of boolean flags.\n\n## Command\nThe Command pattern encapsulates a request as an object. An invoker executes the\ncommand, which delegates to a receiver. Both a graphical interface and a command\nline can submit the same command without duplicating the operation's rules.\n\n## Facade and MVC\nA Facade provides a simple entry point to a group of collaborating subsystems.\nModel View Controller separates presentation, request coordination, and application\ndata. Together they keep a graphical interface and a command line consistent.",
+            "location": "design-patterns.md, text, characters 1001-1676",
+            "material_id": "b909f86606b84f3b8e1db783b6939765"
+          }
+        ],
+        "id": "85448e148d2641a5919a2095b785a228",
+        "course": "0dbd3a369d6e4a6e863724c8d30863d1",
+        "created_at": "2026-11-13T04:46:00.564172+00:00"
+      }
+    },
+    {
+      "feature": "F06",
+      "check": "Generate two real cited flashcards",
+      "status": "PASS",
+      "result": {
+        "cards": [
+          {
+            "front": "What does the Strategy pattern define in software design?",
+            "back": "The Strategy pattern defines a family of algorithms behind a common interface, allowing a context to delegate an operation to a selected strategy that can change at runtime without changing the context.",
+            "topic": "Strategy",
+            "citations": [
+              "b909f86606b84f3b8e1db783b6939765:1"
+            ],
+            "id": "9c0c564f842044488b3989c95b1c64db",
+            "due": "2026-11-12",
+            "interval": 0
+          },
+          {
+            "front": "How can the Strategy pattern be applied in a learning service?",
+            "back": "A learning service can use the Strategy pattern to select different generation strategies such as flashcard generation or quiz generation, enabling it to change algorithms at runtime without altering the context.",
+            "topic": "Strategy",
+            "citations": [
+              "b909f86606b84f3b8e1db783b6939765:1"
+            ],
+            "id": "977149b0de20413dbefad8b30a41c708",
+            "due": "2026-11-12",
+            "interval": 0
+          }
+        ],
+        "evidence": [
+          {
+            "id": "b909f86606b84f3b8e1db783b6939765:1",
+            "text": "# Software Design: Design Patterns\n\n## Strategy\nThe Strategy pattern defines a family of algorithms behind a common interface.\nA context delegates an operation to a selected strategy. A strategy can change at\nruntime without changing the context. For example, a learning service can select\na flashcard generation strategy or a quiz generation strategy.\n\n## Observer\nThe Observer pattern lets a subject notify subscribed observers when an event\noccurs. Publishers do not need to know the concrete observers. For example, a\ncompleted quiz can publish an AttemptRecorded event. A progress projector observes\nthat event and updates mastery statistics.\n\n## Adapter\nThe Adapter pattern translates an existing interface into the interface a client\nexpects. An OpenAI adapter converts a provider-neutral generation request into an\nHTTP request and converts the response back into a domain result.\n\n## State\nThe State pattern represents state-specific behavior in separate objects. A\ncontext delegates legal transitions to its current state. A paused study session\ncan resume, while a completed session cannot resume. This prevents inconsistent\ncombinations of boolean flags.\n\n## Command\nThe Command pattern e",
+            "location": "design-patterns.md, text, characters 1-1200",
+            "material_id": "b909f86606b84f3b8e1db783b6939765"
+          }
+        ],
+        "coverage": {
+          "retrieved_chunks": 1,
+          "available_chunks": 2,
+          "partial": true,
+          "note": "Generation covers the displayed retrieved excerpts only."
+        },
+        "topic": "Strategy",
+        "count": 2,
+        "difficulty": "mixed",
+        "id": "cf60708c2e6641f9bd5cb9357ef01956",
+        "course": "0dbd3a369d6e4a6e863724c8d30863d1",
+        "created_at": "2026-11-13T04:46:02.866191+00:00"
+      }
+    },
+    {
+      "feature": "F06",
+      "check": "Synthetic learner review 1: forgot (rating 0)",
+      "status": "PASS",
+      "result": {
+        "front": "What does the Strategy pattern define in software design?",
+        "back": "The Strategy pattern defines a family of algorithms behind a common interface, allowing a context to delegate an operation to a selected strategy that can change at runtime without changing the context.",
+        "topic": "Strategy",
+        "citations": [
+          "b909f86606b84f3b8e1db783b6939765:1"
+        ],
+        "id": "9c0c564f842044488b3989c95b1c64db",
+        "due": "2026-11-13",
+        "interval": 1,
+        "last_rating": 0,
+        "reviews": 1
+      }
+    },
+    {
+      "feature": "F06",
+      "check": "Synthetic learner review 2: forgot (rating 0)",
+      "status": "PASS",
+      "result": {
+        "front": "What does the Strategy pattern define in software design?",
+        "back": "The Strategy pattern defines a family of algorithms behind a common interface, allowing a context to delegate an operation to a selected strategy that can change at runtime without changing the context.",
+        "topic": "Strategy",
+        "citations": [
+          "b909f86606b84f3b8e1db783b6939765:1"
+        ],
+        "id": "9c0c564f842044488b3989c95b1c64db",
+        "due": "2026-11-13",
+        "interval": 1,
+        "last_rating": 0,
+        "reviews": 2
+      }
+    },
+    {
+      "feature": "F06",
+      "check": "Inspect persisted spaced-review queue",
+      "status": "PASS",
+      "result": {
+        "date": "2026-11-12",
+        "cards": [
+          {
+            "front": "How can the Strategy pattern be applied in a learning service?",
+            "back": "A learning service can use the Strategy pattern to select different generation strategies such as flashcard generation or quiz generation, enabling it to change algorithms at runtime without altering the context.",
+            "topic": "Strategy",
+            "citations": [
+              "b909f86606b84f3b8e1db783b6939765:1"
+            ],
+            "id": "977149b0de20413dbefad8b30a41c708",
+            "due": "2026-11-12",
+            "interval": 0,
+            "deck_id": "cf60708c2e6641f9bd5cb9357ef01956"
+          }
+        ]
+      }
+    },
+    {
+      "feature": "F07",
+      "check": "Generate two real source-backed quiz questions",
+      "status": "PASS",
+      "result": {
+        "items": [
+          {
+            "question": "What is the primary purpose of the Strategy design pattern?",
+            "type": "choice",
+            "options": [
+              "To define a family of algorithms behind a common interface",
+              "To notify subscribed observers when an event occurs",
+              "To translate an existing interface into the interface a client expects",
+              "To represent state-specific behavior in separate objects"
+            ],
+            "answer": "To define a family of algorithms behind a common interface",
+            "rubric": "Correct answer must identify that Strategy encapsulates algorithms behind a common interface allowing dynamic interchange without changing the context.",
+            "topic": "Strategy",
+            "citations": [
+              "b909f86606b84f3b8e1db783b6939765:1"
+            ],
+            "id": "6c317b1b98fe481d89c827dc76e12e51"
+          },
+          {
+            "question": "How does the Strategy pattern benefit a context object?",
+            "type": "free",
+            "answer": "By delegating operations to a selected strategy, which can change at runtime without modifying the context.",
+            "rubric": "Response should explain that the context uses a strategy to perform certain operations and that the strategy can be changed dynamically, enabling flexible behavior without altering the context code.",
+            "topic": "Strategy",
+            "citations": [
+              "b909f86606b84f3b8e1db783b6939765:1"
+            ],
+            "id": "ffd77f7f06f6431ea5768ccdeb3e3a80"
+          }
+        ],
+        "evidence": [
+          {
+            "id": "b909f86606b84f3b8e1db783b6939765:1",
+            "text": "# Software Design: Design Patterns\n\n## Strategy\nThe Strategy pattern defines a family of algorithms behind a common interface.\nA context delegates an operation to a selected strategy. A strategy can change at\nruntime without changing the context. For example, a learning service can select\na flashcard generation strategy or a quiz generation strategy.\n\n## Observer\nThe Observer pattern lets a subject notify subscribed observers when an event\noccurs. Publishers do not need to know the concrete observers. For example, a\ncompleted quiz can publish an AttemptRecorded event. A progress projector observes\nthat event and updates mastery statistics.\n\n## Adapter\nThe Adapter pattern translates an existing interface into the interface a client\nexpects. An OpenAI adapter converts a provider-neutral generation request into an\nHTTP request and converts the response back into a domain result.\n\n## State\nThe State pattern represents state-specific behavior in separate objects. A\ncontext delegates legal transitions to its current state. A paused study session\ncan resume, while a completed session cannot resume. This prevents inconsistent\ncombinations of boolean flags.\n\n## Command\nThe Command pattern e",
+            "location": "design-patterns.md, text, characters 1-1200",
+            "material_id": "b909f86606b84f3b8e1db783b6939765"
+          }
+        ],
+        "coverage": {
+          "retrieved_chunks": 1,
+          "available_chunks": 2,
+          "partial": true,
+          "note": "Generation covers the displayed retrieved excerpts only."
+        },
+        "topic": "Strategy",
+        "count": 2,
+        "difficulty": "mixed",
+        "id": "e68873d8e6b245a1b289a6679c0c893c",
+        "course": "0dbd3a369d6e4a6e863724c8d30863d1",
+        "created_at": "2026-11-13T04:46:05.779703+00:00"
+      }
+    },
+    {
+      "feature": "F08",
+      "check": "Grade generated quiz with synthetic reference-answer submission",
+      "status": "PASS",
+      "result": {
+        "id": "0a12b2b4222a41309c1198fdead62a1c",
+        "quiz_id": "e68873d8e6b245a1b289a6679c0c893c",
+        "answers": {
+          "6c317b1b98fe481d89c827dc76e12e51": "To define a family of algorithms behind a common interface",
+          "ffd77f7f06f6431ea5768ccdeb3e3a80": "By delegating operations to a selected strategy, which can change at runtime without modifying the context."
+        },
+        "results": [
+          {
+            "item_id": "6c317b1b98fe481d89c827dc76e12e51",
+            "topic": "Strategy",
+            "score": 1.0,
+            "feedback": "Expected answer: To define a family of algorithms behind a common interface",
+            "confidence": 1.0,
+            "needs_review": false,
+            "citations": [
+              "b909f86606b84f3b8e1db783b6939765:1"
+            ]
+          },
+          {
+            "item_id": "ffd77f7f06f6431ea5768ccdeb3e3a80",
+            "topic": "Strategy",
+            "score": 1,
+            "feedback": "The answer correctly states that the context delegates operations to a selected strategy and that the strategy can change at runtime without modifying the context, aligning well with the rubric requirements.",
+            "confidence": 1,
+            "needs_review": false,
+            "citations": [
+              "b909f86606b84f3b8e1db783b6939765:1"
+            ]
+          }
+        ],
+        "score": 1.0,
+        "evidence": [
+          {
+            "id": "b909f86606b84f3b8e1db783b6939765:1",
+            "text": "# Software Design: Design Patterns\n\n## Strategy\nThe Strategy pattern defines a family of algorithms behind a common interface.\nA context delegates an operation to a selected strategy. A strategy can change at\nruntime without changing the context. For example, a learning service can select\na flashcard generation strategy or a quiz generation strategy.\n\n## Observer\nThe Observer pattern lets a subject notify subscribed observers when an event\noccurs. Publishers do not need to know the concrete observers. For example, a\ncompleted quiz can publish an AttemptRecorded event. A progress projector observes\nthat event and updates mastery statistics.\n\n## Adapter\nThe Adapter pattern translates an existing interface into the interface a client\nexpects. An OpenAI adapter converts a provider-neutral generation request into an\nHTTP request and converts the response back into a domain result.\n\n## State\nThe State pattern represents state-specific behavior in separate objects. A\ncontext delegates legal transitions to its current state. A paused study session\ncan resume, while a completed session cannot resume. This prevents inconsistent\ncombinations of boolean flags.\n\n## Command\nThe Command pattern e",
+            "location": "design-patterns.md, text, characters 1-1200",
+            "material_id": "b909f86606b84f3b8e1db783b6939765"
+          }
+        ],
+        "course": "0dbd3a369d6e4a6e863724c8d30863d1",
+        "created_at": "2026-11-13T04:46:07.268423+00:00"
+      }
+    },
+    {
+      "feature": "F09",
+      "check": "Diagnose synthetic review weakness and generate real adaptive practice",
+      "status": "PASS",
+      "result": {
+        "status": "generated",
+        "topic": "Strategy",
+        "mastery": 0.5,
+        "sample_size": 4,
+        "minutes": 10,
+        "difficulty": "intermediate",
+        "reason": "Lowest measured mastery among topics with sufficient evidence.",
+        "practice": {
+          "items": [
+            {
+              "question": "What is the primary purpose of the Strategy design pattern?",
+              "type": "choice",
+              "options": [
+                "To define a family of algorithms behind a common interface and allow changing the algorithm at runtime",
+                "To notify subscribed observers when an event occurs",
+                "To translate an existing interface into the interface a client expects",
+                "To represent state-specific behavior in separate objects"
+              ],
+              "answer": "To define a family of algorithms behind a common interface and allow changing the algorithm at runtime",
+              "rubric": "Correctly identifies that the Strategy pattern encapsulates multiple algorithms behind a common interface and supports changing the algorithm dynamically without altering the context.",
+              "topic": "Strategy",
+              "citations": [
+                "b909f86606b84f3b8e1db783b6939765:1"
+              ],
+              "id": "33b12bc93af7420b9d00441ba0a4d1c1"
+            },
+            {
+              "question": "In the Strategy pattern, how does a context object utilize strategies?",
+              "type": "choice",
+              "options": [
+                "It delegates an operation to a selected strategy which can change at runtime",
+                "It directly implements all algorithm logic internally",
+                "It notifies observers when it changes the algorithm",
+                "It uses separate objects to represent different states"
+              ],
+              "answer": "It delegates an operation to a selected strategy which can change at runtime",
+              "rubric": "Answers must include that the context delegates an operation to a strategy object and that the strategy may be swapped dynamically during runtime.",
+              "topic": "Strategy",
+              "citations": [
+                "b909f86606b84f3b8e1db783b6939765:1"
+              ],
+              "id": "ac3484b3044f4175a53fd44dc144d7c9"
+            }
+          ],
+          "evidence": [
+            {
+              "id": "b909f86606b84f3b8e1db783b6939765:1",
+              "text": "# Software Design: Design Patterns\n\n## Strategy\nThe Strategy pattern defines a family of algorithms behind a common interface.\nA context delegates an operation to a selected strategy. A strategy can change at\nruntime without changing the context. For example, a learning service can select\na flashcard generation strategy or a quiz generation strategy.\n\n## Observer\nThe Observer pattern lets a subject notify subscribed observers when an event\noccurs. Publishers do not need to know the concrete observers. For example, a\ncompleted quiz can publish an AttemptRecorded event. A progress projector observes\nthat event and updates mastery statistics.\n\n## Adapter\nThe Adapter pattern translates an existing interface into the interface a client\nexpects. An OpenAI adapter converts a provider-neutral generation request into an\nHTTP request and converts the response back into a domain result.\n\n## State\nThe State pattern represents state-specific behavior in separate objects. A\ncontext delegates legal transitions to its current state. A paused study session\ncan resume, while a completed session cannot resume. This prevents inconsistent\ncombinations of boolean flags.\n\n## Command\nThe Command pattern e",
+              "location": "design-patterns.md, text, characters 1-1200",
+              "material_id": "b909f86606b84f3b8e1db783b6939765"
+            }
+          ],
+          "coverage": {
+            "retrieved_chunks": 1,
+            "available_chunks": 2,
+            "partial": true,
+            "note": "Generation covers the displayed retrieved excerpts only."
+          },
+          "topic": "Strategy",
+          "count": 2,
+          "difficulty": "intermediate",
+          "id": "21e7334d79f047dda98ff0da4f2d77e3",
+          "course": "0dbd3a369d6e4a6e863724c8d30863d1",
+          "created_at": "2026-11-13T04:46:10.442928+00:00"
+        }
+      }
+    },
+    {
+      "feature": "F10",
+      "check": "Reproducible progress includes synthetic learner evidence",
+      "status": "PASS",
+      "result": {
+        "course": "0dbd3a369d6e4a6e863724c8d30863d1",
+        "topics": [
+          {
+            "topic": "Strategy",
+            "mastery": 0.5,
+            "sample_size": 4
+          }
+        ],
+        "attempts": 1,
+        "completed_sessions": 0,
+        "plans": 1,
+        "events": 4,
+        "as_of": "2026-11-13T04:46:10.447165+00:00",
+        "method": "Mean accepted item scores and card ratings; evidence counts shown."
+      }
+    },
+    {
+      "feature": "F11",
+      "check": "Confirm conflict-checked schedule and export local calendar",
+      "status": "PASS",
+      "result": {
+        "status": "confirmed",
+        "reminders": [
+          {
+            "id": "reminder-b1b87e0e04ec46af843ff2f32c673e60",
+            "plan_id": "85448e148d2641a5919a2095b785a228",
+            "title": "Strategy pattern",
+            "start": "2026-11-13T18:00:00-05:00",
+            "end": "2026-11-13T18:25:00-05:00",
+            "timezone": "America/Toronto",
+            "status": "confirmed",
+            "course": "0dbd3a369d6e4a6e863724c8d30863d1",
+            "created_at": "2026-11-13T04:46:10.447900+00:00"
+          },
+          {
+            "id": "reminder-d53d790422144aa883373cf03d076c5a",
+            "plan_id": "85448e148d2641a5919a2095b785a228",
+            "title": "Observer pattern",
+            "start": "2026-11-13T18:25:00-05:00",
+            "end": "2026-11-13T18:50:00-05:00",
+            "timezone": "America/Toronto",
+            "status": "confirmed",
+            "course": "0dbd3a369d6e4a6e863724c8d30863d1",
+            "created_at": "2026-11-13T04:46:10.448373+00:00"
+          }
+        ],
+        "calendar_file": "[isolated acceptance workspace]/live-acceptance.ics"
+      }
+    },
+    {
+      "feature": "F11",
+      "check": "Repeated confirmation is idempotent",
+      "status": "PASS",
+      "result": {
+        "status": "confirmed",
+        "reminders": [
+          {
+            "id": "reminder-b1b87e0e04ec46af843ff2f32c673e60",
+            "plan_id": "85448e148d2641a5919a2095b785a228",
+            "title": "Strategy pattern",
+            "start": "2026-11-13T18:00:00-05:00",
+            "end": "2026-11-13T18:25:00-05:00",
+            "timezone": "America/Toronto",
+            "status": "confirmed",
+            "course": "0dbd3a369d6e4a6e863724c8d30863d1",
+            "created_at": "2026-11-13T04:46:10.447900+00:00"
+          },
+          {
+            "id": "reminder-d53d790422144aa883373cf03d076c5a",
+            "plan_id": "85448e148d2641a5919a2095b785a228",
+            "title": "Observer pattern",
+            "start": "2026-11-13T18:25:00-05:00",
+            "end": "2026-11-13T18:50:00-05:00",
+            "timezone": "America/Toronto",
+            "status": "confirmed",
+            "course": "0dbd3a369d6e4a6e863724c8d30863d1",
+            "created_at": "2026-11-13T04:46:10.448373+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "feature": "F12",
+      "check": "Start bounded study session",
+      "status": "PASS",
+      "result": {
+        "goal": "Explain Strategy",
+        "minutes": 20,
+        "state": "learn",
+        "started_at": "2026-11-13T04:46:10.450762+00:00",
+        "results": [],
+        "steps": [
+          "learn",
+          "practice",
+          "review"
+        ],
+        "step": 0,
+        "id": "4ac41c7ba85743e38a7637d05e592465",
+        "course": "0dbd3a369d6e4a6e863724c8d30863d1",
+        "created_at": "2026-11-13T04:46:10.450787+00:00"
+      }
+    },
+    {
+      "feature": "F12",
+      "check": "Execute actual retrieval and explanation tool",
+      "status": "PASS",
+      "result": {
+        "goal": "Explain Strategy",
+        "minutes": 20,
+        "state": "practice",
+        "started_at": "2026-11-13T04:46:10.450762+00:00",
+        "results": [
+          {
+            "step": "learn",
+            "result": {
+              "text": "The Strategy pattern defines a family of algorithms behind a common interface and allows a context to delegate an operation to a selected strategy. This strategy can change at runtime without changing the context, enabling flexible swapping of different algorithms, such as choosing between flashcard generation or quiz generation strategies.",
+              "citations": [
+                "b909f86606b84f3b8e1db783b6939765:1"
+              ],
+              "confidence": "high",
+              "follow_ups": [
+                "How is the Strategy pattern implemented in code?",
+                "What are some practical examples of the Strategy pattern?"
+              ],
+              "evidence": [
+                {
+                  "id": "b909f86606b84f3b8e1db783b6939765:1",
+                  "text": "# Software Design: Design Patterns\n\n## Strategy\nThe Strategy pattern defines a family of algorithms behind a common interface.\nA context delegates an operation to a selected strategy. A strategy can change at\nruntime without changing the context. For example, a learning service can select\na flashcard generation strategy or a quiz generation strategy.\n\n## Observer\nThe Observer pattern lets a subject notify subscribed observers when an event\noccurs. Publishers do not need to know the concrete observers. For example, a\ncompleted quiz can publish an AttemptRecorded event. A progress projector observes\nthat event and updates mastery statistics.\n\n## Adapter\nThe Adapter pattern translates an existing interface into the interface a client\nexpects. An OpenAI adapter converts a provider-neutral generation request into an\nHTTP request and converts the response back into a domain result.\n\n## State\nThe State pattern represents state-specific behavior in separate objects. A\ncontext delegates legal transitions to its current state. A paused study session\ncan resume, while a completed session cannot resume. This prevents inconsistent\ncombinations of boolean flags.\n\n## Command\nThe Command pattern e",
+                  "location": "design-patterns.md, text, characters 1-1200",
+                  "material_id": "b909f86606b84f3b8e1db783b6939765"
+                }
+              ],
+              "coverage": {
+                "retrieved_chunks": 1,
+                "available_chunks": 2,
+                "partial": true,
+                "note": "Generation covers the displayed retrieved excerpts only."
+              },
+              "question": "Explain Strategy",
+              "plan": [
+                "retrieve scoped evidence",
+                "answer from evidence",
+                "verify citations",
+                "remember turn"
+              ],
+              "id": "dd8c4d0ffc0c4e88aaf63725157eb1f4",
+              "course": "0dbd3a369d6e4a6e863724c8d30863d1",
+              "created_at": "2026-11-13T04:46:11.980297+00:00"
+            }
+          }
+        ],
+        "steps": [
+          "learn",
+          "practice",
+          "review"
+        ],
+        "step": 1,
+        "id": "4ac41c7ba85743e38a7637d05e592465",
+        "course": "0dbd3a369d6e4a6e863724c8d30863d1",
+        "created_at": "2026-11-13T04:46:10.450787+00:00"
+      }
+    },
+    {
+      "feature": "F12",
+      "check": "Checkpoint pause",
+      "status": "PASS",
+      "result": {
+        "goal": "Explain Strategy",
+        "minutes": 20,
+        "state": "paused",
+        "started_at": "2026-11-13T04:46:10.450762+00:00",
+        "results": [
+          {
+            "step": "learn",
+            "result": {
+              "text": "The Strategy pattern defines a family of algorithms behind a common interface and allows a context to delegate an operation to a selected strategy. This strategy can change at runtime without changing the context, enabling flexible swapping of different algorithms, such as choosing between flashcard generation or quiz generation strategies.",
+              "citations": [
+                "b909f86606b84f3b8e1db783b6939765:1"
+              ],
+              "confidence": "high",
+              "follow_ups": [
+                "How is the Strategy pattern implemented in code?",
+                "What are some practical examples of the Strategy pattern?"
+              ],
+              "evidence": [
+                {
+                  "id": "b909f86606b84f3b8e1db783b6939765:1",
+                  "text": "# Software Design: Design Patterns\n\n## Strategy\nThe Strategy pattern defines a family of algorithms behind a common interface.\nA context delegates an operation to a selected strategy. A strategy can change at\nruntime without changing the context. For example, a learning service can select\na flashcard generation strategy or a quiz generation strategy.\n\n## Observer\nThe Observer pattern lets a subject notify subscribed observers when an event\noccurs. Publishers do not need to know the concrete observers. For example, a\ncompleted quiz can publish an AttemptRecorded event. A progress projector observes\nthat event and updates mastery statistics.\n\n## Adapter\nThe Adapter pattern translates an existing interface into the interface a client\nexpects. An OpenAI adapter converts a provider-neutral generation request into an\nHTTP request and converts the response back into a domain result.\n\n## State\nThe State pattern represents state-specific behavior in separate objects. A\ncontext delegates legal transitions to its current state. A paused study session\ncan resume, while a completed session cannot resume. This prevents inconsistent\ncombinations of boolean flags.\n\n## Command\nThe Command pattern e",
+                  "location": "design-patterns.md, text, characters 1-1200",
+                  "material_id": "b909f86606b84f3b8e1db783b6939765"
+                }
+              ],
+              "coverage": {
+                "retrieved_chunks": 1,
+                "available_chunks": 2,
+                "partial": true,
+                "note": "Generation covers the displayed retrieved excerpts only."
+              },
+              "question": "Explain Strategy",
+              "plan": [
+                "retrieve scoped evidence",
+                "answer from evidence",
+                "verify citations",
+                "remember turn"
+              ],
+              "id": "dd8c4d0ffc0c4e88aaf63725157eb1f4",
+              "course": "0dbd3a369d6e4a6e863724c8d30863d1",
+              "created_at": "2026-11-13T04:46:11.980297+00:00"
+            }
+          }
+        ],
+        "steps": [
+          "learn",
+          "practice",
+          "review"
+        ],
+        "step": 1,
+        "id": "4ac41c7ba85743e38a7637d05e592465",
+        "course": "0dbd3a369d6e4a6e863724c8d30863d1",
+        "created_at": "2026-11-13T04:46:10.450787+00:00",
+        "resume_state": "practice"
+      }
+    },
+    {
+      "feature": "F12",
+      "check": "Resume same persisted session",
+      "status": "PASS",
+      "result": {
+        "goal": "Explain Strategy",
+        "minutes": 20,
+        "state": "practice",
+        "started_at": "2026-11-13T04:46:10.450762+00:00",
+        "results": [
+          {
+            "step": "learn",
+            "result": {
+              "text": "The Strategy pattern defines a family of algorithms behind a common interface and allows a context to delegate an operation to a selected strategy. This strategy can change at runtime without changing the context, enabling flexible swapping of different algorithms, such as choosing between flashcard generation or quiz generation strategies.",
+              "citations": [
+                "b909f86606b84f3b8e1db783b6939765:1"
+              ],
+              "confidence": "high",
+              "follow_ups": [
+                "How is the Strategy pattern implemented in code?",
+                "What are some practical examples of the Strategy pattern?"
+              ],
+              "evidence": [
+                {
+                  "id": "b909f86606b84f3b8e1db783b6939765:1",
+                  "text": "# Software Design: Design Patterns\n\n## Strategy\nThe Strategy pattern defines a family of algorithms behind a common interface.\nA context delegates an operation to a selected strategy. A strategy can change at\nruntime without changing the context. For example, a learning service can select\na flashcard generation strategy or a quiz generation strategy.\n\n## Observer\nThe Observer pattern lets a subject notify subscribed observers when an event\noccurs. Publishers do not need to know the concrete observers. For example, a\ncompleted quiz can publish an AttemptRecorded event. A progress projector observes\nthat event and updates mastery statistics.\n\n## Adapter\nThe Adapter pattern translates an existing interface into the interface a client\nexpects. An OpenAI adapter converts a provider-neutral generation request into an\nHTTP request and converts the response back into a domain result.\n\n## State\nThe State pattern represents state-specific behavior in separate objects. A\ncontext delegates legal transitions to its current state. A paused study session\ncan resume, while a completed session cannot resume. This prevents inconsistent\ncombinations of boolean flags.\n\n## Command\nThe Command pattern e",
+                  "location": "design-patterns.md, text, characters 1-1200",
+                  "material_id": "b909f86606b84f3b8e1db783b6939765"
+                }
+              ],
+              "coverage": {
+                "retrieved_chunks": 1,
+                "available_chunks": 2,
+                "partial": true,
+                "note": "Generation covers the displayed retrieved excerpts only."
+              },
+              "question": "Explain Strategy",
+              "plan": [
+                "retrieve scoped evidence",
+                "answer from evidence",
+                "verify citations",
+                "remember turn"
+              ],
+              "id": "dd8c4d0ffc0c4e88aaf63725157eb1f4",
+              "course": "0dbd3a369d6e4a6e863724c8d30863d1",
+              "created_at": "2026-11-13T04:46:11.980297+00:00"
+            }
+          }
+        ],
+        "steps": [
+          "learn",
+          "practice",
+          "review"
+        ],
+        "step": 1,
+        "id": "4ac41c7ba85743e38a7637d05e592465",
+        "course": "0dbd3a369d6e4a6e863724c8d30863d1",
+        "created_at": "2026-11-13T04:46:10.450787+00:00"
+      }
+    },
+    {
+      "feature": "F12",
+      "check": "Execute adaptive practice tool",
+      "status": "PASS",
+      "result": {
+        "goal": "Explain Strategy",
+        "minutes": 20,
+        "state": "review",
+        "started_at": "2026-11-13T04:46:10.450762+00:00",
+        "results": [
+          {
+            "step": "learn",
+            "result": {
+              "text": "The Strategy pattern defines a family of algorithms behind a common interface and allows a context to delegate an operation to a selected strategy. This strategy can change at runtime without changing the context, enabling flexible swapping of different algorithms, such as choosing between flashcard generation or quiz generation strategies.",
+              "citations": [
+                "b909f86606b84f3b8e1db783b6939765:1"
+              ],
+              "confidence": "high",
+              "follow_ups": [
+                "How is the Strategy pattern implemented in code?",
+                "What are some practical examples of the Strategy pattern?"
+              ],
+              "evidence": [
+                {
+                  "id": "b909f86606b84f3b8e1db783b6939765:1",
+                  "text": "# Software Design: Design Patterns\n\n## Strategy\nThe Strategy pattern defines a family of algorithms behind a common interface.\nA context delegates an operation to a selected strategy. A strategy can change at\nruntime without changing the context. For example, a learning service can select\na flashcard generation strategy or a quiz generation strategy.\n\n## Observer\nThe Observer pattern lets a subject notify subscribed observers when an event\noccurs. Publishers do not need to know the concrete observers. For example, a\ncompleted quiz can publish an AttemptRecorded event. A progress projector observes\nthat event and updates mastery statistics.\n\n## Adapter\nThe Adapter pattern translates an existing interface into the interface a client\nexpects. An OpenAI adapter converts a provider-neutral generation request into an\nHTTP request and converts the response back into a domain result.\n\n## State\nThe State pattern represents state-specific behavior in separate objects. A\ncontext delegates legal transitions to its current state. A paused study session\ncan resume, while a completed session cannot resume. This prevents inconsistent\ncombinations of boolean flags.\n\n## Command\nThe Command pattern e",
+                  "location": "design-patterns.md, text, characters 1-1200",
+                  "material_id": "b909f86606b84f3b8e1db783b6939765"
+                }
+              ],
+              "coverage": {
+                "retrieved_chunks": 1,
+                "available_chunks": 2,
+                "partial": true,
+                "note": "Generation covers the displayed retrieved excerpts only."
+              },
+              "question": "Explain Strategy",
+              "plan": [
+                "retrieve scoped evidence",
+                "answer from evidence",
+                "verify citations",
+                "remember turn"
+              ],
+              "id": "dd8c4d0ffc0c4e88aaf63725157eb1f4",
+              "course": "0dbd3a369d6e4a6e863724c8d30863d1",
+              "created_at": "2026-11-13T04:46:11.980297+00:00"
+            }
+          },
+          {
+            "step": "practice",
+            "result": {
+              "items": [
+                {
+                  "question": "What is the main benefit of using the Strategy pattern in software design?",
+                  "type": "choice",
+                  "options": [
+                    "It defines a family of algorithms behind a common interface allowing dynamic swapping",
+                    "It notifies subscribed observers when an event occurs",
+                    "It translates an existing interface into the interface a client expects",
+                    "It represents state-specific behavior in separate objects"
+                  ],
+                  "answer": "It defines a family of algorithms behind a common interface allowing dynamic swapping",
+                  "rubric": "The answer should indicate understanding that Strategy encapsulates algorithms behind an interface and allows the context to change a strategy at runtime without modifying the context.",
+                  "topic": "Strategy",
+                  "citations": [
+                    "b909f86606b84f3b8e1db783b6939765:1"
+                  ],
+                  "id": "87c275eb2ddb4d0f9a2aa90f52f968fe"
+                },
+                {
+                  "question": "Explain how the Strategy pattern can be applied in a learning service context.",
+                  "type": "free",
+                  "options": [],
+                  "answer": "The learning service can select different strategies such as flashcard generation or quiz generation at runtime without changing the context, allowing flexibility in how content is generated.",
+                  "rubric": "The response should mention that the pattern allows a learning service to dynamically choose among algorithms like flashcard or quiz generation strategies behind a common interface.",
+                  "topic": "Strategy",
+                  "citations": [
+                    "b909f86606b84f3b8e1db783b6939765:1"
+                  ],
+                  "id": "6fb4378587104216bae296eb055d81fa"
+                }
+              ],
+              "evidence": [
+                {
+                  "id": "b909f86606b84f3b8e1db783b6939765:1",
+                  "text": "# Software Design: Design Patterns\n\n## Strategy\nThe Strategy pattern defines a family of algorithms behind a common interface.\nA context delegates an operation to a selected strategy. A strategy can change at\nruntime without changing the context. For example, a learning service can select\na flashcard generation strategy or a quiz generation strategy.\n\n## Observer\nThe Observer pattern lets a subject notify subscribed observers when an event\noccurs. Publishers do not need to know the concrete observers. For example, a\ncompleted quiz can publish an AttemptRecorded event. A progress projector observes\nthat event and updates mastery statistics.\n\n## Adapter\nThe Adapter pattern translates an existing interface into the interface a client\nexpects. An OpenAI adapter converts a provider-neutral generation request into an\nHTTP request and converts the response back into a domain result.\n\n## State\nThe State pattern represents state-specific behavior in separate objects. A\ncontext delegates legal transitions to its current state. A paused study session\ncan resume, while a completed session cannot resume. This prevents inconsistent\ncombinations of boolean flags.\n\n## Command\nThe Command pattern e",
+                  "location": "design-patterns.md, text, characters 1-1200",
+                  "material_id": "b909f86606b84f3b8e1db783b6939765"
+                }
+              ],
+              "coverage": {
+                "retrieved_chunks": 1,
+                "available_chunks": 2,
+                "partial": true,
+                "note": "Generation covers the displayed retrieved excerpts only."
+              },
+              "topic": "Strategy",
+              "count": 2,
+              "difficulty": "intermediate",
+              "id": "0ff67777c15f48ebaa89fa03154d9bfb",
+              "course": "0dbd3a369d6e4a6e863724c8d30863d1",
+              "created_at": "2026-11-13T04:46:16.180360+00:00"
+            }
+          }
+        ],
+        "steps": [
+          "learn",
+          "practice",
+          "review"
+        ],
+        "step": 2,
+        "id": "4ac41c7ba85743e38a7637d05e592465",
+        "course": "0dbd3a369d6e4a6e863724c8d30863d1",
+        "created_at": "2026-11-13T04:46:10.450787+00:00"
+      }
+    },
+    {
+      "feature": "F12",
+      "check": "Submit synthetic session-practice answers before final progress review",
+      "status": "PASS",
+      "result": {
+        "id": "5a98f5c2c30f4e3ea1cf75a320140da9",
+        "quiz_id": "0ff67777c15f48ebaa89fa03154d9bfb",
+        "answers": {
+          "87c275eb2ddb4d0f9a2aa90f52f968fe": "It defines a family of algorithms behind a common interface allowing dynamic swapping",
+          "6fb4378587104216bae296eb055d81fa": "The learning service can select different strategies such as flashcard generation or quiz generation at runtime without changing the context, allowing flexibility in how content is generated."
+        },
+        "results": [
+          {
+            "item_id": "87c275eb2ddb4d0f9a2aa90f52f968fe",
+            "topic": "Strategy",
+            "score": 1.0,
+            "feedback": "Expected answer: It defines a family of algorithms behind a common interface allowing dynamic swapping",
+            "confidence": 1.0,
+            "needs_review": false,
+            "citations": [
+              "b909f86606b84f3b8e1db783b6939765:1"
+            ]
+          },
+          {
+            "item_id": "6fb4378587104216bae296eb055d81fa",
+            "topic": "Strategy",
+            "score": 1,
+            "feedback": "The answer correctly explains that the learning service can select different strategies such as flashcard or quiz generation at runtime without changing the context, which aligns well with the rubric's requirement of mentioning dynamic choice among algorithms behind a common interface.",
+            "confidence": 1,
+            "needs_review": false,
+            "citations": [
+              "b909f86606b84f3b8e1db783b6939765:1"
+            ]
+          }
+        ],
+        "score": 1.0,
+        "evidence": [
+          {
+            "id": "b909f86606b84f3b8e1db783b6939765:1",
+            "text": "# Software Design: Design Patterns\n\n## Strategy\nThe Strategy pattern defines a family of algorithms behind a common interface.\nA context delegates an operation to a selected strategy. A strategy can change at\nruntime without changing the context. For example, a learning service can select\na flashcard generation strategy or a quiz generation strategy.\n\n## Observer\nThe Observer pattern lets a subject notify subscribed observers when an event\noccurs. Publishers do not need to know the concrete observers. For example, a\ncompleted quiz can publish an AttemptRecorded event. A progress projector observes\nthat event and updates mastery statistics.\n\n## Adapter\nThe Adapter pattern translates an existing interface into the interface a client\nexpects. An OpenAI adapter converts a provider-neutral generation request into an\nHTTP request and converts the response back into a domain result.\n\n## State\nThe State pattern represents state-specific behavior in separate objects. A\ncontext delegates legal transitions to its current state. A paused study session\ncan resume, while a completed session cannot resume. This prevents inconsistent\ncombinations of boolean flags.\n\n## Command\nThe Command pattern e",
+            "location": "design-patterns.md, text, characters 1-1200",
+            "material_id": "b909f86606b84f3b8e1db783b6939765"
+          }
+        ],
+        "course": "0dbd3a369d6e4a6e863724c8d30863d1",
+        "created_at": "2026-11-13T04:46:17.306353+00:00"
+      }
+    },
+    {
+      "feature": "F12",
+      "check": "Complete review with current persisted progress",
+      "status": "PASS",
+      "result": {
+        "goal": "Explain Strategy",
+        "minutes": 20,
+        "state": "completed",
+        "started_at": "2026-11-13T04:46:10.450762+00:00",
+        "results": [
+          {
+            "step": "learn",
+            "result": {
+              "text": "The Strategy pattern defines a family of algorithms behind a common interface and allows a context to delegate an operation to a selected strategy. This strategy can change at runtime without changing the context, enabling flexible swapping of different algorithms, such as choosing between flashcard generation or quiz generation strategies.",
+              "citations": [
+                "b909f86606b84f3b8e1db783b6939765:1"
+              ],
+              "confidence": "high",
+              "follow_ups": [
+                "How is the Strategy pattern implemented in code?",
+                "What are some practical examples of the Strategy pattern?"
+              ],
+              "evidence": [
+                {
+                  "id": "b909f86606b84f3b8e1db783b6939765:1",
+                  "text": "# Software Design: Design Patterns\n\n## Strategy\nThe Strategy pattern defines a family of algorithms behind a common interface.\nA context delegates an operation to a selected strategy. A strategy can change at\nruntime without changing the context. For example, a learning service can select\na flashcard generation strategy or a quiz generation strategy.\n\n## Observer\nThe Observer pattern lets a subject notify subscribed observers when an event\noccurs. Publishers do not need to know the concrete observers. For example, a\ncompleted quiz can publish an AttemptRecorded event. A progress projector observes\nthat event and updates mastery statistics.\n\n## Adapter\nThe Adapter pattern translates an existing interface into the interface a client\nexpects. An OpenAI adapter converts a provider-neutral generation request into an\nHTTP request and converts the response back into a domain result.\n\n## State\nThe State pattern represents state-specific behavior in separate objects. A\ncontext delegates legal transitions to its current state. A paused study session\ncan resume, while a completed session cannot resume. This prevents inconsistent\ncombinations of boolean flags.\n\n## Command\nThe Command pattern e",
+                  "location": "design-patterns.md, text, characters 1-1200",
+                  "material_id": "b909f86606b84f3b8e1db783b6939765"
+                }
+              ],
+              "coverage": {
+                "retrieved_chunks": 1,
+                "available_chunks": 2,
+                "partial": true,
+                "note": "Generation covers the displayed retrieved excerpts only."
+              },
+              "question": "Explain Strategy",
+              "plan": [
+                "retrieve scoped evidence",
+                "answer from evidence",
+                "verify citations",
+                "remember turn"
+              ],
+              "id": "dd8c4d0ffc0c4e88aaf63725157eb1f4",
+              "course": "0dbd3a369d6e4a6e863724c8d30863d1",
+              "created_at": "2026-11-13T04:46:11.980297+00:00"
+            }
+          },
+          {
+            "step": "practice",
+            "result": {
+              "items": [
+                {
+                  "question": "What is the main benefit of using the Strategy pattern in software design?",
+                  "type": "choice",
+                  "options": [
+                    "It defines a family of algorithms behind a common interface allowing dynamic swapping",
+                    "It notifies subscribed observers when an event occurs",
+                    "It translates an existing interface into the interface a client expects",
+                    "It represents state-specific behavior in separate objects"
+                  ],
+                  "answer": "It defines a family of algorithms behind a common interface allowing dynamic swapping",
+                  "rubric": "The answer should indicate understanding that Strategy encapsulates algorithms behind an interface and allows the context to change a strategy at runtime without modifying the context.",
+                  "topic": "Strategy",
+                  "citations": [
+                    "b909f86606b84f3b8e1db783b6939765:1"
+                  ],
+                  "id": "87c275eb2ddb4d0f9a2aa90f52f968fe"
+                },
+                {
+                  "question": "Explain how the Strategy pattern can be applied in a learning service context.",
+                  "type": "free",
+                  "options": [],
+                  "answer": "The learning service can select different strategies such as flashcard generation or quiz generation at runtime without changing the context, allowing flexibility in how content is generated.",
+                  "rubric": "The response should mention that the pattern allows a learning service to dynamically choose among algorithms like flashcard or quiz generation strategies behind a common interface.",
+                  "topic": "Strategy",
+                  "citations": [
+                    "b909f86606b84f3b8e1db783b6939765:1"
+                  ],
+                  "id": "6fb4378587104216bae296eb055d81fa"
+                }
+              ],
+              "evidence": [
+                {
+                  "id": "b909f86606b84f3b8e1db783b6939765:1",
+                  "text": "# Software Design: Design Patterns\n\n## Strategy\nThe Strategy pattern defines a family of algorithms behind a common interface.\nA context delegates an operation to a selected strategy. A strategy can change at\nruntime without changing the context. For example, a learning service can select\na flashcard generation strategy or a quiz generation strategy.\n\n## Observer\nThe Observer pattern lets a subject notify subscribed observers when an event\noccurs. Publishers do not need to know the concrete observers. For example, a\ncompleted quiz can publish an AttemptRecorded event. A progress projector observes\nthat event and updates mastery statistics.\n\n## Adapter\nThe Adapter pattern translates an existing interface into the interface a client\nexpects. An OpenAI adapter converts a provider-neutral generation request into an\nHTTP request and converts the response back into a domain result.\n\n## State\nThe State pattern represents state-specific behavior in separate objects. A\ncontext delegates legal transitions to its current state. A paused study session\ncan resume, while a completed session cannot resume. This prevents inconsistent\ncombinations of boolean flags.\n\n## Command\nThe Command pattern e",
+                  "location": "design-patterns.md, text, characters 1-1200",
+                  "material_id": "b909f86606b84f3b8e1db783b6939765"
+                }
+              ],
+              "coverage": {
+                "retrieved_chunks": 1,
+                "available_chunks": 2,
+                "partial": true,
+                "note": "Generation covers the displayed retrieved excerpts only."
+              },
+              "topic": "Strategy",
+              "count": 2,
+              "difficulty": "intermediate",
+              "id": "0ff67777c15f48ebaa89fa03154d9bfb",
+              "course": "0dbd3a369d6e4a6e863724c8d30863d1",
+              "created_at": "2026-11-13T04:46:16.180360+00:00"
+            }
+          },
+          {
+            "step": "review",
+            "result": {
+              "summary": "Session activities completed. Review saved explanations and submit the generated quiz for feedback.",
+              "progress": {
+                "course": "0dbd3a369d6e4a6e863724c8d30863d1",
+                "topics": [
+                  {
+                    "topic": "Strategy",
+                    "mastery": 0.667,
+                    "sample_size": 6
+                  }
+                ],
+                "attempts": 2,
+                "completed_sessions": 0,
+                "plans": 1,
+                "events": 9,
+                "as_of": "2026-11-13T04:46:17.310094+00:00",
+                "method": "Mean accepted item scores and card ratings; evidence counts shown."
+              }
+            }
+          }
+        ],
+        "steps": [
+          "learn",
+          "practice",
+          "review"
+        ],
+        "step": 3,
+        "id": "4ac41c7ba85743e38a7637d05e592465",
+        "course": "0dbd3a369d6e4a6e863724c8d30863d1",
+        "created_at": "2026-11-13T04:46:10.450787+00:00"
+      }
+    }
+  ],
+  "model": "gpt-4.1-mini-2025-04-14",
+  "course_id": "0dbd3a369d6e4a6e863724c8d30863d1",
+  "source": "samples/design-patterns.md",
+  "completed_at": "2026-11-13T04:46:17.313938+00:00",
+  "requests": [
+    {
+      "task": "summary",
+      "evidence_chunks": 2,
+      "status": "PASS",
+      "seconds": 3.486,
+      "reported_tokens": {
+        "input_tokens": 710,
+        "output_tokens": 167
+      }
+    },
+    {
+      "task": "concepts",
+      "evidence_chunks": 2,
+      "status": "PASS",
+      "seconds": 5.666,
+      "reported_tokens": {
+        "input_tokens": 802,
+        "output_tokens": 383
+      }
+    },
+    {
+      "task": "answer",
+      "evidence_chunks": 2,
+      "status": "PASS",
+      "seconds": 1.344,
+      "reported_tokens": {
+        "input_tokens": 757,
+        "output_tokens": 109
+      }
+    },
+    {
+      "task": "plan",
+      "evidence_chunks": 2,
+      "status": "PASS",
+      "seconds": 0.768,
+      "reported_tokens": {
+        "input_tokens": 769,
+        "output_tokens": 11
+      }
+    },
+    {
+      "task": "flashcards",
+      "evidence_chunks": 1,
+      "status": "PASS",
+      "seconds": 2.298,
+      "reported_tokens": {
+        "input_tokens": 518,
+        "output_tokens": 198
+      }
+    },
+    {
+      "task": "quiz",
+      "evidence_chunks": 1,
+      "status": "PASS",
+      "seconds": 2.907,
+      "reported_tokens": {
+        "input_tokens": 568,
+        "output_tokens": 293
+      }
+    },
+    {
+      "task": "grade",
+      "evidence_chunks": 1,
+      "status": "PASS",
+      "seconds": 1.486,
+      "reported_tokens": {
+        "input_tokens": 524,
+        "output_tokens": 45
+      }
+    },
+    {
+      "task": "quiz",
+      "evidence_chunks": 1,
+      "status": "PASS",
+      "seconds": 3.171,
+      "reported_tokens": {
+        "input_tokens": 569,
+        "output_tokens": 359
+      }
+    },
+    {
+      "task": "answer",
+      "evidence_chunks": 1,
+      "status": "PASS",
+      "seconds": 1.527,
+      "reported_tokens": {
+        "input_tokens": 614,
+        "output_tokens": 126
+      }
+    },
+    {
+      "task": "quiz",
+      "evidence_chunks": 1,
+      "status": "PASS",
+      "seconds": 4.19,
+      "reported_tokens": {
+        "input_tokens": 569,
+        "output_tokens": 327
+      }
+    },
+    {
+      "task": "grade",
+      "evidence_chunks": 1,
+      "status": "PASS",
+      "seconds": 1.121,
+      "reported_tokens": {
+        "input_tokens": 536,
+        "output_tokens": 57
+      }
+    }
+  ],
+  "total_reported_tokens": {
+    "input_tokens": 6936,
+    "output_tokens": 2075
+  },
+  "money_cost": {
+    "estimated_standard_uncached_usd": 0.0060944,
+    "measured_account_charge_usd": null,
+    "pricing": {
+      "currency": "USD",
+      "input_per_million_tokens": 0.4,
+      "output_per_million_tokens": 1.6,
+      "source": "https://developers.openai.com/api/docs/models/gpt-4.1-mini",
+      "assumptions": "Standard uncached token pricing; estimates exclude cache discounts, tax, unrelated use, and rejected setup attempts without returned usage. Measured account billing remains authoritative."
+    }
+  },
+  "source_sha256": "dd18af94fbc13da5ab85d91d6ac47552829525b027f977caff5554b305a32da7",
+  "source_review": {
+    "status": "PASS",
+    "method": "Independent AI-assisted comparison with the bundled source; not a proof of semantic entailment for other inputs.",
+    "source_chunks_verified": 2,
+    "nested_evidence_copies_verified": 20,
+    "citation_references_verified": 33,
+    "notes": [
+      "All inspected final claims match the source.",
+      "Seven concept nodes and zero asserted relationships; unsupported Command-State edge absent.",
+      "New reminders are future and nonoverlapping; repeated scheduling preserves identifiers.",
+      "Synthetic learner reviews and reference answers are disclosed, not human performance."
+    ]
+  }
+}

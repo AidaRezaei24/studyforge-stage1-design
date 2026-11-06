@@ -6,7 +6,7 @@
 | --- | --- | --- | --- |
 | Codex desktop coding agent | GPT-6 family as described by this environment; exact billed model identifier was not exposed | Read Stage 1 and Stage 2 documents; inspect/fetch original repository; implement shared core, model adapter, GUI/CLI, tests, sample configuration, documentation and report preparation; coordinate implementation and cross-review | Unavailable in this environment. Do not interpret unavailable as zero. The account usage/billing export is needed for a final measured total. |
 | Codex delegated coding agents | Same inherited model as parent; exact billed identifier unavailable | Separate learning/retrieval, application core, and interface tasks; shared source review and regression fixes | Included in unavailable agent-session accounting; no invented per-agent estimate. |
-| StudyForge runtime OpenAI adapter | Default configured model `gpt-4.1-mini-2025-04-14`, user-overridable through `OPENAI_MODEL` | Production implementation for summaries, answers, concepts, cards, quizzes, study-plan topics and free-response grading | A key was configured privately after the initial implementation checks. Initial provider requests revealed a JSON-mode input requirement, now corrected. No completed generation usage was returned in these validation attempts; live output acceptance and measured costs remain pending. In-memory `usage` counts API-reported input/output tokens on completed responses; money is not calculated or stored. |
+| StudyForge runtime OpenAI adapter | `gpt-4.1-mini-2025-04-14` | Real summaries, concept maps, answers, plans, cards, quizzes, free-response grading and focused-session tools using the bundled sample | Across 24 completed validation requests: 15,352 input tokens and 4,725 output tokens. Estimated standard uncached cost: USD 0.0137008, excluding discounts, taxes and unrelated activity; measured account charges remain unverified. See runtime-usage.json. Provider-reported usage is counted before status/content validation so malformed-output retries are included. |
 
 Local Python tools, SQLite, Git, PDF extraction, and browser/HTTP checks are development tools, not additional LLM models. Unit-test fake gateways produce deterministic test fixtures only. They are dependency-injected inside tests and are not a production fallback or a claim that an LLM ran.
 
@@ -30,6 +30,9 @@ The following are concise summaries of representative requests and outcomes from
 | Review planning and progress against original report | Added known graph prerequisite-order checks, rejected duplicate topics, added broad-goal planning fallback with regression, and documented omitted availability windows, trend analytics, adherence, remote calendar integration and general-purpose autonomous planning. |
 | Exercise the real provider request contract | Found that JSON mode requires an explicit JSON instruction in the input message, beyond the provider instructions field. Added it to the structured input envelope and regression-tested empty and populated requests. |
 | Improve actionable provider errors | Added bounded parsing of structured quota error identifiers. Credit-related failures now give an actionable local message without printing raw provider messages, secrets or retrying failed requests. |
+| Inspect actual live output against course sources | Found an unsupported Command-State relationship inferred from adjacent sections. Tightened relationship grounding, then ran a targeted live regression and a complete live rerun; the final graph contains only supported concepts and asserts no unsupported edges. |
+| Inspect live schedule timestamps | Found that an evening run could create earlier same-day reminders. Added an explicit start date, future default dates, rejection of new past reminders, visible interface controls and frozen-clock regressions. Approved plans never shift silently. |
+| Audit runtime usage accounting | Moved API-reported usage accumulation before status/content validation and tested malformed/incomplete responses, preventing undercounted paid retries. |
 
 ## Verification evidence and limits
 
@@ -39,7 +42,15 @@ A fake HTTP opener verifies the production adapter sends the expected Responses 
 
 The original main branch contained documentation only, so there was no previous runnable application whose behavior could be compared. The relevant baseline comparison is Stage 1 feature/class/interaction promises against the new source. `architecture.md` records those differences explicitly. New regression tests demonstrate corrected behavior for defects found during implementation; there is no claim of Stage 3 KUMA validation.
 
-A local API key is now configured privately and remains excluded from Git. Initial real provider requests were attempted, but no generated output has been accepted. Full live feature acceptance and output-quality evaluation remain pending. Feature demonstration recordings and accessible timestamped video links are separate requirements; a test run, screenshot, code listing or generated report is not a replacement for those recordings.
+A local API key is configured privately and remains excluded from Git. The final
+live run passed 23 checks covering F01-F12 using 11 actual provider requests
+(6,936 input and 2,075 output tokens). Independent AI-assisted comparison verified
+the sample hash, source copies, citation scope, generated claims, grading and
+future reminder times. The GUI was also inspected while displaying the saved real
+summary and its source passages. These checks cover the bundled sample, not all
+future user inputs. See live-verification.json for evidence and runtime-usage.json
+for the full validation usage ledger. Feature videos and accessible timestamped
+links remain separate requirements; tests and screenshots do not replace them.
 
 ## Weekly code activity, Toronto local dates
 

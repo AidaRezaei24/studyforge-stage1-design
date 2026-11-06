@@ -1,0 +1,52 @@
+{
+  "model": "gpt-4.1-mini-2025-04-14",
+  "runs": [
+    {
+      "name": "Initial connection summary",
+      "requests": 1,
+      "input_tokens": 714,
+      "output_tokens": 139,
+      "status": "PASS",
+      "estimated_standard_uncached_usd": 0.000508
+    },
+    {
+      "name": "Initial workflow before semantic corrections",
+      "requests": 11,
+      "input_tokens": 6896,
+      "output_tokens": 2127,
+      "status": "Structural checks passed; subsequent review found defects corrected before final acceptance",
+      "estimated_standard_uncached_usd": 0.0061616
+    },
+    {
+      "name": "Targeted concept relationship regression",
+      "requests": 1,
+      "input_tokens": 806,
+      "output_tokens": 384,
+      "status": "PASS",
+      "estimated_standard_uncached_usd": 0.0009368
+    },
+    {
+      "name": "Final corrected workflow",
+      "requests": 11,
+      "input_tokens": 6936,
+      "output_tokens": 2075,
+      "status": "PASS",
+      "estimated_standard_uncached_usd": 0.0060944
+    }
+  ],
+  "total_reported_usage": {
+    "requests": 24,
+    "input_tokens": 15352,
+    "output_tokens": 4725
+  },
+  "pricing": {
+    "currency": "USD",
+    "input_per_million_tokens": 0.4,
+    "output_per_million_tokens": 1.6,
+    "source": "https://developers.openai.com/api/docs/models/gpt-4.1-mini",
+    "assumptions": "Standard uncached token pricing; estimates exclude cache discounts, tax, unrelated use, and rejected setup attempts without returned usage. Measured account billing remains authoritative."
+  },
+  "estimated_standard_uncached_usd": 0.0137008,
+  "measured_account_charge_usd": null,
+  "development_tool_totals": "Not exposed by this coding environment; owner usage export needed."
+}
