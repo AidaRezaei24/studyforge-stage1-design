@@ -5,7 +5,9 @@ Each has an implemented path, with modifications listed below and in architectur
 Offline acceptance uses a model test double. The final live sample run passed all
 twelve feature workflows; evidence is recorded in live-verification.json. This
 does not guarantee semantic correctness for every future input.
-Every video entry is awaiting owner recording, as indexed in demo-index.json.
+The owner supplied a combined recording and all twelve feature start times, indexed
+in demo-index.json. Signed-out playback was verified on November 15, 2026; full feature coverage
+has not been independently verified. Direct segment links below use the owner-supplied timestamps.
 
 Provider accounting: the adapter records nonnegative integer token counts reported
 in a parsed provider response envelope before checking completion or generated JSON.
@@ -30,7 +32,7 @@ in a per-file transaction. One rejected file does not discard other successes.
 
 Patterns: MVC, Command, Adapter (format parsing), Observer. Changes: filename-derived
 metadata and lexical index replace AI tagging and vector embeddings. OCR is absent.
-Video: F01 segment pending; show valid file, duplicate, unsupported file and sources.
+Video: [F01 at 0:32](https://youtu.be/vovxVKUw2TE?t=32) (owner-supplied; coverage unverified); suggested recording checks: show valid file, duplicate, unsupported file and sources.
 
 ## F02 Grounded summaries / UC02
 
@@ -50,7 +52,7 @@ produces an error before generation. Coverage reports bounded retrieval explicit
 
 Patterns: Strategy, Adapter, Command, MVC. Changes: no section-domain selector or
 exhaustive whole-course summary; source-ID validity does not prove semantic entailment.
-Video: F02 pending; show detail/focus, source resolution and missing evidence behavior.
+Video: [F02 at 1:30](https://youtu.be/vovxVKUw2TE?t=90) (owner-supplied; coverage unverified); suggested recording checks: show detail/focus, source resolution and missing evidence behavior.
 
 ## F03 Concept extraction and knowledge map / UC03
 
@@ -68,7 +70,7 @@ and the saved graph is rendered with relationships and source records.
 
 Patterns: Strategy, Adapter, MVC. Changes: invalid graph rejects and retries rather
 than quarantining individual edges; regeneration creates a new record without a
-version comparison service. Video: F03 pending; show graph and supporting evidence.
+version comparison service. Video: [F03 at 2:10](https://youtu.be/vovxVKUw2TE?t=130) (owner-supplied; coverage unverified); suggested recording checks: show graph and supporting evidence.
 
 ## F04 Grounded question answering / UC04
 
@@ -87,7 +89,7 @@ Lexical misses return an evidence-gap error, without inventing an answer.
 
 Patterns: Strategy, Facade, Command, Adapter, MVC. Changes: explicit commands replace
 IntentRouter and multi-query TaskPlanner; pronoun-only questions may need rephrasing.
-Video: F04 pending; show answer/citations, follow-up and unrelated question error.
+Video: [F04 at 2:56](https://youtu.be/vovxVKUw2TE?t=176) (owner-supplied; coverage unverified); suggested recording checks: show answer/citations, follow-up and unrelated question error.
 
 ## F05 Personalized study plan / UC05
 
@@ -109,7 +111,7 @@ Approved session dates are never shifted silently.
 
 Patterns: Facade, Command, Adapter, MVC. Changes: daily-minute capacity replaces
 arbitrary availability windows/profile priorities; activities and checkpoints are
-not richly generated. Video: F05 pending; show draft, approval, infeasible capacity
+not richly generated. Video: [F05 at 4:20](https://youtu.be/vovxVKUw2TE?t=260) (owner-supplied; coverage unverified); suggested recording checks: show draft, approval, infeasible capacity
 and replacement guard.
 
 ## F06 Flashcard generation and review / UC06
@@ -127,7 +129,7 @@ cards. Reviewing a card with rating 0-3 saves its next interval/due date and pub
 CardReviewed. Queue excludes rejected/not-yet-due cards. Edits are marked user_edited.
 
 Patterns: Strategy, Command, Observer, Adapter, MVC. Changes: simple documented
-rating multiplier; user edits are not AI-reverified. Video: F06 pending; show deck,
+rating multiplier; user edits are not AI-reverified. Video: [F06 at 5:35](https://youtu.be/vovxVKUw2TE?t=335) (owner-supplied; coverage unverified); suggested recording checks: show deck,
 review, due schedule and edit/reject alternatives.
 
 ## F07 Quiz generation / UC07
@@ -145,7 +147,7 @@ free-response rubrics and resolvable citations. Saved quiz includes answer key a
 evidence. Invalid output retries once, then fails without a partial saved quiz.
 
 Patterns: Strategy, Command, Adapter, MVC. Changes: no explicit objective coverage
-validator, user-selected format mix or partial-quiz fallback. Video: F07 pending;
+validator, user-selected format mix or partial-quiz fallback. Video: [F07 at 7:00](https://youtu.be/vovxVKUw2TE?t=420) (owner-supplied; coverage unverified); suggested recording checks:
 show saved questions/rubrics/citations and invalid count.
 
 ## F08 Automatic grading and explanations / UC08
@@ -165,7 +167,7 @@ Low-confidence item scores are flagged and excluded from mastery.
 
 Patterns: Command, Adapter, Observer, Facade. Changes: no human grade-override UI;
 duplicate protection uses a supplied stable attempt ID, while new IDs denote new
-attempts. Video: F08 pending; show mixed scoring, feedback, incomplete submission
+attempts. Video: [F08 at 8:20](https://youtu.be/vovxVKUw2TE?t=500) (owner-supplied; coverage unverified); suggested recording checks: show mixed scoring, feedback, incomplete submission
 and duplicate ID rejection.
 
 ## F09 Weak-topic diagnosis and adaptive practice / UC09
@@ -183,7 +185,7 @@ with that actual difficulty, saving a quiz and adaptation record.
 
 Patterns: Facade, Command, Strategy (reused quiz generator), Adapter. Changes: no
 prerequisite remediation traversal, AI narrative or insertion into active plan.
-Sparse evidence is reported honestly. Video: F09 pending; show insufficient evidence,
+Sparse evidence is reported honestly. Video: [F09 at 9:47](https://youtu.be/vovxVKUw2TE?t=587) (owner-supplied; coverage unverified); suggested recording checks: show insufficient evidence,
 then weak-topic proposal and confirmed practice.
 
 ## F10 Progress and mastery analytics / UC10
@@ -201,7 +203,7 @@ and returns attempt/session/plan/event counts with an as-of timestamp.
 
 Patterns: Observer, MVC. Changes: date ranges, trend charts, plan adherence and
 optional AI narrative are absent. Metrics are descriptive means, not calibrated
-probabilities of mastery. Video: F10 pending; contrast empty data and measured results.
+probabilities of mastery. Video: [F10 at 11:30](https://youtu.be/vovxVKUw2TE?t=690) (owner-supplied; coverage unverified); suggested recording checks: contrast empty data and measured results.
 
 ## F11 Study scheduling and reminders / UC11
 
@@ -223,7 +225,7 @@ export leaves confirmed local records available for retry.
 
 Patterns: Command, Adapter, Facade, MVC. Changes: no live calendar authorization,
 remote conflict reads, remote retries, AI rescheduling or notification daemon.
-Video: F11 pending; show preview, confirmation, duplicate prevention, conflict and ICS.
+Video: [F11 at 10:40](https://youtu.be/vovxVKUw2TE?t=640) (owner-supplied; coverage unverified); suggested recording checks: show preview, confirmation, duplicate prevention, conflict and ICS.
 
 ## F12 Orchestrated focused study session / UC12
 
@@ -244,5 +246,5 @@ The user can grade the generated quiz before advancing review.
 
 Patterns: State, Facade, Command, Observer, Strategy, Adapter. Changes: bounded three
 stages replace arbitrary plans/Setup/activity mixes and continuous per-answer replanning.
-Paused time counts toward budget. Video: F12 pending; show actual tools, pause/restart,
+Paused time counts toward budget. Video: [F12 at 12:10](https://youtu.be/vovxVKUw2TE?t=730) (owner-supplied; coverage unverified); suggested recording checks: show actual tools, pause/restart,
 resume, review and terminal-state error.

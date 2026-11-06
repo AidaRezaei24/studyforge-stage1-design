@@ -153,16 +153,18 @@ See [implemented architecture and diagrams](docs/architecture.md),
 [Stage 2 implementation report](stage2-report.pdf), and
 [AI collaboration and verification log](docs/development-log.md).
 The original Stage 1 report remains unchanged in this repository.
+See the [final requirement audit](docs/final-audit.md) for the latest checks and remaining submission items.
 
 ## Submission status and limits
 
 The weekly historical commit requirement cannot be established by newly created
-commits. The report records actual history rather than fabricated dates. Feature
-videos remain outstanding until completed by the owner. The final live sample run
-passed 23 checks across all twelve features using 11 actual provider requests;
+commits. The report records actual history rather than fabricated dates. The owner
+supplied a [demonstration recording with all twelve feature timestamps](docs/demonstrations.md);
+signed-out playback has been verified; full feature coverage still requires review. The
+final live sample run passed 23 checks across all twelve features using 11 actual provider requests;
 see [live evidence](docs/live-verification.json) and the
 [runtime usage ledger](docs/runtime-usage.json). Do not treat the repository as
-ready for submission until recordings, measured usage accounting and final
+ready for submission until recording verification, measured usage accounting and final
 submission steps are complete.
 
 Retrieval is a deterministic local lexical index instead of embeddings; scanned

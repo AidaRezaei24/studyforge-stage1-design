@@ -1,7 +1,7 @@
 {
   "status": "owner_supplied_recording_and_timestamps",
   "recording_url": "https://youtu.be/vovxVKUw2TE",
-  "description": "Recording and feature start times supplied by the owner on 2026-11-15. Playback access and feature coverage await independent verification.",
+  "description": "Owner supplied recording and feature start times on 2026-11-15. Signed-out playback verified on 2026-11-15; complete feature coverage remains pending independent review.",
   "features": [
     {
       "feature_id": "F01",
@@ -159,5 +159,18 @@
       ],
       "guide_section": "Segment 12 \u2014 F12 Orchestrated Focused Study Session"
     }
-  ]
+  ],
+  "playback_verification": {
+    "status": "passed",
+    "method": "YouTube page opened and video played in signed-out browser session",
+    "verified_on": "2026-11-15",
+    "duration_displayed": "13:06",
+    "limits": "Playback access verified; complete narration, CLI coverage, per-feature output and absence of secrets throughout the full recording were not verified."
+  },
+  "owner_coverage_confirmation": {
+    "reported_on": "2026-11-15",
+    "gui_and_cli_shown": true,
+    "source": "Owner confirmation",
+    "verification": "Not independently reviewed for complete feature coverage"
+  }
 }

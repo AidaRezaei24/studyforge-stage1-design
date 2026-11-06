@@ -3,8 +3,8 @@
 **Status: owner supplied the recording and all twelve feature start times.**
 
 Recording: [StudyForge Stage 2 demonstration](https://youtu.be/vovxVKUw2TE).
-The owner supplied the recording and timestamps on November 15, 2026. Playback
-access and feature coverage have not been independently verified. F11 appears
+The owner supplied the recording and timestamps on November 15, 2026. Signed-out playback was verified on November 15, 2026; full feature coverage
+has not been independently verified. F11 appears
 before F10 in the supplied recording order. The guide below remains available
 for reproducing the demonstrations.
 
@@ -140,7 +140,7 @@ Approve a saved draft. Show replacement protection by attempting approval of a
 second plan without confirming replacement.
 
 ```sh
-python -m studyforge plan --course COURSE --goal "Understand design patterns" --deadline "$DEADLINE" --start-date "$FUTURE_START" --minutes-per-day 60 --session-minutes 25
+python -m studyforge plan --course COURSE --goal "Understand design patterns" --deadline "$DEADLINE" --start-date "$FUTURE_START" --minutes-per-day 60
 python -m studyforge plan-approve --plan-id PLAN
 ```
 

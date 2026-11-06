@@ -48,5 +48,14 @@
   },
   "estimated_standard_uncached_usd": 0.0137008,
   "measured_account_charge_usd": null,
-  "development_tool_totals": "Not exposed by this coding environment; owner usage export needed."
+  "development_tool_totals": "Not exposed by this coding environment; owner usage export needed.",
+  "scope": "The 24 validation requests listed here only. Excludes later demonstration recording requests and Codex development usage; not a complete project cost total.",
+  "owner_reported_account_usage": {
+    "total_spend_usd": 0.014,
+    "source": "Owner confirmed Total spend on the OpenAI Usage page",
+    "reported_on": "2026-11-15",
+    "dashboard_date_range": "Not provided",
+    "total_tokens": null,
+    "verification": "Owner-reported; not independently checked against a billing export"
+  }
 }
