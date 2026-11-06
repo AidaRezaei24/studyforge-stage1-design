@@ -328,7 +328,35 @@ class AdapterTests(unittest.TestCase):
                 self.assertNotIn('test-private-key', str(raised.exception))
                 self.assertNotIn('provider-private-message', str(raised.exception))
 
+    def test_usage_includes_invalid_or_incomplete_billed_responses(self):
+        cases = [({'status': 'incomplete', 'output': []}, ModelError),
+                 ({'status': 'completed', 'output': [{'type': 'message', 'content': [
+                     {'type': 'output_text', 'text': 'not JSON'}]}]}, InvalidModelOutput),
+                 ({'status': 'completed', 'output': [{'type': 'message', 'content': [
+                     {'type': 'output_text', 'text': '[]'}]}]}, InvalidModelOutput)]
+        for response, expected_error in cases:
+            with self.subTest(status=response['status'], output=response['output']):
+                response['usage'] = {'input_tokens': 10, 'output_tokens': 4}
+                def opener(*args, **kwargs):
+                    return io.BytesIO(json.dumps(response).encode())
+                adapter = OpenAIModelAdapter(api_key='test-only', opener=opener)
+                with self.assertRaises(expected_error):
+                    adapter.generate('answer', [], {})
+                self.assertEqual({'input_tokens': 10, 'output_tokens': 4}, adapter.usage)
 
+    def test_usage_only_accumulates_nonnegative_integer_counts(self):
+        response = {'status': 'completed', 'output': [
+            {'type': 'message', 'content': [{'type': 'output_text', 'text': '{}'}]}]}
+        usage_values = [{'input_tokens': 5, 'output_tokens': 0},
+                        {'input_tokens': True, 'output_tokens': -1},
+                        {'input_tokens': '9', 'output_tokens': 2.5}, None, []]
+        def opener(*args, **kwargs):
+            return io.BytesIO(json.dumps(response).encode())
+        adapter = OpenAIModelAdapter(api_key='test-only', opener=opener)
+        for usage in usage_values:
+            response['usage'] = usage
+            adapter.generate('answer', [], {})
+        self.assertEqual({'input_tokens': 5, 'output_tokens': 0}, adapter.usage)
 
     def test_missing_key_and_safe_http_error(self):
         with self.assertRaisesRegex(ModelError, 'OPENAI_API_KEY'):
