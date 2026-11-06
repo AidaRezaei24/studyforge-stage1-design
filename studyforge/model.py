@@ -51,7 +51,12 @@ class OpenAIModelAdapter:
                 'chunk IDs. Do not invent evidence. If evidence is insufficient, report the gap. '
                 'You cannot run tools or perform external actions.'
             ),
-            'input': json.dumps({'task': task, 'evidence': evidence, 'request': payload}),
+            # JSON mode checks input messages for an explicit JSON instruction;
+            # provider-level instructions alone do not satisfy that prerequisite.
+            'input': json.dumps({
+                'output_instruction': 'Return one JSON object matching the task schema.',
+                'task': task, 'evidence': evidence, 'request': payload,
+            }),
             'text': {'format': {'type': 'json_object'}},
         }).encode(), headers={'Authorization': 'Bearer ' + self.api_key, 'Content-Type': 'application/json'})
         try:
@@ -71,6 +76,20 @@ class OpenAIModelAdapter:
                 self.usage[key] += int(usage.get(key, 0))
             return parsed
         except urllib.error.HTTPError as exc:
+            credit_exhausted = False
+            if exc.code == 429 and exc.fp is not None:
+                try:
+                    # Inspect only bounded structured identifiers; never show provider messages.
+                    detail = json.loads(exc.read(16_384))
+                    error = detail.get('error', {}) if isinstance(detail, dict) else {}
+                    credit_exhausted = isinstance(error, dict) and (
+                        error.get('code') == 'credit_balance_exhausted'
+                        or error.get('type') == 'insufficient_quota'
+                    )
+                except (ValueError, TypeError, AttributeError, OSError):
+                    pass
+            if credit_exhausted:
+                raise ModelError('OpenAI API credit is exhausted. Add API credits in your OpenAI billing settings, then retry.') from None
             raise ModelError(f'LLM request failed (HTTP {exc.code}); check local configuration or retry later.') from None
         except (urllib.error.URLError, TimeoutError, OSError):
             raise ModelError('LLM service could not be reached. Your saved work is unchanged.') from None

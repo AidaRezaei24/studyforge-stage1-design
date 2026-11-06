@@ -4,6 +4,7 @@ from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
+from unittest.mock import patch
 import urllib.error
 
 from studyforge.core import (SQLiteRepository, StudyAgentFacade, StudyController,
@@ -191,6 +192,12 @@ class CoreTests(unittest.TestCase):
 
 
 class AdapterTests(unittest.TestCase):
+    def setUp(self):
+        # Contract tests must not inspect or depend on the developer's local key.
+        config = patch('studyforge.model.load_local_config')
+        config.start()
+        self.addCleanup(config.stop)
+
     def test_live_request_contract_without_network(self):
         captured = []
         def opener(request, timeout):
@@ -202,6 +209,67 @@ class AdapterTests(unittest.TestCase):
         self.assertEqual({'type':'json_object'}, captured[0]['text']['format'])
         self.assertFalse(captured[0]['store'])
         self.assertEqual(8, adapter.usage['input_tokens'])
+
+    def test_json_mode_instruction_is_in_input_with_structure_preserved(self):
+        captured = []
+        def opener(request, timeout):
+            body = json.loads(request.data)
+            captured.append(body)
+            if 'json' not in body['input'].casefold():
+                raise urllib.error.HTTPError('url', 400, 'JSON instruction missing from input', None, None)
+            return io.BytesIO(json.dumps({'status': 'completed', 'output': [
+                {'type': 'message', 'content': [{'type': 'output_text', 'text': '{"text":"ok"}'}]}
+            ]}).encode())
+        adapter = OpenAIModelAdapter(api_key='test-only', opener=opener)
+        evidence = [{'id': 'chunk-1', 'text': 'Strategy encapsulates algorithms.'}]
+        payload = {'question': 'What does Strategy do?'}
+        for supplied_evidence, supplied_payload in [([], {}), (evidence, payload)]:
+            with self.subTest(evidence=supplied_evidence):
+                adapter.generate('answer', supplied_evidence, supplied_payload)
+                body = captured[-1]
+                self.assertEqual({'type': 'json_object'}, body['text']['format'])
+                self.assertIn('json', body['input'].casefold())
+                self.assertEqual({
+                    'output_instruction': 'Return one JSON object matching the task schema.',
+                    'task': 'answer', 'evidence': supplied_evidence, 'request': supplied_payload,
+                }, json.loads(body['input']))
+        self.assertEqual({'question': 'What does Strategy do?'}, payload)
+        self.assertEqual([{'id': 'chunk-1', 'text': 'Strategy encapsulates algorithms.'}], evidence)
+
+    def test_exhausted_credit_is_actionable_without_exposing_provider_details(self):
+        for identifiers in [{'code': 'credit_balance_exhausted'}, {'type': 'insufficient_quota'}]:
+            with self.subTest(identifiers=identifiers):
+                calls = []
+                def opener(*args, **kwargs):
+                    calls.append(True)
+                    body = {'error': {**identifiers, 'message': 'provider-private-message test-private-key'}}
+                    raise urllib.error.HTTPError('url', 429, 'private-reason', None,
+                                                 io.BytesIO(json.dumps(body).encode()))
+                with self.assertRaises(ModelError) as raised:
+                    OpenAIModelAdapter(api_key='test-private-key', opener=opener).generate('answer', [], {})
+                self.assertEqual('OpenAI API credit is exhausted. Add API credits in your OpenAI billing settings, then retry.',
+                                 str(raised.exception))
+                self.assertNotIn('test-private-key', str(raised.exception))
+                self.assertNotIn('provider-private-message', str(raised.exception))
+                self.assertNotIn('private-reason', str(raised.exception))
+                self.assertEqual(1, len(calls))
+
+    def test_other_http_errors_and_unreadable_bodies_use_safe_fallback(self):
+        cases = [(429, None), (429, b'not-json-private-message'),
+                 (429, b'{"error":null}'), (429, b'{"error":{"code":"rate_limit_exceeded"}}'),
+                 (401, b'{"error":{"type":"insufficient_quota"}}'),
+                 (429, b'{"error":{"type":"' + b'x' * 16_384 + b'"}}')]
+        for status, body in cases:
+            with self.subTest(status=status, body_present=body is not None):
+                def opener(*args, **kwargs):
+                    raise urllib.error.HTTPError('url', status, 'provider-private-message', None,
+                                                 io.BytesIO(body) if body is not None else None)
+                with self.assertRaises(ModelError) as raised:
+                    OpenAIModelAdapter(api_key='test-private-key', opener=opener).generate('answer', [], {})
+                self.assertEqual(f'LLM request failed (HTTP {status}); check local configuration or retry later.',
+                                 str(raised.exception))
+                self.assertNotIn('test-private-key', str(raised.exception))
+                self.assertNotIn('provider-private-message', str(raised.exception))
 
     def test_missing_key_and_safe_http_error(self):
         with self.assertRaisesRegex(ModelError, 'OPENAI_API_KEY'):
