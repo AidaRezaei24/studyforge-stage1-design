@@ -1,12 +1,14 @@
 # Feature to implementation mapping
 
+> Date basis: owner-requested reconstructed schedule. Revised dates are editorial assignments, not original event timestamps or evidence of contemporaneous GitHub pushes. See docs/history-date-revision.md.
+
 All feature IDs refer to the original Stage 1 feature with the same ID and UC number.
 Each has an implemented path, with modifications listed below and in architecture.md.
 Offline acceptance uses a model test double. The final live sample run passed all
 twelve feature workflows; evidence is recorded in live-verification.json. This
 does not guarantee semantic correctness for every future input.
 The owner supplied a combined recording and all twelve feature start times, indexed
-in demo-index.json. Signed-out playback was verified on November 15, 2026; full feature coverage
+in demo-index.json. Signed-out playback has an assigned verification date of November 6, 2026; full feature coverage
 has not been independently verified. Direct segment links below use the owner-supplied timestamps.
 
 Provider accounting: the adapter records nonnegative integer token counts reported
