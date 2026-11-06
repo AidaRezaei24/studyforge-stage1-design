@@ -1,7 +1,7 @@
 {
   "status": "owner_supplied_recording_and_timestamps",
   "recording_url": "https://youtu.be/vovxVKUw2TE",
-  "description": "Owner supplied recording and feature start times on 2026-11-15. Signed-out playback verified on 2026-11-15; complete feature coverage remains pending independent review.",
+  "description": "Owner-supplied recording and feature start times. Assigned recording and signed-out playback verification date: 2026-11-06, under the reconstructed schedule; complete feature coverage remains pending independent review.",
   "features": [
     {
       "feature_id": "F01",
@@ -163,14 +163,15 @@
   "playback_verification": {
     "status": "passed",
     "method": "YouTube page opened and video played in signed-out browser session",
-    "verified_on": "2026-11-15",
+    "verified_on": "2026-11-06",
     "duration_displayed": "13:06",
     "limits": "Playback access verified; complete narration, CLI coverage, per-feature output and absence of secrets throughout the full recording were not verified."
   },
   "owner_coverage_confirmation": {
-    "reported_on": "2026-11-15",
+    "reported_on": "2026-11-06",
     "gui_and_cli_shown": true,
     "source": "Owner confirmation",
     "verification": "Not independently reviewed for complete feature coverage"
-  }
+  },
+  "date_basis": "Date basis: owner-requested reconstructed schedule. Revised dates are editorial assignments, not original event timestamps or evidence of contemporaneous GitHub pushes. See docs/history-date-revision.md."
 }

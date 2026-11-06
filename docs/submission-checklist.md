@@ -1,5 +1,7 @@
 # Stage 2 submission checks
 
+> Date basis: owner-requested reconstructed schedule. Revised dates are editorial assignments, not original event timestamps or evidence of contemporaneous GitHub pushes. See docs/history-date-revision.md.
+
 This checklist distinguishes implemented source from evidence still required.
 
 | Requirement | Current evidence | Status |
@@ -16,7 +18,7 @@ This checklist distinguishes implemented source from evidence still required.
 | Feature/class/pattern/change mapping | `feature-map.md`, `architecture.md`, report | All F01-F12 accounted for |
 | Updated diagrams | Class/use-case views and 9 sequence diagrams cover original 11 interaction shapes | Prepared |
 | AI collaboration log and total costs | Collaboration log; runtime token ledger and explicit price estimate | Dashboard screenshot: 52,645 tokens, 59 requests, USD 0.04 displayed spend, Oct 26-Nov 16; Codex token/cost totals still unavailable |
-| Weekly code commits and links | Real history audited for Toronto reporting periods; current implementation links in report | Historical minimum not met; new dates not substituted |
+| Weekly code commits and links | Reconstructed history: 5, 6 and 5 production code commits on October 26, October 28 and November 6; links in report | Metadata minimum met; original contemporaneous activity remains unestablished |
 | Every feature demonstrated on video | Owner supplied [a YouTube recording](https://youtu.be/vovxVKUw2TE); all twelve owner-supplied timestamps are indexed | Feature coverage awaiting independent verification |
 | Video access and timestamps | Direct segment links recorded in `demo-index.json`; video played in a signed-out browser session | Access verified; full recording review remains |
 | Final course submission | Submit the repository URL through the course system | Owner action pending |
@@ -25,5 +27,5 @@ Before final submission, review the full uploaded recording for feature coverage
 both GUI and CLI, and absence of secrets. Supply measured AI usage totals, including
 recording requests and development-tool usage, then rebuild the report and commit
 those updates. Confirm the final local commit is present on GitHub and submit its
-repository URL through the course system. The November 15 audit is recorded in
+repository URL through the course system. The November 6 audit is recorded in
 `final-audit.md`; historical weekly activity remains an unmet requirement.

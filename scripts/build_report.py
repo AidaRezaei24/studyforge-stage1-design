@@ -147,7 +147,7 @@ def footer(c, doc):
     c.setFont('Helvetica', 8)
     c.setFillColor(ACCENT)
     c.drawString(55, h - 31, 'STUDYFORGE  /  STAGE 2 IMPLEMENTATION')
-    c.drawString(55, 31, 'EECS3311  |  November 15, 2026  |  Video timestamps supplied')
+    c.drawString(55, 31, 'EECS3311  |  November 6, 2026  |  Video timestamps supplied')
     c.drawRightString(w - 55, 31, str(doc.page))
 
 
@@ -168,7 +168,9 @@ def build():
     overview = '''# StudyForge
 ## Stage 2 Implementation Report
 
-EECS3311 Software Design / Fall 2026 / Prepared November 12, 2026; updated November 15, 2026, Toronto local time.
+EECS3311 Software Design / Fall 2026 / Revised schedule: October 26, October 28 and November 6, 2026, Toronto local time.
+
+Date basis: owner-requested reconstructed schedule. Revised dates are editorial assignments, not original event timestamps or evidence of contemporaneous GitHub pushes. See docs/history-date-revision.md.
 
 ### 1 Project overview and implementation status
 
@@ -348,7 +350,7 @@ Sections 2-4 account for every original feature and affected class/pattern.
     markdown('# 6 Development and verification summary\n' + section(development, 'Verification evidence and limits')
              + '\n' + section(development, 'Weekly code activity, Toronto local dates'), story)
     story.append(PageBreak())
-    live_text = '# Live acceptance and runtime usage\n'
+    live_text = '# Live acceptance and runtime usage\nRevised evidence dates use the owner-requested reconstructed schedule, not original event timestamps.\n\n'
     live_text += ('The final corrected sample run passed ' + str(len(live['steps'])) + ' checks using '
                   + str(len(live['requests'])) + ' real requests to ' + live['model'] + '.\n\n'
                   + 'Evidence: docs/live-verification.json. Inputs are the bundled source and explicitly synthetic learner reviews/reference answers. No personal learning performance is claimed. Independent AI-assisted source comparison verified citation scope, source copies, selected factual outputs, grading and future reminder times. This does not establish correctness for arbitrary future inputs or replace owner review.\n\n')
@@ -368,15 +370,15 @@ Sections 2-4 account for every original feature and affected class/pattern.
                   + ' total tokens, ' + str(usage['owner_reported_account_usage']['total_requests']) + ' requests and USD '
                   + format(usage['owner_reported_account_usage']['total_spend_usd'], '.2f')
                   + ' displayed total spend for ' + usage['owner_reported_account_usage']['dashboard_date_range']
-                  + ', Default project, all API sources/models/users; captured November 15, 2026. This supersedes the earlier USD 0.014 owner report. Spend is displayed rounded; input/output split and dashboard timezone are not shown. The aggregate has not been independently reconciled against a billing export or attributed exclusively to StudyForge. It includes a broader scope than the validation-only ledger above. Codex development-tool token/money totals remain unavailable.\n\n'
+                  + ', Default project, all API sources/models/users; assigned capture date November 6, 2026. This supersedes the earlier USD 0.014 owner report. Spend is displayed rounded; input/output split and dashboard timezone are not shown. The aggregate has not been independently reconciled against a billing export or attributed exclusively to StudyForge. It includes a broader scope than the validation-only ledger above. Codex development-tool token/money totals remain unavailable.\n\n'
                   + 'Initial live review found two defects despite passing structural checks: an unsupported relationship inferred from adjacent source sections, and same-day reminders in the past. '
                   + 'Both were corrected and independently reviewed before the final live run. Targeted graph regression returned no unsupported edge; final reminders occur after run completion and preserve IDs on retry.')
     markdown(live_text, story)
     story.append(PageBreak())
-    markdown('## Current implementation commits\nThese are actual implementation commits available when this report was generated, not substitutes for missing historical activity. The report-packaging commit itself is not listed.\n' + '\n\n'.join(commit_paragraphs), story)
+    markdown('## Current implementation commits\nThese implementation commits use the owner-requested reconstructed dates. They do not establish contemporaneous development or pushes. The report-packaging commit itself is not listed.\n' + '\n\n'.join(commit_paragraphs), story)
     markdown('## Reproduction and remaining gates\nRun python -m unittest discover -s tests -v and make check after installing with python -m pip install -e . . The suite passed ' + str(test_count) + ' tests at the final verification recorded for this report. Python compilation, JavaScript syntax, credential scanning, package installation and PDF visual checks are separate release checks. No Stage 3 KUMA validation is claimed.\n\nA production launch without credentials must show a configuration error; test fixtures are never accepted as live LLM evidence. Record actual live results before claiming final feature acceptance. Confirm all source/report files are pushed to the public repository and verify video access signed out before course submission.', story)
     story.append(PageBreak())
-    markdown('# 7 Demonstration index\nThe owner supplied a combined YouTube recording and all twelve feature start times on November 15, 2026. The links below use those supplied times. Signed-out playback was verified on November 15, 2026; full feature coverage has not been independently verified. The owner confirms the recording shows both GUI and CLI. F11 starts before F10 in the supplied recording order. docs/demonstrations.md retains the reproduction guide; docs/demo-index.json is the source for this index.', story)
+    markdown('# 7 Demonstration index\nThe owner supplied a combined YouTube recording and all twelve feature start times on November 6, 2026. The links below use those supplied times. Signed-out playback has an assigned verification date of November 6, 2026; full feature coverage has not been independently verified. The owner confirms the recording shows both GUI and CLI. F11 starts before F10 in the supplied recording order. docs/demonstrations.md retains the reproduction guide; docs/demo-index.json is the source for this index.', story)
     for entry in demos['features']:
         feature = re.search(r'^## (' + entry['feature_id'] + r' .+)$', feature_map, re.M).group(1)
         markdown('### ' + feature + '\nOwner-reported recording. Start: ' + entry['timestamp']

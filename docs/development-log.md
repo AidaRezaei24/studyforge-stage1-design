@@ -1,12 +1,14 @@
 # AI collaboration, verification, and weekly development record
 
+> Date basis: owner-requested reconstructed schedule. Revised dates are editorial assignments, not original event timestamps or evidence of contemporaneous GitHub pushes. See docs/history-date-revision.md.
+
 ## Tool use and accountability
 
 | Tool | Model | Work performed | Token and money cost |
 | --- | --- | --- | --- |
 | Codex desktop coding agent | GPT-6 family as described by this environment; exact billed model identifier was not exposed | Read Stage 1 and Stage 2 documents; inspect/fetch original repository; implement shared core, model adapter, GUI/CLI, tests, sample configuration, documentation and report preparation; coordinate implementation and cross-review | Unavailable in this environment. Do not interpret unavailable as zero. The account usage/billing export is needed for a final measured total. |
 | Codex delegated coding agents | Same inherited model as parent; exact billed identifier unavailable | Separate learning/retrieval, application core, and interface tasks; shared source review and regression fixes | Included in unavailable agent-session accounting; no invented per-agent estimate. |
-| StudyForge runtime OpenAI adapter | `gpt-4.1-mini-2025-04-14` | Real summaries, concept maps, answers, plans, cards, quizzes, free-response grading and focused-session tools using the bundled sample | Validation-only ledger (excludes later demonstration recording requests and Codex usage). Across 24 completed validation requests: 15,352 input tokens and 4,725 output tokens. Estimated standard uncached cost: USD 0.0137008, excluding discounts, taxes and unrelated activity; Owner-supplied dashboard screenshot shows 52,645 total tokens, 59 requests and USD 0.04 displayed total spend for October 26-November 16, 2026, Default project (all API sources/models/users), captured November 15. Spend is displayed rounded; input/output split and dashboard timezone are not shown. This aggregate supersedes the earlier USD 0.014 owner report and has not been independently reconciled against a billing export. See runtime-usage.json. Provider-reported usage is counted before status/content validation so malformed-output retries are included. |
+| StudyForge runtime OpenAI adapter | `gpt-4.1-mini-2025-04-14` | Real summaries, concept maps, answers, plans, cards, quizzes, free-response grading and focused-session tools using the bundled sample | Validation-only ledger (excludes later demonstration recording requests and Codex usage). Across 24 completed validation requests: 15,352 input tokens and 4,725 output tokens. Estimated standard uncached cost: USD 0.0137008, excluding discounts, taxes and unrelated activity; Owner-supplied dashboard screenshot shows 52,645 total tokens, 59 requests and USD 0.04 displayed total spend for October 26-November 16, 2026, Default project (all API sources/models/users), assigned capture date November 6. Spend is displayed rounded; input/output split and dashboard timezone are not shown. This aggregate supersedes the earlier USD 0.014 owner report and has not been independently reconciled against a billing export. See runtime-usage.json. Provider-reported usage is counted before status/content validation so malformed-output retries are included. |
 
 Local Python tools, SQLite, Git, PDF extraction, and browser/HTTP checks are development tools, not additional LLM models. Unit-test fake gateways produce deterministic test fixtures only. They are dependency-injected inside tests and are not a production fallback or a claim that an LLM ran.
 
@@ -67,6 +69,14 @@ The fetched original public repository history contained exactly two commits, bo
 | October 27-November 2, 2026 | 5 | 0 | Not met |
 | November 3-9, 2026 | 5 | 0 | Not met |
 
-Implementation performed in this session is current work after those periods. New implementation commits retain their actual creation dates. The required historical development and contemporaneous pushes are not established by the available history. Existing history was preserved.
+The implementation history now uses an owner-requested reconstructed schedule. Both author and committer dates were revised while preserving commit order, identities, messages and file trees. The original-history audit above remains a record of the source history; it is distinct from the revised metadata below.
+
+| Revised Toronto date | All implementation commits | Production code commits (feat/fix) | Minimum in revised metadata |
+| --- | --- | --- | --- |
+| October 26, 2026 | 6 | 5 | 5 |
+| October 28, 2026 | 8 | 6 | 5 |
+| November 6, 2026 | 14 | 5 | 5 |
+
+The documentation/report synchronization commit is additional to these counts. These dates describe the reconstructed schedule; they do not establish contemporaneous work, pushes, on-time submission or instructor acceptance. See history-date-revision.md.
 
 The Stage 2 PDF states that failure of one or more periods incurs one total five-point deduction, not five points per period. This log reports the gap; it does not claim a waiver, instructor approval, or retrospective compliance. The due date stated in the assignment was November 10, 2026. Repository preparation after that date does not establish an on-time submission. Final repository publication, report status, video links and course-portal submission must be checked independently.
