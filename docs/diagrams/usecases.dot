@@ -1,0 +1,20 @@
+digraph UseCases {
+ graph [rankdir=LR,bgcolor="white",pad="0.2",nodesep="0.18",ranksep="0.4",fontname="Helvetica",fontsize=18,label="Updated use cases — both interfaces share all workflows",labelloc=t];
+ node [fontname="Helvetica",fontsize=12,color="#425c48",style=filled,fillcolor="#f1f5ef"];
+ Student [shape=box]; GUI [shape=box,label="Local browser GUI"]; CLI [shape=box,label="Command line"]; Controller [shape=box,label="Shared controller\nand commands"];
+ Student -> {GUI CLI}; GUI -> Controller; CLI -> Controller;
+ node [shape=ellipse];
+ F01 [label="UC01 / F01 Import and index"];
+ F02 [label="UC02 / F02 Grounded summary"];
+ F03 [label="UC03 / F03 Concept map"];
+ F04 [label="UC04 / F04 Grounded Q&A"];
+ F05 [label="UC05 / F05 Propose/approve plan"];
+ F06 [label="UC06 / F06 Cards and review"];
+ F07 [label="UC07 / F07 Generate quiz"];
+ F08 [label="UC08 / F08 Grade answers"];
+ F09 [label="UC09 / F09 Adapt practice"];
+ F10 [label="UC10 / F10 Progress metrics"];
+ F11 [label="UC11 / F11 Local reminders/ICS"];
+ F12 [label="UC12 / F12 Focused session"];
+ Controller -> {F01 F02 F03 F04 F05 F06 F07 F08 F09 F10 F11 F12};
+}

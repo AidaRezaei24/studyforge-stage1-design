@@ -1,0 +1,17 @@
+digraph runtime {
+ graph [rankdir=TB,bgcolor="white",pad="0.15",nodesep="0.18",ranksep="0.35",fontname="Helvetica",fontsize=18,label="Session state and event observation",labelloc=t];
+ node [shape=record,fontname="Helvetica",fontsize=14,style=filled,fillcolor="#f1f5ef",color="#425c48"];
+ edge [color="#667a6b",arrowsize=0.8];
+  AgentOrchestrator [label="{AgentOrchestrator|start(); run()}"];
+  ToolRegistry [label="{ToolRegistry|execute()}"];
+  SessionState [label="{SessionState|handle()}"];
+  ActiveState [label="{ActiveState|handle()}"];
+  PausedState [label="{PausedState|handle()}"];
+  TerminalState [label="TerminalState"];
+  EventBus [label="{EventBus|subscribe(); publish()}"];
+  ProgressProjector [label="{ProgressProjector|update()}"];
+  SQLiteRepository [label="{SQLiteRepository|save(); get(); list()\ltransaction(); close()\l}"];
+AgentOrchestrator -> {ToolRegistry SessionState EventBus};
+ ActiveState -> SessionState [arrowhead=empty]; PausedState -> SessionState [arrowhead=empty]; TerminalState -> SessionState [arrowhead=empty];
+ EventBus -> ProgressProjector [label="notify"]; ProgressProjector -> SQLiteRepository; AgentOrchestrator -> SQLiteRepository;
+}
