@@ -7,7 +7,10 @@ name = "studyforge"
 version = "0.2.0"
 description = "A local-first, evidence-grounded study agent with GUI and CLI"
 requires-python = ">=3.11"
-dependencies = ["pypdf>=5,<7", "python-docx>=1.1,<2"]
+dependencies = ["pypdf>=5,<7", "tzdata; sys_platform == 'win32'"]
+
+[project.optional-dependencies]
+report = ["reportlab>=4,<5"]
 
 [project.scripts]
 studyforge = "studyforge.cli:main"
