@@ -1,0 +1,19 @@
+# Local secrets
+.env
+.env.*
+!.env.example
+config.local.json
+# Local learner data and generated exports
+.studyforge/
+*.sqlite3
+*.sqlite3-*
+*.ics
+# Python, build, and verification output
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+build/
+dist/
+tmp/
+.DS_Store
