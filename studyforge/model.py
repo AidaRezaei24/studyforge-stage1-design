@@ -63,6 +63,16 @@ class OpenAIModelAdapter:
             with self.opener(request, timeout=45) as response:
                 raw = response.read(2_000_000)
             result = json.loads(raw)
+            if not isinstance(result, dict):
+                raise InvalidModelOutput('The provider returned an invalid response object.')
+            # A billed response can be incomplete or fail application validation.
+            # Preserve its reported usage before inspecting generated content.
+            usage = result.get('usage', {})
+            if isinstance(usage, dict):
+                for key in self.usage:
+                    count = usage.get(key)
+                    if type(count) is int and count >= 0:
+                        self.usage[key] += count
             if result.get('status') != 'completed':
                 raise ModelError('The model did not complete its response. Retry with less source content.')
             output = ''.join(part.get('text', '') for item in result.get('output', [])
@@ -71,9 +81,6 @@ class OpenAIModelAdapter:
             parsed = json.loads(output)
             if not isinstance(parsed, dict):
                 raise InvalidModelOutput('The model returned an invalid JSON object.')
-            usage = result.get('usage', {})
-            for key in self.usage:
-                self.usage[key] += int(usage.get(key, 0))
             return parsed
         except urllib.error.HTTPError as exc:
             credit_exhausted = False
