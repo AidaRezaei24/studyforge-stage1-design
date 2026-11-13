@@ -7,6 +7,7 @@ from html import escape
 from pathlib import Path
 import re
 import subprocess
+import unittest
 
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import A4
@@ -151,6 +152,7 @@ def build():
     architecture = (ROOT / 'docs/architecture.md').read_text()
     development = (ROOT / 'docs/development-log.md').read_text()
     feature_map = (ROOT / 'docs/feature-map.md').read_text()
+    test_count = unittest.defaultTestLoader.discover(str(ROOT / 'tests')).countTestCases()
     log = subprocess.run(['git', 'log', 'ee6d35a..HEAD', '--format=%H%x09%aI%x09%s'], cwd=ROOT,
                          capture_output=True, text=True, check=True).stdout
     commit_paragraphs = []
@@ -180,14 +182,16 @@ transitions. This is a multi-step agent workflow rather than a raw prompt-forwar
 interface. Deterministic policies control grading, dates, workload, approvals,
 calendar conflicts, review intervals and learning metrics.
 
-Verification status: 39 automated tests passed, including complete CLI and local
+Verification status: TEST_COUNT automated tests passed, including complete CLI and local
 HTTP API journeys through all twelve features with real SQLite persistence and
 reopening. Only the remote model is replaced by a test double in those journeys.
 The GUI was manually inspected for course creation, real material import and safe
 missing-key errors. A stale-output defect discovered in that check was corrected.
-No live provider request was made: a local API key has not been supplied.
+Local API configuration is now in place. Initial provider requests exposed a
+JSON-mode input requirement, which was corrected and regression-tested. No live
+generated output has yet been accepted; full live feature validation is pending.
 
-Submission is not complete. The owner will configure API access, validate actual
+Submission is not complete. The owner will complete API access, validate actual
 generated output, record and upload all feature demonstrations, add accessible
 timestamped links, supply measured AI usage/cost accounting and submit the course
 repository URL. Historical weekly activity is absent in the original repository;
@@ -200,7 +204,7 @@ descriptive analytics and bounded sessions replace broader planned behavior.
 Sections 2-4 account for every original feature and affected class/pattern.
 '''
     story = []
-    markdown(overview, story)
+    markdown(overview.replace('TEST_COUNT', str(test_count)), story)
     story.append(PageBreak())
     parts = re.split(r'(?=^## F\d{2} )', feature_map, flags=re.M)
     markdown('# 2 Feature to implementation mapping\n' + '\n'.join(parts[0].splitlines()[1:]), story)
@@ -333,7 +337,7 @@ Sections 2-4 account for every original feature and affected class/pattern.
     story.append(PageBreak())
     markdown('# 6 Development and verification summary\n' + section(development, 'Weekly code activity, Toronto local dates'), story)
     markdown('## Current implementation commits\nThese are actual implementation commits available when this report was generated, not substitutes for missing historical activity. The report-packaging commit itself is not listed.\n' + '\n\n'.join(commit_paragraphs), story)
-    markdown('## Reproduction and remaining gates\nRun python -m unittest discover -s tests -v and make check after installing with python -m pip install -e . . The suite passed 39 tests at the final verification recorded for this report. Python compilation, JavaScript syntax, credential scanning, package installation and PDF visual checks are separate release checks. No Stage 3 KUMA validation is claimed.\n\nA production launch without credentials must show a configuration error; test fixtures are never accepted as live LLM evidence. Record actual live results before claiming final feature acceptance. Confirm all source/report files are pushed to the public repository and verify video access signed out before course submission.', story)
+    markdown('## Reproduction and remaining gates\nRun python -m unittest discover -s tests -v and make check after installing with python -m pip install -e . . The suite passed ' + str(test_count) + ' tests at the final verification recorded for this report. Python compilation, JavaScript syntax, credential scanning, package installation and PDF visual checks are separate release checks. No Stage 3 KUMA validation is claimed.\n\nA production launch without credentials must show a configuration error; test fixtures are never accepted as live LLM evidence. Record actual live results before claiming final feature acceptance. Confirm all source/report files are pushed to the public repository and verify video access signed out before course submission.', story)
     story.append(PageBreak())
     markdown('# 7 Demonstration index\nThe owner selected the recording-guide workflow. No videos have yet been recorded or supplied in this session. All twelve rows remain pending; no accessible link or real timestamp is invented. docs/demonstrations.md contains exact GUI/CLI invocation, input, expected result, alternative/error and AI explanation for each segment. docs/demo-index.json is the machine-readable index to update after uploading.\n\nA combined recording is acceptable only when each feature has a direct timestamped link. Record the running application with the real provider and show both GUI and CLI collectively; screenshots, this report and test fixtures are not video demonstrations. Avoid recording .env or account credentials.', story)
     for i in range(1, 13):

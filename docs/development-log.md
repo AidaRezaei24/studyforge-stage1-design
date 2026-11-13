@@ -6,7 +6,7 @@
 | --- | --- | --- | --- |
 | Codex desktop coding agent | GPT-6 family as described by this environment; exact billed model identifier was not exposed | Read Stage 1 and Stage 2 documents; inspect/fetch original repository; implement shared core, model adapter, GUI/CLI, tests, sample configuration, documentation and report preparation; coordinate implementation and cross-review | Unavailable in this environment. Do not interpret unavailable as zero. The account usage/billing export is needed for a final measured total. |
 | Codex delegated coding agents | Same inherited model as parent; exact billed identifier unavailable | Separate learning/retrieval, application core, and interface tasks; shared source review and regression fixes | Included in unavailable agent-session accounting; no invented per-agent estimate. |
-| StudyForge runtime OpenAI adapter | Default configured model `gpt-4.1-mini-2025-04-14`, user-overridable through `OPENAI_MODEL` | Production implementation for summaries, answers, concepts, cards, quizzes, study-plan topics and free-response grading | No real API key was supplied during the initial implementation checks. Live feature execution and actual runtime token/cost measurements remain unverified. In-memory `usage` counts API-reported input/output tokens when a real response occurs; money is not calculated or stored. |
+| StudyForge runtime OpenAI adapter | Default configured model `gpt-4.1-mini-2025-04-14`, user-overridable through `OPENAI_MODEL` | Production implementation for summaries, answers, concepts, cards, quizzes, study-plan topics and free-response grading | A key was configured privately after the initial implementation checks. Initial provider requests revealed a JSON-mode input requirement, now corrected. No completed generation usage was returned in these validation attempts; live output acceptance and measured costs remain pending. In-memory `usage` counts API-reported input/output tokens on completed responses; money is not calculated or stored. |
 
 Local Python tools, SQLite, Git, PDF extraction, and browser/HTTP checks are development tools, not additional LLM models. Unit-test fake gateways produce deterministic test fixtures only. They are dependency-injected inside tests and are not a production fallback or a claim that an LLM ran.
 
@@ -28,6 +28,8 @@ The following are concise summaries of representative requests and outcomes from
 | Review model failure retries | Distinguished malformed model JSON (`InvalidModelOutput`) from missing-key/network/HTTP errors so the bounded schema retry does not repeat unrelated failed requests. |
 | Challenge state-machine edge cases | Found expiry could bypass legal-state validation; validate state first and regression-test that an expired completed session cannot advance again. Tool failure persists pause and resume state. |
 | Review planning and progress against original report | Added known graph prerequisite-order checks, rejected duplicate topics, added broad-goal planning fallback with regression, and documented omitted availability windows, trend analytics, adherence, remote calendar integration and general-purpose autonomous planning. |
+| Exercise the real provider request contract | Found that JSON mode requires an explicit JSON instruction in the input message, beyond the provider instructions field. Added it to the structured input envelope and regression-tested empty and populated requests. |
+| Improve actionable provider errors | Added bounded parsing of structured quota error identifiers. Credit-related failures now give an actionable local message without printing raw provider messages, secrets or retrying failed requests. |
 
 ## Verification evidence and limits
 
@@ -37,7 +39,7 @@ A fake HTTP opener verifies the production adapter sends the expected Responses 
 
 The original main branch contained documentation only, so there was no previous runnable application whose behavior could be compared. The relevant baseline comparison is Stage 1 feature/class/interaction promises against the new source. `architecture.md` records those differences explicitly. New regression tests demonstrate corrected behavior for defects found during implementation; there is no claim of Stage 3 KUMA validation.
 
-No API key was provided to the implementation agents. Live LLM feature acceptance and output-quality evaluation still require local credentials, configured model access and a successful real execution. Feature demonstration recordings and accessible timestamped video links are separate requirements; a test run, screenshot, code listing or generated report is not a replacement for those recordings.
+A local API key is now configured privately and remains excluded from Git. Initial real provider requests were attempted, but no generated output has been accepted. Full live feature acceptance and output-quality evaluation remain pending. Feature demonstration recordings and accessible timestamped video links are separate requirements; a test run, screenshot, code listing or generated report is not a replacement for those recordings.
 
 ## Weekly code activity, Toronto local dates
 

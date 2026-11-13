@@ -8,10 +8,10 @@ This checklist distinguishes implemented source from evidence still required.
 | At least 10 meaningful features | All F01-F12 have implemented paths; `feature-map.md` accounts for every original feature and changed scope | Implemented; live AI acceptance pending |
 | Working GUI and CLI | Shared controller; real GUI import/configuration error checked; full CLI and HTTP feature journeys tested | Verified with model test double for AI calls |
 | At least 5 distinct patterns | Seven mapped in `architecture.md` with actual participants and methods | Source reviewed |
-| LLM and meaningful agent behavior | Responses adapter; scoped retrieval/memory; checkpointed learn/practice/review tool execution; adaptation from progress | Implemented; API key and live verification pending |
+| LLM and meaningful agent behavior | Responses adapter; scoped retrieval/memory; checkpointed learn/practice/review tool execution; adaptation from progress | Implemented; local key configured, live output acceptance pending |
 | Dependency and build files | Fresh virtual environment install, installed command-line entry point, `make check`, CI workflow | Passed on macOS Python 3.13; Windows timezone dependency declared |
 | README and safe sample data | Setup, local key configuration, GUI/CLI commands, limitations; sample course material | Checked |
-| Secret protection | `.env` ignored, `.env.example` placeholders, source credential scan; no actual key supplied | Passed |
+| Secret protection | Actual key stays in ignored local `.env`; `.env.example` contains placeholders; source credential scan | Passed |
 | Stage 2 report PDF | `stage2-report.pdf`, rebuildable with `scripts/build_report.py`, 7 required sections | Prepared and visually checked; evidence gaps explicit |
 | Feature/class/pattern/change mapping | `feature-map.md`, `architecture.md`, report | All F01-F12 accounted for |
 | Updated diagrams | Class/use-case views and 9 sequence diagrams cover original 11 interaction shapes | Prepared |

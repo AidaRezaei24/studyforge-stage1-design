@@ -1,0 +1,2 @@
+# PDF cross-reference tables contain significant bytes and must not be normalized.
+*.pdf binary
