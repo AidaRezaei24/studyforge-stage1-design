@@ -43,6 +43,16 @@ class CLITests(unittest.TestCase):
                 self.assertEqual(action, expected)
                 self.assertNotIn("db", params)
 
+    def test_plan_start_date_is_explicit_or_omitted(self):
+        base = ["plan", "--course", "c", "--goal", "learn", "--deadline", "2027-01-10"]
+        action, params = request_from_args(parser().parse_args(base))
+        self.assertEqual(action, "plan_create")
+        self.assertNotIn("start_date", params)
+        _, blank_params = request_from_args(parser().parse_args(base + ["--start-date", ""]))
+        self.assertNotIn("start_date", blank_params)
+        action, params = request_from_args(parser().parse_args(base + ["--start-date", "2027-01-05"]))
+        self.assertEqual(params["start_date"], "2027-01-05")
+
     def test_session_control_preserves_nested_action_parameter(self):
         controller = FakeController()
         with contextlib.redirect_stdout(io.StringIO()):

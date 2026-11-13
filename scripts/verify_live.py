@@ -153,6 +153,8 @@ def run(controller, repo, gateway, report, directory):
     reminders = step("F11", "Confirm conflict-checked schedule and export local calendar", lambda: controller.handle(
         "schedule", plan_id=plan["id"], start_time="18:00", confirm=True,
         export_path=str(directory / "live-acceptance.ics")))
+    assert all(datetime.fromisoformat(item["start"]) > datetime.now(timezone.utc)
+               for item in reminders["reminders"]), "New reminders must start in the future"
     before = len(repo.list("reminder", course))
     repeated = step("F11", "Repeated confirmation is idempotent", lambda: controller.handle(
         "schedule", plan_id=plan["id"], start_time="18:00", confirm=True))

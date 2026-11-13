@@ -50,6 +50,7 @@ def parser() -> argparse.ArgumentParser:
         elif name == "plan":
             cmd.add_argument("--goal", required=True)
             cmd.add_argument("--deadline", required=True)
+            cmd.add_argument("--start-date", help="First study date (ISO YYYY-MM-DD). Defaults to tomorrow, or today for same-day deadlines.")
             cmd.add_argument("--minutes-per-day", type=int, default=30)
             cmd.add_argument("--approve", action="store_true")
             cmd.add_argument("--replace", action="store_true")
@@ -96,6 +97,8 @@ def request_from_args(args):
     command = values.pop("command")
     values.pop("db", None)
     operation = values.pop("operation", None)
+    if command == "plan" and values.get("start_date") in (None, ""):
+        values.pop("start_date", None)
     if command == "course":
         return "course_" + operation, values
     if command == "material":
