@@ -37,6 +37,7 @@ literally. Prepare a genuinely future deadline, within the next year:
 
 ```sh
 DEADLINE=$(python -c 'from datetime import date,timedelta; print(date.today()+timedelta(days=7))')
+FUTURE_START=$(python -c 'from datetime import date,timedelta; print(date.today()+timedelta(days=1))')
 ```
 
 The sample source is `samples/design-patterns.md`; use its absolute local path in
@@ -117,15 +118,20 @@ mathematical guarantee of answer truth.
 
 ### Segment 5 — F05 Personalized Study Plan
 
-**GUI:** Study planner → goal, future deadline, daily minutes/session length →
-Build study plan. Keep approval unchecked initially. Inspect the draft, then use
+**GUI:** Study planner → goal, future deadline, optional First study date, and
+daily minutes/session length → Build study plan. Keep approval unchecked initially. Inspect the draft, then use
 Approve a saved draft. Show replacement protection by attempting approval of a
 second plan without confirming replacement.
 
 ```sh
-python -m studyforge plan --course COURSE --goal "Understand design patterns" --deadline "$DEADLINE" --minutes-per-day 60 --session-minutes 25
+python -m studyforge plan --course COURSE --goal "Understand design patterns" --deadline "$DEADLINE" --start-date "$FUTURE_START" --minutes-per-day 60 --session-minutes 25
 python -m studyforge plan-approve --plan-id PLAN
 ```
+
+The optional `--start-date` accepts an ISO date (`YYYY-MM-DD`) between today and
+the deadline. Leave the GUI date blank, or omit the CLI option, to start tomorrow
+when the deadline is in the future. A same-day deadline starts today. Show the
+saved `start_date` and session dates in the plan record before approving it.
 
 **Output / AI:** AI orders proposed topics with learner state. Deterministic
 checks enforce dates, available slots and known prerequisites; approval controls
@@ -233,7 +239,9 @@ python -m studyforge reminder --plan-id PLAN --start-time 18:00 --timezone Ameri
 
 **Output / AI:** Local time/overlap checks, confirmation, reminder IDs and ICS
 export are deterministic. Repeat confirmation to show idempotency. An unapproved
-plan is rejected. This adapter does not write to an external calendar account or
+plan is rejected. Preview and confirmation also reject a new reminder that would
+start in the past. Choose a later time or create and approve a plan with a future
+start date; the scheduler never silently shifts approved dates. This adapter does not write to an external calendar account or
 send background notifications; importing the file is a separate user action.
 
 ### Segment 12 — F12 Orchestrated Focused Study Session

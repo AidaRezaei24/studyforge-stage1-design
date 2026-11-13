@@ -35,7 +35,7 @@ classDiagram
     }
     class StudyAgentFacade {
         course_create()
-        plan_create()
+        plan_create(start_date)
         plan_approve()
         review()
         grade()
@@ -240,6 +240,7 @@ sequenceDiagram
     else Evidence available
         L->>S: generate(evidence, payload)
         S->>M: generate(task, evidence, output contract)
+        Note over M: Record reported tokens before completion/output checks
         M-->>S: Parsed JSON object
         S->>V: verify(citations, evidence)
         alt Invalid output
@@ -352,8 +353,8 @@ sequenceDiagram
     participant P as ProgressService
     participant M as ModelGateway
     participant DB as SQLiteRepository
-    UI->>F: plan_create(course, goal, deadline, daily minutes)
-    F->>F: Validate goal, date and minute bounds
+    UI->>F: plan_create(course, goal, deadline, daily minutes, start_date)
+    F->>F: Resolve start date; validate today <= start <= deadline and minute bounds
     F->>R: execute(course, goal)
     alt Broad goal has no lexical matches
         F->>R: execute(course)
@@ -362,11 +363,11 @@ sequenceDiagram
     F->>M: generate(plan, evidence, goal and mastery)
     M-->>F: Ordered topic list
     F->>DB: list(graph, course)
-    F->>F: Validate topics, known prerequisites and slot capacity
+    F->>F: Validate topics, prerequisites and capacity from start through deadline
     alt Invalid or infeasible
         F-->>UI: Error; no plan saved
     else Valid
-        F->>DB: save(plan, course, draft dated sessions)
+        F->>DB: save(plan, course, draft sessions and displayed start_date)
         F-->>UI: Draft plan
         UI->>F: plan_approve(plan_id, replace)
         F->>DB: get(plan); list(plan, course)
@@ -379,7 +380,7 @@ sequenceDiagram
     end
 ```
 
-Deadline and availability remain deterministic local constraints; the model receives goal, mastery and retrieved evidence. Missing material stops before model generation. `approve=true` on creation invokes the same approval method after the draft is saved.
+Deadline, start date and availability remain deterministic local constraints; the model receives goal, mastery and retrieved evidence. Optional `start_date` defaults to tomorrow when the deadline is in the future, otherwise today for a same-day deadline. An explicit start must be today or later and no later than the deadline. Capacity and session dates use the inclusive start-to-deadline interval. The resolved start date is persisted and displayed with the draft before approval. Missing material stops before model generation. `approve=true` on creation invokes the same approval method after the draft is saved. Approved sessions are never shifted automatically.
 
 ### SD11 / F06 flashcard review and due scheduling
 
@@ -517,15 +518,15 @@ sequenceDiagram
     participant FS as Local filesystem
     UI->>F: schedule(plan_id, local time, timezone, confirm, export_path)
     F->>DB: get(plan); list(reminder across all courses)
-    F->>F: Require approved plan; validate timezone and clock time
+    F->>F: Require approved plan; validate timezone and clock time; capture current UTC time
     loop Each plan session
         alt Stable reminder ID already exists
-            F->>F: Reuse existing reminder
+            F->>F: Reuse existing reminder ID, including historical records
         else New reminder
-            F->>F: Calculate local start/end; check DST, midnight and overlaps
+            F->>F: Calculate start/end; require new start > now; check DST, midnight and overlaps
         end
     end
-    alt Invalid schedule or conflict
+    alt Invalid schedule, past new reminder or conflict
         F-->>UI: Error before reminder writes
     else confirm is false
         F-->>UI: Proposed reminders; confirmation required
@@ -544,7 +545,7 @@ sequenceDiagram
     end
 ```
 
-This replaces the original remote-calendar authorization and write sequence. Calendar access, remote conflict inspection, delivery of notifications, and importing the file are outside this application. Repeating confirmation reuses local reminder IDs; importing an ICS file repeatedly is governed by the receiving calendar's behavior.
+This replaces the original remote-calendar authorization and write sequence. Both preview and confirmation reject a new reminder whose start is at or before the captured current time, before saving any candidate. The error asks the student to choose a later time or create and approve a future-start plan; it never silently shifts an approved plan. Existing reminder IDs remain reusable for idempotent retries and historical inspection. Calendar access, remote conflict inspection, delivery of notifications, and importing the file are outside this application. Importing an ICS file repeatedly is governed by the receiving calendar's behavior.
 
 ## Consolidated feature and class change record
 
@@ -554,17 +555,18 @@ This replaces the original remote-calendar authorization and write sequence. Cal
 | F02 selected-section summaries, concise/detailed content, evidence checking | `SummaryStrategy`, material selection, detail and optional focus at service level; persisted retrieved evidence and partial-coverage metadata | Bounded prompts and common validation pipeline | No section-selector domain object or exhaustive whole-course summarization; GUI/CLI option exposure may be narrower than service arguments. Citations validate references, not semantic truth. |
 | F03 confidence-bearing knowledge map, quarantine unsupported edges | `ConceptGraphStrategy` normalizes duplicate names, checks confidence/endpoints/relation types, rejects invalid generated graph and retries | Keep the graph internally consistent and preserve evidence | Invalid relations are rejected rather than placed in a quarantine workflow. Regeneration saves another graph record; there is no graph-version comparison service. Browser renders graph nodes/edges and evidence data; no dedicated graph-editing domain service. |
 | F04 `IntentRouter`, `TaskPlanner`, grounded strategy and conversation repository | Explicit feature command, ranked lexical retrieval, `GroundedAnswerStrategy`, last four stored turns, shared SQLite store | Predictable, testable course-scoped execution without a second model routing request | No model intent classifier, query decomposition, or autonomous retrieval-plan search. Empty retrieval is an explicit gap; ambiguous contextual questions may fail lexical retrieval. |
-| F05 learner profile, priorities, availability windows, prerequisite plan validator, approval | `StudyAgentFacade.plan_create()` obtains ordered topics from model using goal retrieval or course-wide fallback for broad goals, validates daily-minute capacity/deadline/known graph ordering, builds dated slots; `plan_approve()` requires replacement confirmation | Feasible minimum local planner with explicit approval and deterministic safeguards | No learner-profile class, arbitrary availability windows, priority weights, detailed activity/checkpoint generation, or automatic alternative proposal. Known graph constraints apply when matching topics exist. |
+| F05 learner profile, priorities, availability windows, prerequisite plan validator, approval | `StudyAgentFacade.plan_create()` obtains ordered topics from model using goal retrieval or course-wide fallback for broad goals, resolves and persists optional start date (tomorrow by default for future deadlines), validates capacity over start through deadline and known graph ordering, builds dated slots; `plan_approve()` requires replacement confirmation | Feasible minimum local planner with explicit dates, approval and deterministic safeguards; tomorrow defaults avoid proposing already elapsed same-day slots | No learner-profile class, arbitrary availability windows, priority weights, detailed activity/checkpoint generation, or automatic alternative proposal. Known graph constraints apply when matching topics exist. |
 | F06 generated cards, duplicate filters, review scheduler, edit/reject | `FlashcardStrategy`, `ReviewScheduler`, `LearningService.card_update()` and `due_queue()`, `review()` with 0-3 ratings | Retain source-linked practice and a deterministic, understandable interval rule | Scheduler is a simple rating-based interval policy, not a calibrated learning algorithm. User edits are marked `user_edited`; their semantics are not reverified by an LLM. Rejected cards cannot be reviewed. |
 | F07 objective/free-response quiz, objectives/format/difficulty/coverage validation, partial quiz fallback | `QuizStrategy` validates requested count, uniqueness, choice options/key, free rubric, topic, difficulty and citations | Prevent malformed quizzes and persist full evidence | Explicit objective-coverage validation, user-selected format mix, partial-quiz fallback and a separate `QuizValidator` are absent. Invalid count or repeated invalid output fails safely. |
 | F08 attempts, deterministic objective grading, rubric LLM grading, confidence review | `AssessmentService.grade()` validates complete answers, exact normalized objective key, free-response score/feedback/confidence, stores rubric snapshot, excludes low-confidence grades from mastery | Preserve auditable scoring with a deterministic objective path | Low-confidence results are flagged, but no human-grade override workflow is implemented. Duplicate protection depends on reusing attempt ID; a new ID is a separate attempt. There is no independent `Attempt` domain class. |
 | F09 prerequisite-aware strategy selection, AI explanation, confirmation before plan insertion | `StudyAgentFacade.adapt()` requires two observations, identifies lowest weak topic, sets difficulty, confirms before generating quiz | Avoid confident diagnosis from a single result and reuse verified quiz generation | Recommendation explanation is deterministic, not AI narrative. No prerequisite-remediation traversal, separate `AdaptationService`/strategy, or active-plan insertion. Confirmed practice is saved as quiz plus adaptation record. |
 | F10 analytics projections, mastery, adherence, date ranges, trends and optional narrative | `ProgressProjector` stores activity events; `ProgressService` computes accepted item/card means, sample sizes, attempt count, completed sessions and event count | Reproducible small local analytics without invented measurements | Plan adherence, date filtering, trend series/charts and AI narrative are not implemented. Metrics are descriptive sample averages, not validated mastery estimates. |
-| F11 remote calendar authorization/writes, rescheduling, retryable pending records | `schedule()` previews/approves reminders, validates timezone/overlaps across courses, uses stable session-based IDs, optionally calls `CalendarAdapter.export()` | Deliver useful scheduling without requesting third-party credentials or external writes | Local ICS replacement; manual import required. No live calendar conflict read, background notifications, AI rescheduling, remote retries or authorization. Export filesystem failure leaves confirmed local reminders available for retry. |
+| F11 remote calendar authorization/writes, rescheduling, retryable pending records | `schedule()` previews/approves reminders, validates timezone/overlaps across courses and rejects new starts at or before now, preserves approved plan dates, uses stable session-based IDs, optionally calls `CalendarAdapter.export()` | Deliver useful scheduling without third-party credentials, external writes or silent date shifts; keep historical reminder retries idempotent | Local ICS replacement; manual import required. No live calendar conflict read, background notifications, AI rescheduling, remote retries or authorization. Export filesystem failure leaves confirmed local reminders available for retry. |
 | F12 arbitrary typed plan, Setup/Learn/Practice/Review, retries and adaptation after activities | `AgentOrchestrator`, `ToolRegistry`, three-stage workflow, actual learning tool calls, persisted checkpoints, `SessionState` objects, legal controls and wall-clock budget | Bound scope and make recovery observable and testable | No separate Setup state, arbitrary activity mix, per-answer continuous replanning or autonomous scheduling. Paused time counts toward wall-clock budget. See session sequence above. |
 | Separate classes/repositories for Course, Material, Plan, Quiz, Attempt, Session and snapshots | JSON aggregate records and one `SQLiteRepository` with kind/course indexing and transactions | Reduce unused indirection and keep storage behavior consistent | Aggregate invariants live in service validators rather than domain model constructors. Report and diagrams reflect actual classes. |
 | Many concrete `ImportMaterialCommand`, `GradeAttemptCommand`, etc. | One receiver-based `StudyCommand`, registered `CommandFactory` | Every use case already has a cohesive method; avoids empty wrappers | Command names remain explicit; no named per-feature command classes or undo implementation. |
 | `IntentRouter`, `TaskPlanner`, `PlanValidator`, `ConceptGraphService`, `AdaptationService`, named strategy for every operation | Command allowlist; facade policies; generation strategy validators; `AgentOrchestrator` | Consolidate rules around actual operations rather than create unused diagram classes | The original class names and some broader behavioral promises are intentionally not claimed. |
+| Provider adapter and reproducible operation accounting | `OpenAIModelAdapter.generate()` places an explicit JSON output instruction in the serialized input envelope and accumulates provider-reported input/output tokens immediately after parsing the response envelope, before completion or generated-output validation; only nonnegative integer counts are accepted | Satisfy the provider JSON-mode input requirement and retain billed usage even when output is incomplete, malformed or rejected | Missing or invalid usage fields are not fabricated. Counts are in-memory API-reported tokens, not a measured money bill; HTTP error bodies do not supply token totals. |
 | Performance cache keyed by provider/schema/content versions | No generation cache | Avoid stale artifact reuse before cache invalidation requirements are settled | Repeated generation incurs model calls and cost; only saved artifacts are reusable manually. |
 
-Course creation, record inspection, due-card browsing, and card editing are supporting operations for the original feature set; they are not counted as additional meaningful features to hide omissions. All twelve original features have a working path in source, with the reductions above. Full live-model acceptance, video evidence, and report/submission completion must be assessed separately.
+Course creation, record inspection, due-card browsing, and card editing are supporting operations for the original feature set; they are not counted as additional meaningful features to hide omissions. All twelve original features have a working path in source, with the reductions above. The final live sample run passed 23 checks across F01-F12; see `live-verification.json`. This sample acceptance does not guarantee arbitrary model behavior. Video evidence, owner review, measured cost accounting and final submission remain separate requirements.

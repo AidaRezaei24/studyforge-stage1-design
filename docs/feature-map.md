@@ -2,8 +2,15 @@
 
 All feature IDs refer to the original Stage 1 feature with the same ID and UC number.
 Each has an implemented path, with modifications listed below and in architecture.md.
-Automated acceptance uses a model test double; live provider acceptance is pending.
+Offline acceptance uses a model test double. The final live sample run passed all
+twelve feature workflows; evidence is recorded in live-verification.json. This
+does not guarantee semantic correctness for every future input.
 Every video entry is awaiting owner recording, as indexed in demo-index.json.
+
+Provider accounting: the adapter records nonnegative integer token counts reported
+in a parsed provider response envelope before checking completion or generated JSON.
+Incomplete or malformed billed responses therefore still contribute reported usage.
+Missing/invalid usage is not invented; these counts do not establish money charges.
 
 ## F01 Material ingestion and indexing / UC01
 
@@ -91,11 +98,14 @@ approval; ProgressService supplies mastery; model.py OpenAIModelAdapter orders t
 
 Methods: plan_create(); plan_approve(); get_snapshot(); SQLiteRepository.transaction().
 
-Collaboration: goal and mastery go to the planner model; deadline and daily
-availability are enforced locally. Scoped course evidence is used even for broad
-goals. Deterministic rules validate
-topic uniqueness, known graph prerequisite order, deadline and slot capacity; dated
-sessions are saved as a draft. Approval is separate; active replacement is explicit.
+Collaboration: goal and mastery go to the planner model; deadline, optional
+start_date and daily availability are enforced locally. Start defaults to tomorrow
+for a future deadline, otherwise today; an explicit date must be today through the
+deadline. Scoped course evidence is used even for broad goals. Deterministic rules
+validate topic uniqueness, known graph prerequisite order and capacity over the
+inclusive start-to-deadline interval. Dated sessions and the resolved start_date are
+saved and displayed as a draft. Approval is separate; active replacement is explicit.
+Approved session dates are never shifted silently.
 
 Patterns: Facade, Command, Adapter, MVC. Changes: daily-minute capacity replaces
 arbitrary availability windows/profile priorities; activities and checkpoints are
@@ -203,9 +213,13 @@ RFC5545 ICS; SQLiteRepository persists stable session-based reminder IDs.
 Methods: schedule(); CalendarAdapter.export(); SQLiteRepository.save().
 
 Collaboration: approved plan and local time/timezone generate candidates. Rules check
-midnight, DST and overlaps across all local courses. Preview has no writes.
-Confirmation saves reminders idempotently; optional ICS export supplies events and
-a ten-minute alarm for manual calendar import. Failed export leaves local records.
+midnight, DST, overlaps across all local courses, and require every new reminder to
+start strictly after the captured current time. Preview and confirmation reject past
+new starts before writes; the user must choose a later time or approve a new future
+plan. Approved plan dates never shift automatically. Existing reminder IDs remain
+reusable, including historical records, so retries stay idempotent. Optional ICS
+export supplies events and a ten-minute alarm for manual calendar import. Failed
+export leaves confirmed local records available for retry.
 
 Patterns: Command, Adapter, Facade, MVC. Changes: no live calendar authorization,
 remote conflict reads, remote retries, AI rescheduling or notification daemon.

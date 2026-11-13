@@ -65,7 +65,9 @@ python -m studyforge list material --course COURSE
 python -m studyforge summarize --course COURSE --material MATERIAL --detail detailed --focus "What problem does Strategy solve?"
 python -m studyforge concepts --course COURSE --material MATERIAL --topic "design patterns"
 python -m studyforge ask --course COURSE "How does Strategy differ from State?"
-python -m studyforge plan --course COURSE --goal "Understand design patterns" --deadline 2026-12-01
+DEADLINE=$(python -c 'from datetime import date,timedelta; print(date.today()+timedelta(days=7))')
+FUTURE_START=$(python -c 'from datetime import date,timedelta; print(date.today()+timedelta(days=1))')
+python -m studyforge plan --course COURSE --goal "Understand design patterns" --deadline "$DEADLINE" --start-date "$FUTURE_START"
 python -m studyforge plan-approve --plan-id PLAN
 python -m studyforge flashcards --course COURSE --topic "Strategy" --count 3 --difficulty introductory
 python -m studyforge due-cards --course COURSE --deck-id DECK
@@ -84,6 +86,14 @@ python -m studyforge session-action --session-id SESSION pause
 python -m studyforge session-action --session-id SESSION resume
 python -m studyforge list session --course COURSE
 ```
+
+`--start-date` is optional and accepts an ISO date (`YYYY-MM-DD`) from today
+through the deadline. The GUI offers the same **First study date** input. Leaving
+it blank starts tomorrow when the deadline is in the future, or today when the
+deadline is today. The approved plan stores these dates. Reminder preview and
+confirmation reject a new event whose start time is already past; choose a later
+time or create and approve a plan with a future start date. Scheduling never
+silently shifts an approved plan's dates.
 
 Use a future deadline appropriate to the day you run the application. A quiz
 submission must include **every** item ID, with no extra IDs. For multiple-choice
@@ -148,9 +158,12 @@ The original Stage 1 report remains unchanged in this repository.
 
 The weekly historical commit requirement cannot be established by newly created
 commits. The report records actual history rather than fabricated dates. Feature
-videos and live provider verification remain outstanding until completed by the
-owner. Do not treat this repository as ready for submission until those entries
-have been updated with genuine evidence.
+videos remain outstanding until completed by the owner. The final live sample run
+passed 23 checks across all twelve features using 11 actual provider requests;
+see [live evidence](docs/live-verification.json) and the
+[runtime usage ledger](docs/runtime-usage.json). Do not treat the repository as
+ready for submission until recordings, measured usage accounting and final
+submission steps are complete.
 
 Retrieval is a deterministic local lexical index instead of embeddings; scanned
 PDFs require OCR before import. Citation validation verifies source identity, not

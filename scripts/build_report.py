@@ -4,6 +4,7 @@ Install the optional report dependency with: python -m pip install -e '.[report]
 The checked-in diagram PNGs have editable Graphviz .dot sources beside them.
 """
 from html import escape
+import json
 from pathlib import Path
 import re
 import subprocess
@@ -36,6 +37,8 @@ styles['Heading3'].leading = 16
 styles['Heading3'].textColor = ACCENT
 styles['Heading3'].spaceBefore = 12
 styles['Heading3'].spaceAfter = 8
+for name in ('Heading1', 'Heading2', 'Heading3'):
+    styles[name].keepWithNext = True
 
 
 def rich(text):
@@ -144,7 +147,7 @@ def footer(c, doc):
     c.setFont('Helvetica', 8)
     c.setFillColor(ACCENT)
     c.drawString(55, h - 31, 'STUDYFORGE  /  STAGE 2 IMPLEMENTATION')
-    c.drawString(55, 31, 'EECS3311  |  November 12, 2026  |  Live validation and videos pending')
+    c.drawString(55, 31, 'EECS3311  |  November 12, 2026  |  Live sample validated; videos pending')
     c.drawRightString(w - 55, 31, str(doc.page))
 
 
@@ -152,6 +155,8 @@ def build():
     architecture = (ROOT / 'docs/architecture.md').read_text()
     development = (ROOT / 'docs/development-log.md').read_text()
     feature_map = (ROOT / 'docs/feature-map.md').read_text()
+    live = json.loads((ROOT / 'docs/live-verification.json').read_text())
+    usage = json.loads((ROOT / 'docs/runtime-usage.json').read_text())
     test_count = unittest.defaultTestLoader.discover(str(ROOT / 'tests')).countTestCases()
     log = subprocess.run(['git', 'log', 'ee6d35a..HEAD', '--format=%H%x09%aI%x09%s'], cwd=ROOT,
                          capture_output=True, text=True, check=True).stdout
@@ -185,14 +190,16 @@ calendar conflicts, review intervals and learning metrics.
 Verification status: TEST_COUNT automated tests passed, including complete CLI and local
 HTTP API journeys through all twelve features with real SQLite persistence and
 reopening. Only the remote model is replaced by a test double in those journeys.
-The GUI was manually inspected for course creation, real material import and safe
-missing-key errors. A stale-output defect discovered in that check was corrected.
-Local API configuration is now in place. Initial provider requests exposed a
-JSON-mode input requirement, which was corrected and regression-tested. No live
-generated output has yet been accepted; full live feature validation is pending.
+The GUI was inspected for course creation, real material import, clear errors,
+and display of actual generated output with its source passages. A separate final
+live run passed 23 checks across all twelve features using 11 actual provider
+requests. Source comparison confirmed the selected generated claims and citations.
+Live review exposed and corrected an unsupported graph relationship and past-time
+reminders before that final run. Acceptance covers the bundled sample, not every
+possible future input. The key remains private in ignored local configuration.
 
-Submission is not complete. The owner will complete API access, validate actual
-generated output, record and upload all feature demonstrations, add accessible
+Submission is not complete. The owner will review the application and generated
+output, record and upload all feature demonstrations, add accessible
 timestamped links, supply measured AI usage/cost accounting and submit the course
 repository URL. Historical weekly activity is absent in the original repository;
 current commits do not establish development or pushes in the required past periods.
@@ -207,7 +214,8 @@ Sections 2-4 account for every original feature and affected class/pattern.
     markdown(overview.replace('TEST_COUNT', str(test_count)), story)
     story.append(PageBreak())
     parts = re.split(r'(?=^## F\d{2} )', feature_map, flags=re.M)
-    markdown('# 2 Feature to implementation mapping\n' + '\n'.join(parts[0].splitlines()[1:]), story)
+    feature_intro = parts[0].split('\nProvider adapter:')[0]
+    markdown('# 2 Feature to implementation mapping\n' + '\n'.join(feature_intro.splitlines()[1:]), story)
     for index, part in enumerate(parts[1:]):
         if index and index % 2 == 0:
             story.append(PageBreak())
@@ -276,9 +284,9 @@ Sections 2-4 account for every original feature and affected class/pattern.
              (3, 5, 'publish MaterialIndexed', False), (5, 4, 'observer saves activity event', False),
              (3, 4, 'commit file or rollback failure', False), (3, 0, 'imported / duplicates / errors', True)]),
         ('F05 / SD03 Plan, validate and approve',
-         'The model orders evidence-linked topics using goal and mastery. Deadline, daily capacity and known graph prerequisites are enforced locally. Infeasible plans fail before saving; replacing an approved plan requires explicit replacement confirmation.',
+         'The model orders evidence-linked topics using goal and mastery. The user may specify a start date; future-deadline plans otherwise start tomorrow. Start/deadline range, daily capacity and known prerequisites are enforced locally. Infeasible plans fail before saving; replacing an approved plan requires explicit confirmation.',
          ['GUI / CLI', 'Controller', 'Facade', 'Model', 'SQLite', 'Progress'], [
-             (0, 1, 'plan_create(goal, deadline, capacity)', False), (1, 2, 'execute plan command', False),
+             (0, 1, 'plan_create(goal, dates, capacity)', False), (1, 2, 'execute plan command', False),
              (2, 5, 'get_snapshot(course)', False), (2, 4, 'retrieve evidence and known graph', False),
              (2, 3, 'generate ordered topics', False), (3, 2, 'topics; locally validate constraints', True),
              (2, 4, 'save feasible draft plan', False), (2, 0, 'preview dated sessions', True),
@@ -318,7 +326,7 @@ Sections 2-4 account for every original feature and affected class/pattern.
              (3, 4, 'read plans and session states', False), (4, 3, 'stored observations', True),
              (3, 2, 'means, samples, counts, as_of', True), (2, 5, 'render measured snapshot', True)]),
         ('F11 / SD08 Confirm local reminders and export',
-         'This replaces the original remote-calendar sequence. Only approved plans are scheduled. Candidate dates are checked for timezone/DST, midnight and conflicts across all local courses. Preview does not write; confirmation uses stable reminder IDs. An export failure leaves confirmed local reminders available for retry. Manual calendar import is a user step.',
+         'This replaces the original remote-calendar sequence. Only approved plans are scheduled. New reminders must be future and are checked for timezone/DST, midnight and conflicts across courses. Preview does not write; confirmation uses stable IDs. Approved dates never shift silently. Existing historical IDs remain retryable. Manual calendar import is a user step.',
          ['GUI / CLI', 'Controller', 'Facade', 'SQLite', 'ICS Adapter', 'Calendar app'], [
              (0, 1, 'schedule(plan, time, timezone)', False), (1, 2, 'execute scheduling command', False),
              (2, 3, 'load approved plan + all reminders', False), (2, 0, 'validated preview; no writes', True),
@@ -333,9 +341,33 @@ Sections 2-4 account for every original feature and affected class/pattern.
     changes = section(architecture, 'Consolidated feature and class change record').split('\nCourse creation,')[0]
     markdown('# 4 Changes and rationale\n' + '\n'.join(changes.splitlines()[1:]), story)
     story.append(PageBreak())
-    markdown('# 5 AI tools and collaboration log\n' + development.split('## Weekly code activity')[0], story)
+    collaboration = development.split('## Verification evidence and limits')[0]
+    markdown('# 5 AI tools and collaboration log\n' + '\n'.join(collaboration.splitlines()[1:]), story)
     story.append(PageBreak())
-    markdown('# 6 Development and verification summary\n' + section(development, 'Weekly code activity, Toronto local dates'), story)
+    markdown('# 6 Development and verification summary\n' + section(development, 'Verification evidence and limits')
+             + '\n' + section(development, 'Weekly code activity, Toronto local dates'), story)
+    story.append(PageBreak())
+    live_text = '# Live acceptance and runtime usage\n'
+    live_text += ('The final corrected sample run passed ' + str(len(live['steps'])) + ' checks using '
+                  + str(len(live['requests'])) + ' real requests to ' + live['model'] + '.\n\n'
+                  + 'Evidence: docs/live-verification.json. Inputs are the bundled source and explicitly synthetic learner reviews/reference answers. No personal learning performance is claimed. Independent AI-assisted source comparison verified citation scope, source copies, selected factual outputs, grading and future reminder times. This does not establish correctness for arbitrary future inputs or replace owner review.\n\n')
+    for number in range(1, 13):
+        feature = f'F{number:02d}'
+        checks = [step for step in live['steps'] if step['feature'] == feature]
+        live_text += f'**{feature}:** ' + str(len(checks)) + ' live workflow checks passed.\n\n'
+    totals = usage['total_reported_usage']
+    live_text += ('Across connection testing, the initial workflow, the targeted concept regression and the final workflow: '
+                  + str(totals['requests']) + ' completed requests, ' + format(totals['input_tokens'], ',')
+                  + ' input tokens and ' + format(totals['output_tokens'], ',') + ' output tokens.\n\n'
+                  + 'Estimated standard uncached runtime cost: USD ' + format(usage['estimated_standard_uncached_usd'], '.7f')
+                  + '. The estimate uses USD 0.40 per million input tokens and USD 1.60 per million output tokens. '
+                  + 'It is not a measured bill and excludes cache discounts, tax, unrelated activity and rejected setup attempts without returned usage. '
+                  + 'See docs/runtime-usage.json and [official model pricing](https://developers.openai.com/api/docs/models/gpt-4.1-mini). '
+                  + 'Measured account charges and development-tool token/money totals still need owner accounting evidence.\n\n'
+                  + 'Initial live review found two defects despite passing structural checks: an unsupported relationship inferred from adjacent source sections, and same-day reminders in the past. '
+                  + 'Both were corrected and independently reviewed before the final live run. Targeted graph regression returned no unsupported edge; final reminders occur after run completion and preserve IDs on retry.')
+    markdown(live_text, story)
+    story.append(PageBreak())
     markdown('## Current implementation commits\nThese are actual implementation commits available when this report was generated, not substitutes for missing historical activity. The report-packaging commit itself is not listed.\n' + '\n\n'.join(commit_paragraphs), story)
     markdown('## Reproduction and remaining gates\nRun python -m unittest discover -s tests -v and make check after installing with python -m pip install -e . . The suite passed ' + str(test_count) + ' tests at the final verification recorded for this report. Python compilation, JavaScript syntax, credential scanning, package installation and PDF visual checks are separate release checks. No Stage 3 KUMA validation is claimed.\n\nA production launch without credentials must show a configuration error; test fixtures are never accepted as live LLM evidence. Record actual live results before claiming final feature acceptance. Confirm all source/report files are pushed to the public repository and verify video access signed out before course submission.', story)
     story.append(PageBreak())
