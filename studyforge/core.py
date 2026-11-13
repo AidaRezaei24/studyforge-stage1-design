@@ -97,3 +97,105 @@ class ProgressProjector:
     def update(self, name, payload):
         self.repo.save('event', payload.get('course', ''), {'name': name, 'payload': payload})
 
+
+class ProgressService:
+    def __init__(self, repo):
+        self.repo = repo
+
+    def get_snapshot(self, course):
+        topics = defaultdict(list)
+        attempts = self.repo.list('attempt', course)
+        for attempt in attempts:
+            for item in attempt['results']:
+                if not item.get('needs_review'):
+                    topics[item['topic']].append(item['score'])
+        for event in self.repo.list('event', course):
+            payload = event['payload']
+            if event['name'] == 'CardReviewed':
+                topics[payload['topic']].append(payload['rating'] / 3)
+        mastery = [{'topic': key, 'mastery': round(sum(scores) / len(scores), 3),
+                    'sample_size': len(scores)} for key, scores in sorted(topics.items())]
+        plans = self.repo.list('plan', course)
+        sessions = self.repo.list('session', course)
+        return {'course': course, 'topics': mastery, 'attempts': len(attempts),
+                'completed_sessions': sum(s['state'] == 'completed' for s in sessions),
+                'plans': len(plans), 'events': len(self.repo.list('event', course)),
+                'as_of': now(), 'method': 'Mean accepted item scores and card ratings; evidence counts shown.'}
+
+
+class ReviewScheduler:
+    @staticmethod
+    def schedule_next(card, rating):
+        if type(rating) is not int or rating not in range(4):
+            raise ValueError('Rating must be an integer from 0 (forgot) to 3 (easy).')
+        interval = 1 if rating < 2 else max(1, round(max(card.get('interval', 0), 1) * (2 if rating == 2 else 3)))
+        return {**card, 'interval': interval, 'due': (date.today() + timedelta(days=interval)).isoformat(),
+                'last_rating': rating, 'reviews': card.get('reviews', 0) + 1}
+
+
+class AssessmentService:
+    def __init__(self, repo, gateway, events):
+        self.repo, self.gateway, self.events = repo, gateway, events
+
+    def grade(self, quiz_id, answers, attempt_id=None):
+        quiz = self.repo.get(quiz_id, 'quiz')
+        if not quiz.get('items'):
+            raise ValueError('Cannot grade an empty quiz.')
+        attempt_id = attempt_id or uid()
+        if any(a['id'] == attempt_id for a in self.repo.list('attempt', quiz['course'])):
+            raise ValueError('This attempt has already been submitted.')
+        if not isinstance(answers, dict) or set(answers) != {i['id'] for i in quiz['items']}:
+            raise ValueError('Submit one answer keyed by item ID for every quiz item, with no extras.')
+        if any(not isinstance(a, str) or not a.strip() for a in answers.values()):
+            raise ValueError('Answers must be nonempty strings.')
+        results = []
+        for item in quiz['items']:
+            if item['type'] == 'choice':
+                score = float(answers[item['id']].strip().casefold() == item['answer'].strip().casefold())
+                feedback, confidence = 'Expected answer: ' + item['answer'], 1.0
+            else:
+                verdict = self.gateway.generate('grade', quiz.get('evidence', []), {
+                    'question': item['question'], 'answer': answers[item['id']], 'rubric': item.get('rubric', item['answer']),
+                    '_instructions': 'Grade only against supplied rubric. Return {score:number between 0 and 1,feedback:string,confidence:number between 0 and 1}.'})
+                score, confidence = verdict.get('score'), verdict.get('confidence')
+                feedback = verdict.get('feedback')
+                if not all(type(n) in (int, float) and 0 <= n <= 1 for n in (score, confidence)) or not isinstance(feedback, str) or not feedback:
+                    raise ValueError('The model returned an invalid grade; no attempt was saved.')
+            results.append({'item_id': item['id'], 'topic': item.get('topic', 'General'), 'score': score,
+                            'feedback': feedback, 'confidence': confidence, 'needs_review': confidence < .7,
+                            'citations': item.get('citations', [])})
+        result = self.repo.save('attempt', quiz['course'], {'id': attempt_id, 'quiz_id': quiz_id,
+                    'answers': answers, 'results': results, 'score': round(sum(r['score'] for r in results) / len(results), 3),
+                    'rubric_snapshot': quiz['items'], 'evidence': quiz.get('evidence', [])})
+        self.events.publish('AttemptRecorded', {'course': quiz['course'], 'attempt_id': result['id']})
+        return result
+
+
+class CalendarAdapter:
+    """Exports confirmed reminders as RFC5545 UTC events; no remote calendar credentials."""
+    @staticmethod
+    def export(reminders, path):
+        def escape(value):
+            return str(value).replace('\\', '\\\\').replace('\n', '\\n').replace(';', '\\;').replace(',', '\\,').replace('\r', '')
+        lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//StudyForge//Study schedule//EN', 'CALSCALE:GREGORIAN']
+        for event in reminders:
+            lines += ['BEGIN:VEVENT', 'UID:' + event['id'] + '@studyforge.local',
+                      'DTSTAMP:' + datetime.now(tz.utc).strftime('%Y%m%dT%H%M%SZ'),
+                      'DTSTART:' + datetime.fromisoformat(event['start']).astimezone(tz.utc).strftime('%Y%m%dT%H%M%SZ'),
+                      'DTEND:' + datetime.fromisoformat(event['end']).astimezone(tz.utc).strftime('%Y%m%dT%H%M%SZ'),
+                      'SUMMARY:' + escape(event['title']), 'BEGIN:VALARM', 'TRIGGER:-PT10M', 'ACTION:DISPLAY',
+                      'DESCRIPTION:StudyForge study reminder', 'END:VALARM', 'END:VEVENT']
+        lines.append('END:VCALENDAR')
+        # Fold at 75 UTF-8 octets as required by iCalendar.
+        folded = []
+        for line in lines:
+            part = ''
+            for char in line:
+                if len((part + char).encode()) > 75:
+                    folded.append(part)
+                    part = ' '
+                part += char
+            folded.append(part)
+        Path(path).write_bytes(('\r\n'.join(folded) + '\r\n').encode())
+        return str(Path(path).resolve())
+
