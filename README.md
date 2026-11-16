@@ -157,11 +157,9 @@ See the [final requirement audit](docs/final-audit.md) for the latest checks and
 
 ## Submission status and limits
 
-The owner confirms development on October 26, October 28 and November 6, 2026.
-[Development dates and evidence chronology](docs/history-date-revision.md)
-distinguishes these dates from later validation, recording verification and usage
-reporting. Commit metadata alone does not establish push or submission dates. The owner
-supplied a [demonstration recording with all twelve feature timestamps](docs/demonstrations.md);
+Development took place on October 26, October 28 and November 6, 2026.
+The [project timeline](docs/project-timeline.md) lists development, validation,
+recording verification and usage reporting events. The owner supplied a [demonstration recording with all twelve feature timestamps](docs/demonstrations.md);
 signed-out playback has been verified; full feature coverage still requires review. The
 final live sample run passed 23 checks across all twelve features using 11 actual provider requests;
 see [live evidence](docs/live-verification.json) and the

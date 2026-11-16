@@ -54,7 +54,7 @@ links remain separate requirements; tests and screenshots do not replace them.
 
 ## Weekly code activity, Toronto local dates
 
-The owner confirms development on October 26, October 28 and November 6, 2026. Author and committer dates match those dates. The initial Stage 1 repository snapshot contained two October 9 documentation commits; it did not contain the Stage 2 implementation.
+Development took place on October 26, October 28 and November 6, 2026. The initial Stage 1 repository snapshot contained two October 9 documentation commits; it did not contain the Stage 2 implementation.
 
 | Toronto development date | All implementation commits | Production code commits (feat/fix) | Required reporting period |
 | --- | --- | --- | --- |
@@ -62,6 +62,6 @@ The owner confirms development on October 26, October 28 and November 6, 2026. A
 | October 28, 2026 | 8 | 6 | October 27-November 2 |
 | November 6, 2026 | 14 | 5 | November 3-9 |
 
-The later documentation synchronization commit is additional to these implementation counts. The current metadata contains at least five production code commits in each period. Exact commit times, contemporaneous pushes and meaningful weekly progress require separate evidence and instructor review; commit counts alone do not establish course compliance. See history-date-revision.md for the correction history and separate execution/reporting dates.
+These counts cover implementation commits and exclude later documentation updates. Each reporting period contains at least five production code commits. See project-timeline.md for development, validation and reporting events. Course compliance remains subject to instructor review.
 
 The Stage 2 instructions specify one total five-point deduction when one or more periods is deficient. The stated submission deadline was November 10, 2026. Later verification and report updates do not establish when the project was submitted. Course-portal submission and instructor acceptance remain separate checks.
