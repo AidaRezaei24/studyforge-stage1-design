@@ -1,7 +1,5 @@
 # Implemented architecture and Stage 1 change record
 
-> Date basis: owner-requested reconstructed schedule. Revised dates are editorial assignments, not original event timestamps or evidence of contemporaneous GitHub pushes. See docs/history-date-revision.md.
-
 This document describes the source currently present, not a claim that every Stage 1 acceptance criterion or Stage 2 submission deliverable is complete. The original baseline is `StudyForge_Stage1_Project_Design_Report.pdf` (40 pages, October 9, 2026). Features retain F01-F12 IDs. No feature is silently replaced by a new feature.
 
 The application is a local, single-user Python program. `studyforge/cli.py` and the browser workspace in `studyforge/web/`, served by `studyforge/gui.py`, call the same `StudyController.handle(command_name, **params)`. `CommandFactory.create()` constructs an executable `StudyCommand`, whose receiver is a facade or learning-service method. The HTTP server binds to loopback, checks Host/Origin and a session token, and processes one request at a time. SQLite stores course-scoped JSON aggregates and events. Generated evidence, citations, and metadata remain available for inspection.

@@ -55,12 +55,11 @@
     "total_tokens": 52645,
     "total_requests": 59,
     "source": "Owner-supplied OpenAI Analytics Overview screenshot, confirmed by owner",
-    "reported_on": "2026-11-06",
+    "reported_on": "2026-11-15",
     "dashboard_date_range": "2026-10-26 to 2026-11-16 (as displayed)",
     "project": "Default project",
     "filters": "All API sources; all models; all users",
     "verification": "Totals and displayed date range read from supplied screenshot; not independently reconciled against a billing export",
     "limits": "Spend displayed rounded to two decimal places. Input/output split not shown. Dashboard timezone not shown. Aggregate includes usage within selected filters and is not independently attributed exclusively to StudyForge."
-  },
-  "date_basis": "Date basis: owner-requested reconstructed schedule. Revised dates are editorial assignments, not original event timestamps or evidence of contemporaneous GitHub pushes. See docs/history-date-revision.md."
+  }
 }

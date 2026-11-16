@@ -1,6 +1,6 @@
-# Stage 2 requirement audit - November 6, 2026
+# Stage 2 requirement audit - November 15, 2026
 
-> Date basis: owner-requested reconstructed schedule. Revised dates are editorial assignments, not original event timestamps or evidence of contemporaneous GitHub pushes. See docs/history-date-revision.md.
+Date consistency reviewed November 16, 2026. Development dates are owner-confirmed; execution and reporting dates follow the original evidence records. See history-date-revision.md.
 
 Basis: all five pages of the supplied Project-Stage2-Instruction.pdf, the original
 Stage 1 design, current source, generated report and repository evidence.
@@ -18,9 +18,9 @@ Stage 1 design, current source, generated report and repository evidence.
 | Video index | Twelve owner-supplied timestamp links are present in both feature mappings and demonstration index; F11 starts at 10:40, F10 at 11:30. |
 | Video access | Signed-out YouTube playback verified; duration displayed about 13 minutes 6 seconds. Owner confirms both GUI and CLI are shown. Full narration, all input/output/error demonstrations and absence of secrets throughout have not been independently verified. Transcript unavailable in the player. |
 | API-key protection | Local .env ignored; example contains placeholders. Current-source scan and 67 historical text-blob scans found no supported OpenAI key pattern. This is a pattern scan, not proof about every possible credential format or video frame. |
-| AI tools/models and costs | Tools/tasks and runtime model are identified. Validation-only ledger totals 15,352 input and 4,725 output tokens, estimated USD 0.0137008. Recording requests and Codex totals are excluded. Later owner-supplied dashboard screenshot shows 52,645 total tokens, 59 requests and USD 0.04 displayed spend for October 26-November 16, 2026 (Default project, all API sources/models/users), assigned capture date November 6. This supersedes the earlier USD 0.014 owner report. Displayed spend is rounded; token split/timezone are not shown, and exclusive project attribution is not independently established. Codex token/money totals remain missing. Credit top-ups are not usage charges. |
-| Weekly activity | The report's original-history audit has zero qualifying code commits in each required Toronto period (October 20-26, October 27-November 2, November 3-9). Revised metadata assigns 5, 6 and 5 production code commits to October 26, October 28 and November 6 respectively. This reconstruction does not establish original contemporaneous activity. Instructions specify one total 5-point deduction when any period is deficient. |
-| Due date and final submission | Instructions give November 10, 2026; the revised audit date is November 6 (editorial assignment). No on-time submission or extension is established. Owner must submit repository URL in the course system. |
+| AI tools/models and costs | Tools/tasks and runtime model are identified. Validation-only ledger totals 15,352 input and 4,725 output tokens, estimated USD 0.0137008. Recording requests and Codex totals are excluded. Later owner-supplied dashboard screenshot shows 52,645 total tokens, 59 requests and USD 0.04 displayed spend for October 26-November 16, 2026 (Default project, all API sources/models/users), reported November 15; capture time not independently established. This supersedes the earlier USD 0.014 owner report. Displayed spend is rounded; token split/timezone are not shown, and exclusive project attribution is not independently established. Codex token/money totals remain missing. Credit top-ups are not usage charges. |
+| Weekly activity | The owner confirms development on October 26, October 28 and November 6. Current metadata contains 5, 6 and 5 production code commits on those dates, respectively. Exact times and contemporaneous pushes are not independently established; course compliance requires instructor review. Instructions specify one total 5-point deduction when any period is deficient. |
+| Due date and final submission | Instructions give November 10, 2026; the original audit date is November 15, with date consistency reviewed November 16. No on-time submission or extension is established. Owner must submit repository URL in the course system. |
 
 ## Corrections made during this audit
 

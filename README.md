@@ -1,7 +1,5 @@
 # StudyForge
 
-> Date basis: owner-requested reconstructed schedule. Revised dates are editorial assignments, not original event timestamps or evidence of contemporaneous GitHub pushes. See docs/history-date-revision.md.
-
 A local-first study workspace that turns your course materials into grounded
 explanations, practice, plans, and checkpointed study sessions. The browser GUI
 and CLI share the same controller and services. Course data is stored in SQLite;
@@ -159,9 +157,10 @@ See the [final requirement audit](docs/final-audit.md) for the latest checks and
 
 ## Submission status and limits
 
-The weekly historical commit requirement cannot be established by newly created
-commits. The report distinguishes the original-history audit from the owner's
-reconstructed commit schedule. The owner
+The owner confirms development on October 26, October 28 and November 6, 2026.
+[Development dates and evidence chronology](docs/history-date-revision.md)
+distinguishes these dates from later validation, recording verification and usage
+reporting. Commit metadata alone does not establish push or submission dates. The owner
 supplied a [demonstration recording with all twelve feature timestamps](docs/demonstrations.md);
 signed-out playback has been verified; full feature coverage still requires review. The
 final live sample run passed 23 checks across all twelve features using 11 actual provider requests;

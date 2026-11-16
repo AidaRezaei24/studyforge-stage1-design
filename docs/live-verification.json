@@ -1,6 +1,6 @@
 {
   "status": "PASS",
-  "started_at": "2026-11-07T04:45:49.277842+00:00",
+  "started_at": "2026-11-13T04:45:49.277842+00:00",
   "learner_data": "Synthetic acceptance inputs: two forgot card ratings and reference-answer quiz submissions. No real learner performance is claimed.",
   "scope": "Real model execution through application services; does not record GUI/CLI videos or establish semantic correctness of every model statement.",
   "manual_fixture_used": false,
@@ -35,7 +35,7 @@
               "patterns"
             ],
             "course": "0dbd3a369d6e4a6e863724c8d30863d1",
-            "created_at": "2026-11-07T04:45:49.289417+00:00"
+            "created_at": "2026-11-13T04:45:49.289417+00:00"
           }
         ],
         "duplicates": [],
@@ -91,7 +91,7 @@
         "focus": "",
         "id": "04ef16296eb14eb3ba553bc7301240e7",
         "course": "0dbd3a369d6e4a6e863724c8d30863d1",
-        "created_at": "2026-11-07T04:45:52.776696+00:00"
+        "created_at": "2026-11-13T04:45:52.776696+00:00"
       }
     },
     {
@@ -182,7 +182,7 @@
         "topic": "",
         "id": "8da2cd9a994142a2bd4eff7555ad9372",
         "course": "0dbd3a369d6e4a6e863724c8d30863d1",
-        "created_at": "2026-11-07T04:45:58.445784+00:00"
+        "created_at": "2026-11-13T04:45:58.445784+00:00"
       }
     },
     {
@@ -227,7 +227,7 @@
         ],
         "id": "8fc95c962379459e9a2e017aa57c5bf0",
         "course": "0dbd3a369d6e4a6e863724c8d30863d1",
-        "created_at": "2026-11-07T04:45:59.792787+00:00"
+        "created_at": "2026-11-13T04:45:59.792787+00:00"
       }
     },
     {
@@ -236,21 +236,21 @@
       "status": "PASS",
       "result": {
         "goal": "Study Strategy and Observer design patterns",
-        "deadline": "2026-11-13",
-        "start_date": "2026-11-07",
+        "deadline": "2026-11-19",
+        "start_date": "2026-11-13",
         "sessions": [
           {
             "id": "b1b87e0e04ec46af843ff2f32c673e60",
             "topic": "Strategy pattern",
             "minutes": 25,
-            "date": "2026-11-07",
+            "date": "2026-11-13",
             "daily_slot": 0
           },
           {
             "id": "d53d790422144aa883373cf03d076c5a",
             "topic": "Observer pattern",
             "minutes": 25,
-            "date": "2026-11-07",
+            "date": "2026-11-13",
             "daily_slot": 1
           }
         ],
@@ -272,7 +272,7 @@
         ],
         "id": "85448e148d2641a5919a2095b785a228",
         "course": "0dbd3a369d6e4a6e863724c8d30863d1",
-        "created_at": "2026-11-07T04:46:00.564172+00:00"
+        "created_at": "2026-11-13T04:46:00.564172+00:00"
       }
     },
     {
@@ -289,7 +289,7 @@
               "b909f86606b84f3b8e1db783b6939765:1"
             ],
             "id": "9c0c564f842044488b3989c95b1c64db",
-            "due": "2026-11-06",
+            "due": "2026-11-12",
             "interval": 0
           },
           {
@@ -300,7 +300,7 @@
               "b909f86606b84f3b8e1db783b6939765:1"
             ],
             "id": "977149b0de20413dbefad8b30a41c708",
-            "due": "2026-11-06",
+            "due": "2026-11-12",
             "interval": 0
           }
         ],
@@ -323,7 +323,7 @@
         "difficulty": "mixed",
         "id": "cf60708c2e6641f9bd5cb9357ef01956",
         "course": "0dbd3a369d6e4a6e863724c8d30863d1",
-        "created_at": "2026-11-07T04:46:02.866191+00:00"
+        "created_at": "2026-11-13T04:46:02.866191+00:00"
       }
     },
     {
@@ -338,7 +338,7 @@
           "b909f86606b84f3b8e1db783b6939765:1"
         ],
         "id": "9c0c564f842044488b3989c95b1c64db",
-        "due": "2026-11-07",
+        "due": "2026-11-13",
         "interval": 1,
         "last_rating": 0,
         "reviews": 1
@@ -356,7 +356,7 @@
           "b909f86606b84f3b8e1db783b6939765:1"
         ],
         "id": "9c0c564f842044488b3989c95b1c64db",
-        "due": "2026-11-07",
+        "due": "2026-11-13",
         "interval": 1,
         "last_rating": 0,
         "reviews": 2
@@ -367,7 +367,7 @@
       "check": "Inspect persisted spaced-review queue",
       "status": "PASS",
       "result": {
-        "date": "2026-11-06",
+        "date": "2026-11-12",
         "cards": [
           {
             "front": "How can the Strategy pattern be applied in a learning service?",
@@ -377,7 +377,7 @@
               "b909f86606b84f3b8e1db783b6939765:1"
             ],
             "id": "977149b0de20413dbefad8b30a41c708",
-            "due": "2026-11-06",
+            "due": "2026-11-12",
             "interval": 0,
             "deck_id": "cf60708c2e6641f9bd5cb9357ef01956"
           }
@@ -438,7 +438,7 @@
         "difficulty": "mixed",
         "id": "e68873d8e6b245a1b289a6679c0c893c",
         "course": "0dbd3a369d6e4a6e863724c8d30863d1",
-        "created_at": "2026-11-07T04:46:05.779703+00:00"
+        "created_at": "2026-11-13T04:46:05.779703+00:00"
       }
     },
     {
@@ -486,7 +486,7 @@
           }
         ],
         "course": "0dbd3a369d6e4a6e863724c8d30863d1",
-        "created_at": "2026-11-07T04:46:07.268423+00:00"
+        "created_at": "2026-11-13T04:46:07.268423+00:00"
       }
     },
     {
@@ -557,7 +557,7 @@
           "difficulty": "intermediate",
           "id": "21e7334d79f047dda98ff0da4f2d77e3",
           "course": "0dbd3a369d6e4a6e863724c8d30863d1",
-          "created_at": "2026-11-07T04:46:10.442928+00:00"
+          "created_at": "2026-11-13T04:46:10.442928+00:00"
         }
       }
     },
@@ -578,7 +578,7 @@
         "completed_sessions": 0,
         "plans": 1,
         "events": 4,
-        "as_of": "2026-11-07T04:46:10.447165+00:00",
+        "as_of": "2026-11-13T04:46:10.447165+00:00",
         "method": "Mean accepted item scores and card ratings; evidence counts shown."
       }
     },
@@ -593,23 +593,23 @@
             "id": "reminder-b1b87e0e04ec46af843ff2f32c673e60",
             "plan_id": "85448e148d2641a5919a2095b785a228",
             "title": "Strategy pattern",
-            "start": "2026-11-07T18:00:00-05:00",
-            "end": "2026-11-07T18:25:00-05:00",
+            "start": "2026-11-13T18:00:00-05:00",
+            "end": "2026-11-13T18:25:00-05:00",
             "timezone": "America/Toronto",
             "status": "confirmed",
             "course": "0dbd3a369d6e4a6e863724c8d30863d1",
-            "created_at": "2026-11-07T04:46:10.447900+00:00"
+            "created_at": "2026-11-13T04:46:10.447900+00:00"
           },
           {
             "id": "reminder-d53d790422144aa883373cf03d076c5a",
             "plan_id": "85448e148d2641a5919a2095b785a228",
             "title": "Observer pattern",
-            "start": "2026-11-07T18:25:00-05:00",
-            "end": "2026-11-07T18:50:00-05:00",
+            "start": "2026-11-13T18:25:00-05:00",
+            "end": "2026-11-13T18:50:00-05:00",
             "timezone": "America/Toronto",
             "status": "confirmed",
             "course": "0dbd3a369d6e4a6e863724c8d30863d1",
-            "created_at": "2026-11-07T04:46:10.448373+00:00"
+            "created_at": "2026-11-13T04:46:10.448373+00:00"
           }
         ],
         "calendar_file": "[isolated acceptance workspace]/live-acceptance.ics"
@@ -626,23 +626,23 @@
             "id": "reminder-b1b87e0e04ec46af843ff2f32c673e60",
             "plan_id": "85448e148d2641a5919a2095b785a228",
             "title": "Strategy pattern",
-            "start": "2026-11-07T18:00:00-05:00",
-            "end": "2026-11-07T18:25:00-05:00",
+            "start": "2026-11-13T18:00:00-05:00",
+            "end": "2026-11-13T18:25:00-05:00",
             "timezone": "America/Toronto",
             "status": "confirmed",
             "course": "0dbd3a369d6e4a6e863724c8d30863d1",
-            "created_at": "2026-11-07T04:46:10.447900+00:00"
+            "created_at": "2026-11-13T04:46:10.447900+00:00"
           },
           {
             "id": "reminder-d53d790422144aa883373cf03d076c5a",
             "plan_id": "85448e148d2641a5919a2095b785a228",
             "title": "Observer pattern",
-            "start": "2026-11-07T18:25:00-05:00",
-            "end": "2026-11-07T18:50:00-05:00",
+            "start": "2026-11-13T18:25:00-05:00",
+            "end": "2026-11-13T18:50:00-05:00",
             "timezone": "America/Toronto",
             "status": "confirmed",
             "course": "0dbd3a369d6e4a6e863724c8d30863d1",
-            "created_at": "2026-11-07T04:46:10.448373+00:00"
+            "created_at": "2026-11-13T04:46:10.448373+00:00"
           }
         ]
       }
@@ -655,7 +655,7 @@
         "goal": "Explain Strategy",
         "minutes": 20,
         "state": "learn",
-        "started_at": "2026-11-07T04:46:10.450762+00:00",
+        "started_at": "2026-11-13T04:46:10.450762+00:00",
         "results": [],
         "steps": [
           "learn",
@@ -665,7 +665,7 @@
         "step": 0,
         "id": "4ac41c7ba85743e38a7637d05e592465",
         "course": "0dbd3a369d6e4a6e863724c8d30863d1",
-        "created_at": "2026-11-07T04:46:10.450787+00:00"
+        "created_at": "2026-11-13T04:46:10.450787+00:00"
       }
     },
     {
@@ -676,7 +676,7 @@
         "goal": "Explain Strategy",
         "minutes": 20,
         "state": "practice",
-        "started_at": "2026-11-07T04:46:10.450762+00:00",
+        "started_at": "2026-11-13T04:46:10.450762+00:00",
         "results": [
           {
             "step": "learn",
@@ -713,7 +713,7 @@
               ],
               "id": "dd8c4d0ffc0c4e88aaf63725157eb1f4",
               "course": "0dbd3a369d6e4a6e863724c8d30863d1",
-              "created_at": "2026-11-07T04:46:11.980297+00:00"
+              "created_at": "2026-11-13T04:46:11.980297+00:00"
             }
           }
         ],
@@ -725,7 +725,7 @@
         "step": 1,
         "id": "4ac41c7ba85743e38a7637d05e592465",
         "course": "0dbd3a369d6e4a6e863724c8d30863d1",
-        "created_at": "2026-11-07T04:46:10.450787+00:00"
+        "created_at": "2026-11-13T04:46:10.450787+00:00"
       }
     },
     {
@@ -736,7 +736,7 @@
         "goal": "Explain Strategy",
         "minutes": 20,
         "state": "paused",
-        "started_at": "2026-11-07T04:46:10.450762+00:00",
+        "started_at": "2026-11-13T04:46:10.450762+00:00",
         "results": [
           {
             "step": "learn",
@@ -773,7 +773,7 @@
               ],
               "id": "dd8c4d0ffc0c4e88aaf63725157eb1f4",
               "course": "0dbd3a369d6e4a6e863724c8d30863d1",
-              "created_at": "2026-11-07T04:46:11.980297+00:00"
+              "created_at": "2026-11-13T04:46:11.980297+00:00"
             }
           }
         ],
@@ -785,7 +785,7 @@
         "step": 1,
         "id": "4ac41c7ba85743e38a7637d05e592465",
         "course": "0dbd3a369d6e4a6e863724c8d30863d1",
-        "created_at": "2026-11-07T04:46:10.450787+00:00",
+        "created_at": "2026-11-13T04:46:10.450787+00:00",
         "resume_state": "practice"
       }
     },
@@ -797,7 +797,7 @@
         "goal": "Explain Strategy",
         "minutes": 20,
         "state": "practice",
-        "started_at": "2026-11-07T04:46:10.450762+00:00",
+        "started_at": "2026-11-13T04:46:10.450762+00:00",
         "results": [
           {
             "step": "learn",
@@ -834,7 +834,7 @@
               ],
               "id": "dd8c4d0ffc0c4e88aaf63725157eb1f4",
               "course": "0dbd3a369d6e4a6e863724c8d30863d1",
-              "created_at": "2026-11-07T04:46:11.980297+00:00"
+              "created_at": "2026-11-13T04:46:11.980297+00:00"
             }
           }
         ],
@@ -846,7 +846,7 @@
         "step": 1,
         "id": "4ac41c7ba85743e38a7637d05e592465",
         "course": "0dbd3a369d6e4a6e863724c8d30863d1",
-        "created_at": "2026-11-07T04:46:10.450787+00:00"
+        "created_at": "2026-11-13T04:46:10.450787+00:00"
       }
     },
     {
@@ -857,7 +857,7 @@
         "goal": "Explain Strategy",
         "minutes": 20,
         "state": "review",
-        "started_at": "2026-11-07T04:46:10.450762+00:00",
+        "started_at": "2026-11-13T04:46:10.450762+00:00",
         "results": [
           {
             "step": "learn",
@@ -894,7 +894,7 @@
               ],
               "id": "dd8c4d0ffc0c4e88aaf63725157eb1f4",
               "course": "0dbd3a369d6e4a6e863724c8d30863d1",
-              "created_at": "2026-11-07T04:46:11.980297+00:00"
+              "created_at": "2026-11-13T04:46:11.980297+00:00"
             }
           },
           {
@@ -950,7 +950,7 @@
               "difficulty": "intermediate",
               "id": "0ff67777c15f48ebaa89fa03154d9bfb",
               "course": "0dbd3a369d6e4a6e863724c8d30863d1",
-              "created_at": "2026-11-07T04:46:16.180360+00:00"
+              "created_at": "2026-11-13T04:46:16.180360+00:00"
             }
           }
         ],
@@ -962,7 +962,7 @@
         "step": 2,
         "id": "4ac41c7ba85743e38a7637d05e592465",
         "course": "0dbd3a369d6e4a6e863724c8d30863d1",
-        "created_at": "2026-11-07T04:46:10.450787+00:00"
+        "created_at": "2026-11-13T04:46:10.450787+00:00"
       }
     },
     {
@@ -1010,7 +1010,7 @@
           }
         ],
         "course": "0dbd3a369d6e4a6e863724c8d30863d1",
-        "created_at": "2026-11-07T04:46:17.306353+00:00"
+        "created_at": "2026-11-13T04:46:17.306353+00:00"
       }
     },
     {
@@ -1021,7 +1021,7 @@
         "goal": "Explain Strategy",
         "minutes": 20,
         "state": "completed",
-        "started_at": "2026-11-07T04:46:10.450762+00:00",
+        "started_at": "2026-11-13T04:46:10.450762+00:00",
         "results": [
           {
             "step": "learn",
@@ -1058,7 +1058,7 @@
               ],
               "id": "dd8c4d0ffc0c4e88aaf63725157eb1f4",
               "course": "0dbd3a369d6e4a6e863724c8d30863d1",
-              "created_at": "2026-11-07T04:46:11.980297+00:00"
+              "created_at": "2026-11-13T04:46:11.980297+00:00"
             }
           },
           {
@@ -1114,7 +1114,7 @@
               "difficulty": "intermediate",
               "id": "0ff67777c15f48ebaa89fa03154d9bfb",
               "course": "0dbd3a369d6e4a6e863724c8d30863d1",
-              "created_at": "2026-11-07T04:46:16.180360+00:00"
+              "created_at": "2026-11-13T04:46:16.180360+00:00"
             }
           },
           {
@@ -1134,7 +1134,7 @@
                 "completed_sessions": 0,
                 "plans": 1,
                 "events": 9,
-                "as_of": "2026-11-07T04:46:17.310094+00:00",
+                "as_of": "2026-11-13T04:46:17.310094+00:00",
                 "method": "Mean accepted item scores and card ratings; evidence counts shown."
               }
             }
@@ -1148,14 +1148,14 @@
         "step": 3,
         "id": "4ac41c7ba85743e38a7637d05e592465",
         "course": "0dbd3a369d6e4a6e863724c8d30863d1",
-        "created_at": "2026-11-07T04:46:10.450787+00:00"
+        "created_at": "2026-11-13T04:46:10.450787+00:00"
       }
     }
   ],
   "model": "gpt-4.1-mini-2025-04-14",
   "course_id": "0dbd3a369d6e4a6e863724c8d30863d1",
   "source": "samples/design-patterns.md",
-  "completed_at": "2026-11-07T04:46:17.313938+00:00",
+  "completed_at": "2026-11-13T04:46:17.313938+00:00",
   "requests": [
     {
       "task": "summary",
@@ -1296,6 +1296,5 @@
       "New reminders are future and nonoverlapping; repeated scheduling preserves identifiers.",
       "Synthetic learner reviews and reference answers are disclosed, not human performance."
     ]
-  },
-  "date_basis": "Date basis: owner-requested reconstructed schedule. Revised dates are editorial assignments, not original event timestamps or evidence of contemporaneous GitHub pushes. See docs/history-date-revision.md."
+  }
 }

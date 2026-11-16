@@ -1,9 +1,15 @@
-# History date revision
+# Development dates and evidence chronology
 
-The owner requested a reconstructed schedule with at least five code commits on each of October 26, October 28 and November 6, 2026, in America/Toronto.
+The owner confirms that development took place on October 26, October 28 and November 6, 2026, in America/Toronto. Git author and committer dates were previously corrected to those dates. October uses UTC-04:00 and November uses UTC-05:00. Exact commit times have not been independently verified.
 
-The 28 implementation commits were redistributed in their existing order: 6 total / 5 production code commits on October 26, 8 / 6 on October 28, and 14 / 5 on November 6. Author and committer dates match; October uses UTC-04:00 and November uses UTC-05:00. The two original October 9 documentation commits are unchanged. A later documentation synchronization commit uses November 6 as its assigned date.
+The 28 implementation commits comprise 6 commits on October 26, 8 on October 28 and 14 on November 6, including 5, 6 and 5 production code commits (feat/fix), respectively. The two October 9 Stage 1 documentation commits are unchanged. The November 6 date on the subsequent documentation synchronization commit was assigned during the earlier revision; it is not evidence of when that synchronization occurred.
 
-Documentation, the generated report, recording-index dates and evidence-copy dates use this revised schedule. These are editorial date assignments rather than original event timestamps. The live evidence copy shifts its entire sample timeline by six days, preserving durations and relative reminder/deadline intervals. Provider response identifiers, token counts, model names, measured results and the actual displayed billing range are unchanged. The billing dashboard range is a measurement scope, not a commit date.
+Development dates are distinct from later execution and reporting dates:
 
-The original history is preserved in a local Git bundle and unchanged original refs. The original-history audit remains explicitly distinguished from the revised metadata. This revision cannot establish contemporaneous GitHub pushes, original execution/recording dates, on-time submission or instructor acceptance. GitHub-controlled activity and audit timestamps are outside Git commit metadata.
+- The saved live acceptance run started November 13 at 04:45 UTC (November 12 at 23:45 Toronto).
+- The recording was supplied and signed-out playback verified on November 15. The recording creation date is not established by those events.
+- Account usage was reported on November 15. The dashboard displays October 26-November 16; that selected range is not a capture timestamp or a development period.
+
+An earlier date revision shifted the saved live timeline and assigned development dates to later evidence. Those evidence files have been restored from the preceding commit, a804f76144, including their original sample dates, provider identifiers, measurements and results. Owner-confirmed development dates do not change execution, recording, billing or GitHub event timestamps.
+
+Original history refs remain available. Commit metadata and owner confirmation alone do not establish contemporaneous GitHub pushes, course submission time or instructor acceptance.

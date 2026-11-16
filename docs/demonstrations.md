@@ -1,11 +1,9 @@
 # Recording the Stage 2 demonstrations
 
-> Date basis: owner-requested reconstructed schedule. Revised dates are editorial assignments, not original event timestamps or evidence of contemporaneous GitHub pushes. See docs/history-date-revision.md.
-
 **Status: owner supplied the recording and all twelve feature start times.**
 
 Recording: [StudyForge Stage 2 demonstration](https://youtu.be/vovxVKUw2TE).
-The owner supplied the recording and timestamps with an assigned date of November 6, 2026. Signed-out playback has an assigned verification date of November 6, 2026; full feature coverage
+The owner supplied the recording and timestamps on November 15, 2026. Signed-out playback was verified on November 15, 2026; full feature coverage
 has not been independently verified. F11 appears
 before F10 in the supplied recording order. The guide below remains available
 for reproducing the demonstrations.
