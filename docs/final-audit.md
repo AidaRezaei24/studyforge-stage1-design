@@ -10,7 +10,7 @@ Stage 1 design, current source, generated report and repository evidence.
 | GUI and CLI | All twelve GUI actions connect to the shared controller and services; all major operations have CLI commands. End-to-end CLI/HTTP persistence journeys pass. |
 | At least ten meaningful features; account for every Stage 1 feature | F01-F12 implemented and individually mapped in feature-map.md; modifications and scope reductions explicitly documented. |
 | Five distinct implemented patterns | Seven: MVC, Command, Facade, Strategy, Adapter, Observer and State. Architecture table gives participants, roles, actual files/methods, problems and Stage 1 differences. |
-| LLM and meaningful agent behavior | Real Responses API adapter; course retrieval, conversation memory, generated planning with deterministic constraints, adaptive practice and checkpointed session tool orchestration. Prior live sample evidence: 23 checks across all twelve features, 11 requests. The November 24 attempt stopped at first generation with HTTP 401; no token usage was returned. Current generation requires a valid local API key. See nov24-live-check.json. |
+| LLM and meaningful agent behavior | Real Responses API adapter; course retrieval, conversation memory, generated planning with deterministic constraints, adaptive practice and checkpointed session tool orchestration. Prior live sample evidence: 23 checks across all twelve features, 11 requests. The initial November 24 attempt stopped with HTTP 401. After owner key replacement, the current live run passed 23 checks / 11 actual requests; see nov24-live-verification.json. |
 | Changes and diagrams | Consolidated original/change/reason/impact record, implemented class/use-case model and updated sequence diagrams included in report. |
 | Same public repository and source publication | Public repository: AidaRezaei24/studyforge-stage1-design, default main. Review-branch CI passed on Python 3.11, 3.12 and 3.13. Final publication and merge status must be checked before submission. |
 | Reproducibility and basic verification | make check passes all 53 tests; compilation and source credential scan pass. pip check reports no broken dependencies. Browser JavaScript syntax check passes. All 60 README/recording-guide CLI examples parse after removal of an unsupported plan option. |
@@ -31,10 +31,10 @@ Stage 1 design, current source, generated report and repository evidence.
 - Clarified that the validation ledger is not complete project cost accounting.
 
 Passing tests and accessible links do not guarantee a grade. Remaining requirements
-need owner action: valid local API credentials, complete AI cost totals
+need owner action: complete AI cost totals
 and course submission. Historical weekly activity and elapsed deadline are reported
 accurately rather than asserted complete.
 
 ## Professor follow-up
 
-All F01-F12 entries now state original requirements and have actual runtime screenshots embedded in the report. CLI examples, short-session support, failed-import exit status, GUI numeric bounds and HTTP 401 guidance were corrected. Report generation executes tests before claiming a passing count. See professor-review.md for the evidence, video observations, screenshot provenance and current live authentication limitation.
+All F01-F12 entries now state original requirements and have actual runtime screenshots embedded in the report. CLI examples, short-session support, failed-import exit status, GUI numeric bounds and HTTP 401 guidance were corrected. Report generation executes tests before claiming a passing count. See professor-review.md for the evidence, video observations, screenshot provenance and initial authentication failure and successful current retry.

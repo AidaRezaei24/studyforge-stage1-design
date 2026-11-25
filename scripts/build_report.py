@@ -196,7 +196,7 @@ calendar conflicts, review intervals and learning metrics.
 Verification status: TEST_COUNT automated tests passed, including complete CLI and local
 HTTP API journeys through all twelve features with real SQLite persistence and
 reopening. Only the remote model is replaced by a test double in those journeys.
-The November 24 follow-up adds runtime screenshots for F01-F12 and current authentication status. The GUI was inspected for course creation, real material import, clear errors,
+The November 24 follow-up adds runtime screenshots for F01-F12 and current live verification status. The GUI was inspected for course creation, real material import, clear errors,
 and display of actual generated output with its source passages. A separate saved November 12
 live run passed 23 checks across all twelve features using 11 actual provider
 requests. Source comparison confirmed the selected generated claims and citations.
@@ -205,8 +205,7 @@ reminders before that final run. Acceptance covers the bundled sample, not every
 possible future input. The key remains private in ignored local configuration.
 
 Submission is not complete. The owner will review the application and generated
-output, resolve the current HTTP 401 authentication issue, supply measured
-AI usage/cost accounting and submit the course
+output, supply measured AI usage/cost accounting and submit the course
 repository URL. The development log lists weekly activity; course compliance
 remains subject to instructor review.
 The original assignment deadline was November 10. The professor's missing-item follow-up specifies November 24. No grade or on-time status is claimed.
@@ -241,14 +240,14 @@ Sections 2-4 account for every original feature and affected class/pattern.
         markdown('Captured November 24, 2026 from the running local GUI. '
                  + ('A new deterministic recommendation/progress calculation uses the saved sample history. '
                     if feature_id in {'F09', 'F10'} else
-                    'Saved work is reopened from the real November 12 provider acceptance run. ')
+                    'Saved work is reopened from the successful November 24 provider acceptance run. ')
                  + 'Review ratings and reference answers are synthetic acceptance inputs. '
-                 + 'Historical plan/reminder dates are preserved; this is not a new generation claim. '
+                 + 'The saved artifacts preserve the actual live-run inputs, outputs and future plan dates. '
                  + 'The original requirement, implementation and deviations are in the matching feature entry above. '
                  + 'Full-resolution image: docs/screenshots/' + feature_id + '-gui.png.', story)
     story.append(PageBreak())
     markdown('## November 24 follow-up verification\n' +
-             (ROOT / 'docs/professor-review.md').read_text(), story)
+             '\n'.join((ROOT / 'docs/professor-review.md').read_text().splitlines()[1:]), story)
     story.append(PageBreak())
     markdown('# 3 Implemented design patterns\n' + '\n'.join(section(architecture, 'Seven implemented patterns').splitlines()[1:]), story)
     markdown('## Updated UML class diagrams\nFigures split the same implementation into four readable views. Solid arrows show dependencies; open triangle arrowheads show inheritance; dashed open triangles show protocol implementation. Repeated classes are references to the same class. CLI/HTTP are module boundaries, not invented Python classes. The complete editable relationship model and updated use-case diagram are in docs/architecture.md.', story)

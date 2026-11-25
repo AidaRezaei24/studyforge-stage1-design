@@ -33,4 +33,4 @@ repository URL through the course system. The audit prepared November 15 and upd
 - Twelve runtime screenshots and explicit original requirements are included in the report.
 - Video GUI results and successful CLI Q&A/progress output are observed; see professor-review.md for review scope.
 - CLI fixes, GUI limits and safe authentication guidance are covered by 53 passing tests.
-- Current live AI verification is blocked by HTTP 401; replace the local key and rerun. Existing successful evidence describes the earlier run.
+- After private key replacement, current live AI verification passes 23 checks using 11 requests. Initial HTTP 401 evidence and prior November 12 evidence remain separate.

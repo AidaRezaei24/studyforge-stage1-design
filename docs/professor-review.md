@@ -16,7 +16,7 @@ The study-plan segment includes a saved draft around 5:00 and a replacement-prot
 
 ## Screenshot provenance
 
-Captured November 24 using the actual local browser application and the saved November 12 real-provider acceptance workspace. F01-F08, F11 and F12 reopen saved records through the GUI's Saved work controls. F09 and F10 run fresh deterministic calculations over that same saved history. These are not newly generated AI responses and are not test-model fixtures. The associated source/output evidence is `live-verification.json`; review ratings and reference answers are explicitly synthetic test-learner inputs. Historical reminder/plan dates are preserved, not shifted. No current successful AI connection is implied by the screenshots.
+Captured November 24 using the actual local browser application and the successful November 24 real-provider acceptance workspace. F01-F08, F11 and F12 reopen saved records through the GUI's Saved work controls. F09 and F10 run fresh deterministic calculations over that same saved history. The generated outputs come from the current live run, not test-model fixtures. The associated source/output evidence is `nov24-live-verification.json`; review ratings and reference answers are explicitly synthetic test-learner inputs. Plan and reminder dates are the actual future dates approved by the live run, not shifted for screenshots.
 
 ## Fixes and verification
 
@@ -28,8 +28,10 @@ Captured November 24 using the actual local browser application and the saved No
 
 The full suite passes 53 tests. Compilation, JavaScript syntax, submission-file/credential-pattern scan and diff whitespace checks pass. Browser capture reported no JavaScript errors.
 
-A fresh isolated live run on November 24 passed file ingestion and duplicate detection, then stopped at its first AI request with HTTP 401. A separate diagnostic confirmed the safe authentication error. No response tokens were reported; this does not establish billing charges. The original successful live evidence remains unchanged; the failed new run is recorded separately in `nov24-live-check.json`. Update `OPENAI_API_KEY` privately in `.env` or the environment and restart before retrying generation. This credential cannot be repaired from repository code.
+The initial November 24 run passed ingestion and duplicate detection, then stopped at the first AI request with HTTP 401. Its evidence remains in `nov24-live-check.json`. After the owner replaced the credential privately, the fresh isolated retry passed all 23 checks across F01-F12 with 11 actual provider requests (6,868 input and 2,186 output tokens), recorded in `nov24-live-verification.json`. Source comparison confirms the sampled summary and Strategy explanation are supported; the concept graph contains seven source-backed concepts and no invented relationships. Future reminders preserve their IDs on retry, and the focused session completes with three saved tool results. This sample does not establish correctness for arbitrary future inputs. The earlier November 12 evidence is unchanged.
+
+Four real standalone CLI subprocess checks also pass: course listing, file import/duplicate detection, saved summary retrieval and progress. See `nov24-cli-verification.json`; these commands require no GUI server and make no additional model requests. Provider token counts are recorded; actual billed charges require account billing evidence.
 
 ## Remaining owner actions
 
-Replace the rejected API credential locally and rerun the live verification command before claiming current live acceptance. If literal GUI-first ordering is required, add the short supplemental clip described above. Verify final publication and submit the repository URL through the course system. Historical development and billing evidence are outside the three follow-up fixes and have not been rewritten.
+If literal GUI-first ordering is required, add the short supplemental clip described above. Verify final publication and submit the repository URL through the course system. Historical development and billing evidence are outside the three follow-up fixes and have not been rewritten.

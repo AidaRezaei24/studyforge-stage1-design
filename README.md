@@ -193,7 +193,7 @@ signed-out playback and selected frames across all twelve feature segments were 
 final live sample run passed 23 checks across all twelve features using 11 actual provider requests;
 see [live evidence](docs/live-verification.json) and the
 [runtime usage ledger](docs/runtime-usage.json). Do not treat the repository as
-ready for submission until the current authentication issue, measured usage accounting and final
+ready for submission until measured usage accounting and final
 submission steps are complete.
 
 Retrieval is a deterministic local lexical index instead of embeddings; scanned
@@ -207,7 +207,9 @@ limitations are recorded in the report.
 
 The report now includes screenshots for F01-F12 and explicit original requirements.
 The [follow-up review](docs/professor-review.md) records fixes, video observations
-and evidence provenance. All 53 automated tests pass. The latest live attempt
-failed with HTTP 401: update your local `OPENAI_API_KEY` with a valid credential
-and restart before generating new AI output. Prior successful acceptance evidence
-is retained separately from [the failed current check](docs/nov24-live-check.json).
+and evidence provenance. All 53 automated tests pass. After the owner updated the
+local API key, [the current live run](docs/nov24-live-verification.json) passed
+23 checks across all twelve features using 11 actual provider requests.
+[Standalone subprocess checks](docs/nov24-cli-verification.json) also pass.
+The earlier [failed authentication attempt](docs/nov24-live-check.json) is retained
+separately from the successful retry and prior November 12 evidence.
