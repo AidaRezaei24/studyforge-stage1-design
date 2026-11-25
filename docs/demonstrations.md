@@ -1,12 +1,9 @@
 # Recording the Stage 2 demonstrations
 
-**Status: owner supplied the recording and all twelve feature start times.**
+**Status: playback and selected feature frames reviewed November 24, 2026.**
 
 Recording: [StudyForge Stage 2 demonstration](https://youtu.be/vovxVKUw2TE).
-The owner supplied the recording and timestamps on November 15, 2026. Signed-out playback was verified on November 15, 2026; full feature coverage
-has not been independently verified. F11 appears
-before F10 in the supplied recording order. The guide below remains available
-for reproducing the demonstrations.
+The owner supplied the recording and timestamps November 15. Current signed-out playback shows GUI feature results and successful terminal Q&A/progress output. [Review details](professor-review.md) distinguish actual frame observations, transcript review, approval safeguards and the GUI-first ordering caveat. F11 reminders precedes F10 progress in the recording. No claim of every-feature CLI demonstration is made.
 
 | Feature | Start | Direct video link |
 | --- | --- | --- |

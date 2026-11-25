@@ -1,0 +1,90 @@
+{
+  "status": "FAIL",
+  "started_at": "2026-11-25T04:16:18.811379+00:00",
+  "learner_data": "Synthetic acceptance inputs: two forgot card ratings and reference-answer quiz submissions. No real learner performance is claimed.",
+  "scope": "Real model execution through application services; does not record GUI/CLI videos or establish semantic correctness of every model statement.",
+  "manual_fixture_used": false,
+  "steps": [
+    {
+      "feature": "F01",
+      "check": "Import safe sample and verify traceable chunks",
+      "status": "PASS",
+      "result": {
+        "imported": [
+          {
+            "id": "b340cb15028046b5841c0f2ef3541ad4",
+            "title": "design-patterns",
+            "filename": "design-patterns.md",
+            "sha256": "dd18af94fbc13da5ab85d91d6ac47552829525b027f977caff5554b305a32da7",
+            "chunks": [
+              {
+                "id": "b340cb15028046b5841c0f2ef3541ad4:1",
+                "text": "# Software Design: Design Patterns\n\n## Strategy\nThe Strategy pattern defines a family of algorithms behind a common interface.\nA context delegates an operation to a selected strategy. A strategy can change at\nruntime without changing the context. For example, a learning service can select\na flashcard generation strategy or a quiz generation strategy.\n\n## Observer\nThe Observer pattern lets a subject notify subscribed observers when an event\noccurs. Publishers do not need to know the concrete observers. For example, a\ncompleted quiz can publish an AttemptRecorded event. A progress projector observes\nthat event and updates mastery statistics.\n\n## Adapter\nThe Adapter pattern translates an existing interface into the interface a client\nexpects. An OpenAI adapter converts a provider-neutral generation request into an\nHTTP request and converts the response back into a domain result.\n\n## State\nThe State pattern represents state-specific behavior in separate objects. A\ncontext delegates legal transitions to its current state. A paused study session\ncan resume, while a completed session cannot resume. This prevents inconsistent\ncombinations of boolean flags.\n\n## Command\nThe Command pattern e",
+                "location": "design-patterns.md, text, characters 1-1200",
+                "material_id": "b340cb15028046b5841c0f2ef3541ad4"
+              },
+              {
+                "id": "b340cb15028046b5841c0f2ef3541ad4:2",
+                "text": "ransitions to its current state. A paused study session\ncan resume, while a completed session cannot resume. This prevents inconsistent\ncombinations of boolean flags.\n\n## Command\nThe Command pattern encapsulates a request as an object. An invoker executes the\ncommand, which delegates to a receiver. Both a graphical interface and a command\nline can submit the same command without duplicating the operation's rules.\n\n## Facade and MVC\nA Facade provides a simple entry point to a group of collaborating subsystems.\nModel View Controller separates presentation, request coordination, and application\ndata. Together they keep a graphical interface and a command line consistent.",
+                "location": "design-patterns.md, text, characters 1001-1676",
+                "material_id": "b340cb15028046b5841c0f2ef3541ad4"
+              }
+            ],
+            "tags": [
+              "design",
+              "patterns"
+            ],
+            "course": "cd8138fcfc3e46319daa8b543cfb5266",
+            "created_at": "2026-11-25T04:16:18.836642+00:00"
+          }
+        ],
+        "duplicates": [],
+        "errors": []
+      }
+    },
+    {
+      "feature": "F01",
+      "check": "Duplicate import is detected",
+      "status": "PASS",
+      "result": {
+        "imported": [],
+        "duplicates": [
+          {
+            "path": "/Users/aidarezaei/Documents/ChatGPT/studyforge-stage1-design/samples/design-patterns.md",
+            "id": "b340cb15028046b5841c0f2ef3541ad4"
+          }
+        ],
+        "errors": []
+      }
+    },
+    {
+      "feature": "F02",
+      "check": "Real grounded summary and citation resolution",
+      "status": "FAIL",
+      "error_type": "ModelError",
+      "message": "Check failed; inspect application state and the named assertion locally."
+    }
+  ],
+  "model": "gpt-4.1-mini-2025-04-14",
+  "error_type": "ModelError",
+  "failure": "Stopped at first failing check. Provider response bodies and secrets are omitted.",
+  "completed_at": "2026-11-25T04:16:19.176186+00:00",
+  "requests": [
+    {
+      "task": "summary",
+      "evidence_chunks": 2,
+      "status": "FAIL",
+      "error_type": "ModelError",
+      "seconds": 0.336,
+      "reported_tokens": {
+        "input_tokens": 0,
+        "output_tokens": 0
+      }
+    }
+  ],
+  "total_reported_tokens": {
+    "input_tokens": 0,
+    "output_tokens": 0
+  },
+  "money_cost": "Not calculated; consult account billing for measured charges."
+}

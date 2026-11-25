@@ -83,6 +83,8 @@ class OpenAIModelAdapter:
                 raise InvalidModelOutput('The model returned an invalid JSON object.')
             return parsed
         except urllib.error.HTTPError as exc:
+            if exc.code == 401:
+                raise ModelError('OpenAI API authentication failed (HTTP 401). Update OPENAI_API_KEY with a valid key in your local .env file or environment, then restart the application.') from None
             credit_exhausted = False
             if exc.code == 429 and exc.fp is not None:
                 try:

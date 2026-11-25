@@ -121,6 +121,32 @@ class WorkflowTests(unittest.TestCase):
     def test_cli_full_feature_journey_and_reopen(self):
         self.assert_reopened(self.journey(self.cli))
 
+    def test_cli_short_daily_plan_uses_requested_session_length(self):
+        course = self.cli(["course", "create", "Short daily sessions"])["id"]
+        self.cli(["material", "import", str(self.material), "--course", course])
+        plan = self.cli(["plan", "--course", course, "--goal", "Observer and Strategy",
+                         "--deadline", (date.today() + timedelta(days=2)).isoformat(),
+                         "--minutes-per-day", "10", "--session-minutes", "5"])
+        self.assertEqual(10, plan["minutes_per_day"])
+        self.assertEqual([5, 5], [session["minutes"] for session in plan["sessions"]])
+        self.assertEqual([0, 1], [session["daily_slot"] for session in plan["sessions"]])
+
+    def test_cli_import_errors_fail_without_discarding_successful_files(self):
+        course = self.cli(["course", "create", "Import status"])["id"]
+        missing = str(Path(self.temp.name) / "missing.md")
+        for paths in ([missing], [str(self.material), missing]):
+            with self.subTest(paths=paths):
+                output = io.StringIO()
+                with contextlib.redirect_stdout(output):
+                    code = main(["material", "import", *paths, "--course", course], self.controller)
+                result = json.loads(output.getvalue())
+                self.assertEqual(1, code)
+                self.assertEqual(missing, result["errors"][0]["path"])
+                self.assertEqual(int(str(self.material) in paths), len(result["imported"]))
+        self.assertEqual(1, len(self.repo.list("material", course)))
+        duplicate = self.cli(["material", "import", str(self.material), "--course", course])
+        self.assertEqual(1, len(duplicate["duplicates"]))
+
     def test_http_full_feature_journey_and_reopen(self):
         server = HTTPServer(("127.0.0.1", 0), make_handler(self.controller, "workflow-token"))
         thread = threading.Thread(target=server.serve_forever, daemon=True)
