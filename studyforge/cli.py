@@ -52,6 +52,7 @@ def parser() -> argparse.ArgumentParser:
             cmd.add_argument("--deadline", required=True)
             cmd.add_argument("--start-date", help="First study date (ISO YYYY-MM-DD). Defaults to tomorrow, or today for same-day deadlines.")
             cmd.add_argument("--minutes-per-day", type=int, default=30)
+            cmd.add_argument("--session-minutes", type=int, default=25, help="Minutes per study session (5 through daily availability; default: 25)")
             cmd.add_argument("--approve", action="store_true")
             cmd.add_argument("--replace", action="store_true")
         elif name == "adapt":
@@ -119,6 +120,8 @@ def main(argv=None, controller=None) -> int:
         action, params = request_from_args(args)
         result = (controller or create_controller(args.db)).handle(action, **params)
         print(json.dumps(result, ensure_ascii=False, indent=2))
+        if action == "import_materials" and result.get("errors"):
+            return 1
         return 0
     except (ValueError, KeyError, OSError, RuntimeError) as error:
         print(json.dumps({"error": str(error)}, ensure_ascii=False), file=sys.stderr)

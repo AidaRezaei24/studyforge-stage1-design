@@ -61,5 +61,14 @@
     "filters": "All API sources; all models; all users",
     "verification": "Totals and displayed date range read from supplied screenshot; not independently reconciled against a billing export",
     "limits": "Spend displayed rounded to two decimal places. Input/output split not shown. Dashboard timezone not shown. Aggregate includes usage within selected filters and is not independently attributed exclusively to StudyForge."
+  },
+  "november_24_follow_up": {
+    "scope": "Additional isolated professor follow-up validation, separate from the original totals above; excludes Codex and video-review tooling.",
+    "requests": 11,
+    "input_tokens": 6868,
+    "output_tokens": 2186,
+    "evidence": "docs/nov24-live-verification.json",
+    "initial_failed_attempt": "docs/nov24-live-check.json",
+    "actual_billed_cost": "Not measured; consult account billing."
   }
 }

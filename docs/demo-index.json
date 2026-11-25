@@ -1,163 +1,175 @@
 {
-  "status": "owner_supplied_recording_and_timestamps",
+  "status": "playback_and_feature_frames_reviewed",
   "recording_url": "https://youtu.be/vovxVKUw2TE",
-  "description": "Owner supplied recording and feature start times on 2026-11-15. Signed-out playback verified on 2026-11-15; complete feature coverage remains pending independent review.",
+  "description": "Owner timestamps retained. Signed-out playback and selected frames across all twelve feature segments reviewed November 24, 2026; GUI results and terminal Q&A/progress outputs observed. Transcript reviewed separately. See professor-review.md for scope, ordering caveat and observed safeguards.",
   "features": [
     {
       "feature_id": "F01",
       "name": "Material Ingestion and Indexing",
       "suggested_segment": 1,
-      "status": "owner_reported_recorded",
+      "status": "feature_frames_reviewed",
       "video_url": "https://youtu.be/vovxVKUw2TE?t=32",
       "timestamp": "0:32",
       "interfaces_to_show": [
         "GUI",
         "CLI"
       ],
-      "guide_section": "Segment 1 \u2014 F01 Material Ingestion and Indexing"
+      "guide_section": "Segment 1 \u2014 F01 Material Ingestion and Indexing",
+      "screenshot": "docs/screenshots/F01-gui.png"
     },
     {
       "feature_id": "F02",
       "name": "Grounded Material Summaries",
       "suggested_segment": 2,
-      "status": "owner_reported_recorded",
+      "status": "feature_frames_reviewed",
       "video_url": "https://youtu.be/vovxVKUw2TE?t=90",
       "timestamp": "1:30",
       "interfaces_to_show": [
         "GUI",
         "CLI"
       ],
-      "guide_section": "Segment 2 \u2014 F02 Grounded Material Summaries"
+      "guide_section": "Segment 2 \u2014 F02 Grounded Material Summaries",
+      "screenshot": "docs/screenshots/F02-gui.png"
     },
     {
       "feature_id": "F03",
       "name": "Concept Extraction and Knowledge Map",
       "suggested_segment": 3,
-      "status": "owner_reported_recorded",
+      "status": "feature_frames_reviewed",
       "video_url": "https://youtu.be/vovxVKUw2TE?t=130",
       "timestamp": "2:10",
       "interfaces_to_show": [
         "GUI",
         "CLI"
       ],
-      "guide_section": "Segment 3 \u2014 F03 Concept Extraction and Knowledge Map"
+      "guide_section": "Segment 3 \u2014 F03 Concept Extraction and Knowledge Map",
+      "screenshot": "docs/screenshots/F03-gui.png"
     },
     {
       "feature_id": "F04",
       "name": "Grounded Question Answering",
       "suggested_segment": 4,
-      "status": "owner_reported_recorded",
+      "status": "feature_frames_reviewed",
       "video_url": "https://youtu.be/vovxVKUw2TE?t=176",
       "timestamp": "2:56",
       "interfaces_to_show": [
         "GUI",
         "CLI"
       ],
-      "guide_section": "Segment 4 \u2014 F04 Grounded Question Answering"
+      "guide_section": "Segment 4 \u2014 F04 Grounded Question Answering",
+      "screenshot": "docs/screenshots/F04-gui.png"
     },
     {
       "feature_id": "F05",
       "name": "Personalized Study Plan",
       "suggested_segment": 5,
-      "status": "owner_reported_recorded",
+      "status": "feature_frames_reviewed",
       "video_url": "https://youtu.be/vovxVKUw2TE?t=260",
       "timestamp": "4:20",
       "interfaces_to_show": [
         "GUI",
         "CLI"
       ],
-      "guide_section": "Segment 5 \u2014 F05 Personalized Study Plan"
+      "guide_section": "Segment 5 \u2014 F05 Personalized Study Plan",
+      "screenshot": "docs/screenshots/F05-gui.png"
     },
     {
       "feature_id": "F06",
       "name": "Flashcard Generation and Review",
       "suggested_segment": 6,
-      "status": "owner_reported_recorded",
+      "status": "feature_frames_reviewed",
       "video_url": "https://youtu.be/vovxVKUw2TE?t=335",
       "timestamp": "5:35",
       "interfaces_to_show": [
         "GUI",
         "CLI"
       ],
-      "guide_section": "Segment 6 \u2014 F06 Flashcard Generation and Review"
+      "guide_section": "Segment 6 \u2014 F06 Flashcard Generation and Review",
+      "screenshot": "docs/screenshots/F06-gui.png"
     },
     {
       "feature_id": "F07",
       "name": "Quiz Generation",
       "suggested_segment": 7,
-      "status": "owner_reported_recorded",
+      "status": "feature_frames_reviewed",
       "video_url": "https://youtu.be/vovxVKUw2TE?t=420",
       "timestamp": "7:00",
       "interfaces_to_show": [
         "GUI",
         "CLI"
       ],
-      "guide_section": "Segment 7 \u2014 F07 Quiz Generation"
+      "guide_section": "Segment 7 \u2014 F07 Quiz Generation",
+      "screenshot": "docs/screenshots/F07-gui.png"
     },
     {
       "feature_id": "F08",
       "name": "Automatic Grading and Explanations",
       "suggested_segment": 8,
-      "status": "owner_reported_recorded",
+      "status": "feature_frames_reviewed",
       "video_url": "https://youtu.be/vovxVKUw2TE?t=500",
       "timestamp": "8:20",
       "interfaces_to_show": [
         "GUI",
         "CLI"
       ],
-      "guide_section": "Segment 8 \u2014 F08 Automatic Grading and Explanations"
+      "guide_section": "Segment 8 \u2014 F08 Automatic Grading and Explanations",
+      "screenshot": "docs/screenshots/F08-gui.png"
     },
     {
       "feature_id": "F09",
       "name": "Weak-Topic Diagnosis and Adaptive Practice",
       "suggested_segment": 9,
-      "status": "owner_reported_recorded",
+      "status": "feature_frames_reviewed",
       "video_url": "https://youtu.be/vovxVKUw2TE?t=587",
       "timestamp": "9:47",
       "interfaces_to_show": [
         "GUI",
         "CLI"
       ],
-      "guide_section": "Segment 9 \u2014 F09 Weak-Topic Diagnosis and Adaptive Practice"
+      "guide_section": "Segment 9 \u2014 F09 Weak-Topic Diagnosis and Adaptive Practice",
+      "screenshot": "docs/screenshots/F09-gui.png"
     },
     {
       "feature_id": "F10",
       "name": "Progress and Mastery Analytics",
       "suggested_segment": 10,
-      "status": "owner_reported_recorded",
+      "status": "feature_frames_reviewed",
       "video_url": "https://youtu.be/vovxVKUw2TE?t=690",
       "timestamp": "11:30",
       "interfaces_to_show": [
         "GUI",
         "CLI"
       ],
-      "guide_section": "Segment 10 \u2014 F10 Progress and Mastery Analytics"
+      "guide_section": "Segment 10 \u2014 F10 Progress and Mastery Analytics",
+      "screenshot": "docs/screenshots/F10-gui.png"
     },
     {
       "feature_id": "F11",
       "name": "Study Scheduling and Reminders",
       "suggested_segment": 11,
-      "status": "owner_reported_recorded",
+      "status": "feature_frames_reviewed",
       "video_url": "https://youtu.be/vovxVKUw2TE?t=640",
       "timestamp": "10:40",
       "interfaces_to_show": [
         "GUI",
         "CLI"
       ],
-      "guide_section": "Segment 11 \u2014 F11 Study Scheduling and Reminders"
+      "guide_section": "Segment 11 \u2014 F11 Study Scheduling and Reminders",
+      "screenshot": "docs/screenshots/F11-gui.png"
     },
     {
       "feature_id": "F12",
       "name": "Orchestrated Focused Study Session",
       "suggested_segment": 12,
-      "status": "owner_reported_recorded",
+      "status": "feature_frames_reviewed",
       "video_url": "https://youtu.be/vovxVKUw2TE?t=730",
       "timestamp": "12:10",
       "interfaces_to_show": [
         "GUI",
         "CLI"
       ],
-      "guide_section": "Segment 12 \u2014 F12 Orchestrated Focused Study Session"
+      "guide_section": "Segment 12 \u2014 F12 Orchestrated Focused Study Session",
+      "screenshot": "docs/screenshots/F12-gui.png"
     }
   ],
   "playback_verification": {
@@ -165,12 +177,30 @@
     "method": "YouTube page opened and video played in signed-out browser session",
     "verified_on": "2026-11-15",
     "duration_displayed": "13:06",
-    "limits": "Playback access verified; complete narration, CLI coverage, per-feature output and absence of secrets throughout the full recording were not verified."
+    "limits": "Playback access verified; complete narration, CLI coverage, per-feature output and absence of secrets throughout the full recording were not verified.",
+    "historical_note": "November 15 observations retained as historical; superseded for current coverage by the November 24 review field and professor-review.md."
   },
   "owner_coverage_confirmation": {
     "reported_on": "2026-11-15",
     "gui_and_cli_shown": true,
     "source": "Owner confirmation",
     "verification": "Not independently reviewed for complete feature coverage"
+  },
+  "review": {
+    "date": "2026-11-24",
+    "method": "signed-out playback, selected feature frames, separate transcript review",
+    "cli_task_results": [
+      "3:40 Q&A",
+      "11:35-11:50 progress"
+    ],
+    "gui_progress_result": "12:03",
+    "identical_task_gui_then_cli_order": "Provided by the clearly labeled reordered supplement; original progress appears CLI then GUI.",
+    "details": "docs/professor-review.md"
+  },
+  "supplement": {
+    "video_url": "https://github.com/AidaRezaei24/studyforge-stage1-design/raw/refs/heads/main/docs/video/gui-then-cli.mp4",
+    "repository_path": "docs/video/gui-then-cli.mp4",
+    "description": "Silent 29.3-second edited original excerpts: same course progress task, GUI first then real terminal CLI. Commands/results unaltered.",
+    "edit_manifest": "docs/video/edit-manifest.json"
   }
 }

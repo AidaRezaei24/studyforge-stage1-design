@@ -314,7 +314,6 @@ class AdapterTests(unittest.TestCase):
     def test_other_http_errors_and_unreadable_bodies_use_safe_fallback(self):
         cases = [(429, None), (429, b'not-json-private-message'),
                  (429, b'{"error":null}'), (429, b'{"error":{"code":"rate_limit_exceeded"}}'),
-                 (401, b'{"error":{"type":"insufficient_quota"}}'),
                  (429, b'{"error":{"type":"' + b'x' * 16_384 + b'"}}')]
         for status, body in cases:
             with self.subTest(status=status, body_present=body is not None):
@@ -327,6 +326,27 @@ class AdapterTests(unittest.TestCase):
                                  str(raised.exception))
                 self.assertNotIn('test-private-key', str(raised.exception))
                 self.assertNotIn('provider-private-message', str(raised.exception))
+
+    def test_unauthorized_key_has_actionable_error_without_reading_provider_body(self):
+        class UnreadableBody(io.BytesIO):
+            def read(self, *args):
+                raise AssertionError('Authentication error must not inspect provider details.')
+
+        for body in [None, UnreadableBody(b'{"error":{"message":"test-private-key"}}')]:
+            with self.subTest(body_present=body is not None):
+                calls = []
+                def opener(*args, **kwargs):
+                    calls.append(True)
+                    raise urllib.error.HTTPError('url', 401, 'provider-private-message', None, body)
+                adapter = OpenAIModelAdapter(api_key='test-private-key', opener=opener)
+                with self.assertRaises(ModelError) as raised:
+                    adapter.generate('answer', [], {})
+                self.assertEqual('OpenAI API authentication failed (HTTP 401). Update OPENAI_API_KEY with a valid key in your local .env file or environment, then restart the application.',
+                                 str(raised.exception))
+                self.assertNotIn('test-private-key', str(raised.exception))
+                self.assertNotIn('provider-private-message', str(raised.exception))
+                self.assertEqual(1, len(calls))
+                self.assertEqual({'input_tokens': 0, 'output_tokens': 0}, adapter.usage)
 
     def test_usage_includes_invalid_or_incomplete_billed_responses(self):
         cases = [({'status': 'incomplete', 'output': []}, ModelError),

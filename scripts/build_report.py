@@ -8,7 +8,7 @@ import json
 from pathlib import Path
 import re
 import subprocess
-import unittest
+import sys
 
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import A4
@@ -147,7 +147,7 @@ def footer(c, doc):
     c.setFont('Helvetica', 8)
     c.setFillColor(ACCENT)
     c.drawString(55, h - 31, 'STUDYFORGE  /  STAGE 2 IMPLEMENTATION')
-    c.drawString(55, 31, 'EECS3311  |  Fall 2026  |  Video timestamps supplied')
+    c.drawString(55, 31, 'EECS3311  |  Updated November 24, 2026  |  Runtime evidence included')
     c.drawRightString(w - 55, 31, str(doc.page))
 
 
@@ -158,7 +158,10 @@ def build():
     live = json.loads((ROOT / 'docs/live-verification.json').read_text())
     usage = json.loads((ROOT / 'docs/runtime-usage.json').read_text())
     demos = json.loads((ROOT / 'docs/demo-index.json').read_text())
-    test_count = unittest.defaultTestLoader.discover(str(ROOT / 'tests')).countTestCases()
+    verification = subprocess.run(
+        [sys.executable, '-m', 'unittest', 'discover', '-s', 'tests', '-v'],
+        cwd=ROOT, capture_output=True, text=True, check=True)
+    test_count = int(re.search(r'Ran (\d+) tests?', verification.stderr).group(1))
     log = subprocess.run(['git', 'log', 'ee6d35a..HEAD', '--format=%H%x09%aI%x09%s'], cwd=ROOT,
                          capture_output=True, text=True, check=True).stdout
     commit_paragraphs = []
@@ -193,8 +196,8 @@ calendar conflicts, review intervals and learning metrics.
 Verification status: TEST_COUNT automated tests passed, including complete CLI and local
 HTTP API journeys through all twelve features with real SQLite persistence and
 reopening. Only the remote model is replaced by a test double in those journeys.
-The GUI was inspected for course creation, real material import, clear errors,
-and display of actual generated output with its source passages. A separate final
+The November 24 follow-up adds runtime screenshots for F01-F12 and current live verification status. The GUI was inspected for course creation, real material import, clear errors,
+and display of actual generated output with its source passages. A separate saved November 12
 live run passed 23 checks across all twelve features using 11 actual provider
 requests. Source comparison confirmed the selected generated claims and citations.
 Live review exposed and corrected an unsupported graph relationship and past-time
@@ -202,11 +205,10 @@ reminders before that final run. Acceptance covers the bundled sample, not every
 possible future input. The key remains private in ignored local configuration.
 
 Submission is not complete. The owner will review the application and generated
-output, verify access and coverage of the supplied timestamped demonstration
-recording, supply measured AI usage/cost accounting and submit the course
+output, supply measured AI usage/cost accounting and submit the course
 repository URL. The development log lists weekly activity; course compliance
 remains subject to instructor review.
-The original November 10 deadline has passed. No grade or on-time status is claimed.
+The original assignment deadline was November 10. The professor's missing-item follow-up specifies November 24. No grade or on-time status is claimed.
 
 Scope changes are explicit: lexical retrieval replaces embeddings; browser GUI
 replaces a native window; local ICS export replaces remote calendar writes; basic
@@ -225,6 +227,27 @@ Sections 2-4 account for every original feature and affected class/pattern.
         items = []
         markdown(part, items)
         story.append(KeepTogether(items))
+    for entry in demos['features']:
+        story.append(PageBreak())
+        feature_id = entry['feature_id']
+        markdown('## ' + feature_id + ' - Runtime screenshot\n' + entry['name'], story)
+        path = ROOT / 'docs/screenshots' / (feature_id + '-gui.png')
+        with PILImage.open(path) as screenshot:
+            width, height = screenshot.size
+        scale = min(483 / width, 515 / height)
+        story.append(Image(str(path), width=width * scale, height=height * scale))
+        story.append(Spacer(1, 12))
+        markdown('Captured November 24, 2026 from the running local GUI. '
+                 + ('A new deterministic recommendation/progress calculation uses the saved sample history. '
+                    if feature_id in {'F09', 'F10'} else
+                    'Saved work is reopened from the successful November 24 provider acceptance run. ')
+                 + 'Review ratings and reference answers are synthetic acceptance inputs. '
+                 + 'The saved artifacts preserve the actual live-run inputs, outputs and future plan dates. '
+                 + 'The original requirement, implementation and deviations are in the matching feature entry above. '
+                 + 'Full-resolution image: docs/screenshots/' + feature_id + '-gui.png.', story)
+    story.append(PageBreak())
+    markdown('## November 24 follow-up verification\n' +
+             '\n'.join((ROOT / 'docs/professor-review.md').read_text().splitlines()[1:]), story)
     story.append(PageBreak())
     markdown('# 3 Implemented design patterns\n' + '\n'.join(section(architecture, 'Seven implemented patterns').splitlines()[1:]), story)
     markdown('## Updated UML class diagrams\nFigures split the same implementation into four readable views. Solid arrows show dependencies; open triangle arrowheads show inheritance; dashed open triangles show protocol implementation. Repeated classes are references to the same class. CLI/HTTP are module boundaries, not invented Python classes. The complete editable relationship model and updated use-case diagram are in docs/architecture.md.', story)
@@ -377,11 +400,11 @@ Sections 2-4 account for every original feature and affected class/pattern.
     markdown('## Current implementation commits\nImplementation and documentation commits are listed below. This report includes commits through the checkout used to generate it.\n' + '\n\n'.join(commit_paragraphs), story)
     markdown('## Reproduction and remaining gates\nRun python -m unittest discover -s tests -v and make check after installing with python -m pip install -e . . The suite passed ' + str(test_count) + ' tests at the final verification recorded for this report. Python compilation, JavaScript syntax, credential scanning, package installation and PDF visual checks are separate release checks. No Stage 3 KUMA validation is claimed.\n\nA production launch without credentials must show a configuration error; test fixtures are never accepted as live LLM evidence. Record actual live results before claiming final feature acceptance. Confirm all source/report files are pushed to the public repository and verify video access signed out before course submission.', story)
     story.append(PageBreak())
-    markdown('# 7 Demonstration index\nThe owner supplied a combined YouTube recording and all twelve feature start times on November 15, 2026. The links below use those supplied times. Signed-out playback was verified on November 15, 2026; full feature coverage has not been independently verified. The owner confirms the recording shows both GUI and CLI. F11 starts before F10 in the supplied recording order. docs/demonstrations.md retains the reproduction guide; docs/demo-index.json is the source for this index.', story)
+    markdown('# 7 Demonstration index\nThe owner supplied a combined YouTube recording and all twelve feature start times on November 15, 2026. The links below use those supplied times. Signed-out playback and selected frames across all twelve feature segments were reviewed November 24, 2026. GUI results and terminal Q&A/progress output were observed. See the follow-up verification section for scope and the edited GUI-first supplement. [Watch the same progress task in GUI then CLI](https://github.com/AidaRezaei24/studyforge-stage1-design/raw/refs/heads/main/docs/video/gui-then-cli.mp4). The silent supplement reorders original excerpts without altering commands or results. F11 starts before F10 in the supplied recording order. docs/demonstrations.md retains the reproduction guide; docs/demo-index.json is the source for this index.', story)
     for entry in demos['features']:
         feature = re.search(r'^## (' + entry['feature_id'] + r' .+)$', feature_map, re.M).group(1)
         markdown('### ' + feature + '\nOwner-reported recording. Start: ' + entry['timestamp']
-                 + '. [Watch this feature](' + entry['video_url'] + '). Signed-out playback verified; full coverage review remains.', story)
+                 + '. [Watch this feature](' + entry['video_url'] + '). Selected feature frames reviewed November 24; see review scope above.', story)
     markdown('## References and final ownership\nStage 1 source: StudyForge_Stage1_Project_Design_Report.pdf (40 pages, unchanged). Stage 2 requirements: Project-Stage2-Instruction.pdf (5 pages, supplied locally; not republished without need).\n\nOfficial API contract: [Structured model outputs](https://developers.openai.com/api/docs/guides/structured-outputs). JSON mode guarantees JSON shape only; application validators provide feature-level checks.\n\nThe student must review and understand the code, verify model output and billing, verify the supplied recordings and submit the repository through the course system. This report describes verified source and explicit limitations rather than claiming every submission gate has passed.', story)
     doc = SimpleDocTemplate(str(ROOT / 'stage2-report.pdf'), pagesize=A4, leftMargin=55, rightMargin=55,
                             topMargin=60, bottomMargin=55, title='StudyForge Stage 2 Implementation Report',

@@ -55,6 +55,29 @@ Run commands from the project directory. Replace `COURSE`, `MATERIAL`, `PLAN`,
 The optional global `--db PATH` belongs **before** the subcommand. GUI and CLI
 use the same default database, `.studyforge/studyforge.sqlite3`.
 
+The CLI runs directly in the terminal; it does not require the GUI server.
+It accepts document filenames and task text as command arguments, and prints
+JSON to standard output. After activating the environment and configuring your
+API key, this complete example imports a file and answers a question about it
+(macOS/Linux shell):
+
+```sh
+COURSE=$(python -m studyforge course create "CLI demonstration" | python -c 'import json,sys; print(json.load(sys.stdin)["id"])')
+python -m studyforge material import samples/design-patterns.md --course "$COURSE"
+python -m studyforge ask --course "$COURSE" "How does Strategy differ from Observer?"
+```
+
+Use `python -m studyforge SUBCOMMAND --help` for the supported options, for
+example `python -m studyforge plan --help` or
+`python -m studyforge material import --help`. Installation also provides the
+equivalent `studyforge` command. Commands exit with status 0 on success and
+nonzero on failure. A material batch with any failed files exits with status 1;
+its JSON still identifies successful imports, duplicates, and per-file errors.
+Importing an already indexed file succeeds without adding a duplicate.
+
+The following reference covers all twelve workflows; replace the example IDs
+as described above:
+
 ```sh
 python -m studyforge --help
 python -m studyforge course create "EECS3311"
@@ -94,6 +117,12 @@ deadline is today. The approved plan stores these dates. Reminder preview and
 confirmation reject a new event whose start time is already past; choose a later
 time or create and approve a plan with a future start date. Scheduling never
 silently shifts an approved plan's dates.
+
+Plans default to 30 available minutes per day and 25 minutes per session.
+Set `--minutes-per-day` and `--session-minutes` together for another schedule;
+for example, `--minutes-per-day 10 --session-minutes 5` allows two five-minute
+sessions per day. Session length must be at least five minutes and fit within
+the daily availability.
 
 Use a future deadline appropriate to the day you run the application. A quiz
 submission must include **every** item ID, with no extra IDs. For multiple-choice
@@ -160,11 +189,11 @@ See the [final requirement audit](docs/final-audit.md) for the latest checks and
 Development took place on October 26, October 28 and November 6, 2026.
 The [project timeline](docs/project-timeline.md) lists development, validation,
 recording verification and usage reporting events. The owner supplied a [demonstration recording with all twelve feature timestamps](docs/demonstrations.md);
-signed-out playback has been verified; full feature coverage still requires review. The
+signed-out playback and selected frames across all twelve feature segments were reviewed November 24; GUI results and terminal Q&A/progress output were observed. See [the follow-up review](docs/professor-review.md) for scope and ordering details. The
 final live sample run passed 23 checks across all twelve features using 11 actual provider requests;
 see [live evidence](docs/live-verification.json) and the
 [runtime usage ledger](docs/runtime-usage.json). Do not treat the repository as
-ready for submission until recording verification, measured usage accounting and final
+ready for submission until measured usage accounting and final
 submission steps are complete.
 
 Retrieval is a deterministic local lexical index instead of embeddings; scanned
@@ -173,3 +202,16 @@ the truth of every generated claim. The calendar adapter exports local calendar
 data; it does not connect to Google Calendar or send notifications by itself.
 The implementation simplifies some Stage 1 options; all changes and remaining
 limitations are recorded in the report.
+
+## November 24 professor follow-up
+
+The report now includes screenshots for F01-F12 and explicit original requirements.
+The [follow-up review](docs/professor-review.md) records fixes, video observations
+and evidence provenance. A [29-second GUI-then-CLI supplement](docs/video/gui-then-cli.mp4)
+shows the same progress task in the professor's requested order using clearly labeled
+excerpts from your original recording. All 53 automated tests pass. After the owner updated the
+local API key, [the current live run](docs/nov24-live-verification.json) passed
+23 checks across all twelve features using 11 actual provider requests.
+[Standalone subprocess checks](docs/nov24-cli-verification.json) also pass.
+The earlier [failed authentication attempt](docs/nov24-live-check.json) is retained
+separately from the successful retry and prior November 12 evidence.
