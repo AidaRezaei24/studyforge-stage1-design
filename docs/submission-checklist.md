@@ -15,16 +15,14 @@ This checklist distinguishes implemented source from evidence still required.
 | Stage 2 report PDF | `stage2-report.pdf`, rebuildable with `scripts/build_report.py`, 7 required sections | Prepared and visually checked; evidence gaps explicit |
 | Feature/class/pattern/change mapping | `feature-map.md`, `architecture.md`, report | All F01-F12 accounted for |
 | Updated diagrams | Class/use-case views and 9 sequence diagrams cover original 11 interaction shapes | Prepared |
-| AI collaboration log and total costs | Collaboration log; runtime token ledger and explicit price estimate | Dashboard screenshot: 52,645 tokens, 59 requests, USD 0.04 displayed spend, Oct 26-Nov 16; Codex token/cost totals still unavailable |
+| AI collaboration log and total costs | ai-usage-accounting.md; 127,032,805 scoped Codex tokens; 29,131 API validation tokens; subscription access plus authorized API estimate | Recorded snapshot and cost basis supplied; estimates distinguished from invoices |
 | Weekly code commits and links | Development on October 26, October 28 and November 6 includes 5, 6 and 5 production code commits; links in report | Counts recorded; course compliance requires instructor review |
 | Every feature demonstrated on video | Owner supplied [a YouTube recording](https://youtu.be/vovxVKUw2TE); all twelve owner-supplied timestamps are indexed | Selected feature frames and GUI/CLI outputs reviewed November 24; GUI-first supplement included |
 | Video access and timestamps | Direct segment links recorded in `demo-index.json`; video played in a signed-out browser session | Playback verified November 24; selected-frame scope documented |
 | Final course submission | Submit the repository URL through the course system | Owner action pending |
 
 Before final submission, review the full uploaded recording for feature coverage,
-both GUI and CLI, and absence of secrets. Supply measured AI usage totals, including
-recording requests and development-tool usage, then rebuild the report and commit
-those updates. Confirm the final local commit is present on GitHub and submit its
+both GUI and CLI, and absence of secrets. Usage accounting documents the scoped counters, subscription basis and recorded API estimates requested by the owner. Confirm the final local commit is present on GitHub and submit its
 repository URL through the course system. The audit prepared November 15 and updated November 24 is recorded in
 `final-audit.md`; weekly activity evidence remains subject to instructor review.
 
@@ -32,5 +30,5 @@ repository URL through the course system. The audit prepared November 15 and upd
 
 - Twelve runtime screenshots and explicit original requirements are included in the report.
 - Video GUI results and successful CLI Q&A/progress output are observed; see professor-review.md for review scope.
-- CLI fixes, GUI limits and safe authentication guidance are covered by 53 passing tests.
+- CLI fixes, GUI limits and safe authentication guidance are covered by 59 passing tests.
 - After private key replacement, current live AI verification passes 23 checks using 11 requests. Initial HTTP 401 evidence and prior November 12 evidence remain separate.

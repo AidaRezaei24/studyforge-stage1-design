@@ -1,0 +1,129 @@
+{
+  "snapshot_at_utc": "2026-11-25T04:53:42.341637+00:00",
+  "scope": "Explicit root threads and transitive thread_spawn descendants only.",
+  "source": "Codex SQLite per-thread tokens_used counters; each selected thread counted once.",
+  "thread_count": 13,
+  "role_counts": {
+    "root": 3,
+    "delegate": 10
+  },
+  "total_tokens": 127032805,
+  "by_model": {
+    "gpt-6.1-sol": {
+      "thread_count": 13,
+      "total_tokens": 127032805
+    }
+  },
+  "threads": [
+    {
+      "thread_hash": "a8f28bea13f6c2312e51e8f2809571d34ae48228b08cc4c4601105f5b48fd3a5",
+      "parent_thread_hash": null,
+      "role": "root",
+      "model": "gpt-6.1-sol",
+      "total_tokens": 61309063,
+      "created_at_utc": "2026-11-13T00:09:34+00:00"
+    },
+    {
+      "thread_hash": "5fe40f91d6b73a0db77bace281960fe3f91e991338be1d18fb1a22ea79b4e2cb",
+      "parent_thread_hash": "a8f28bea13f6c2312e51e8f2809571d34ae48228b08cc4c4601105f5b48fd3a5",
+      "role": "delegate",
+      "model": "gpt-6.1-sol",
+      "total_tokens": 6003301,
+      "created_at_utc": "2026-11-13T00:11:04+00:00"
+    },
+    {
+      "thread_hash": "55508166dac839342e8a2c806944a65c63806642844e539a8fe3634d01b1dc45",
+      "parent_thread_hash": "a8f28bea13f6c2312e51e8f2809571d34ae48228b08cc4c4601105f5b48fd3a5",
+      "role": "delegate",
+      "model": "gpt-6.1-sol",
+      "total_tokens": 8996052,
+      "created_at_utc": "2026-11-13T00:11:15+00:00"
+    },
+    {
+      "thread_hash": "b2164f8c0c6e730852b1d4a6d3cbb4cdc75ecb1eb0517626a892f46a6c6a3acd",
+      "parent_thread_hash": "a8f28bea13f6c2312e51e8f2809571d34ae48228b08cc4c4601105f5b48fd3a5",
+      "role": "delegate",
+      "model": "gpt-6.1-sol",
+      "total_tokens": 3565618,
+      "created_at_utc": "2026-11-13T00:11:31+00:00"
+    },
+    {
+      "thread_hash": "8d9b798b33b69d4eceaa5644d744b41af98217b4914a934790dbcc2f69e99709",
+      "parent_thread_hash": "a8f28bea13f6c2312e51e8f2809571d34ae48228b08cc4c4601105f5b48fd3a5",
+      "role": "delegate",
+      "model": "gpt-6.1-sol",
+      "total_tokens": 204486,
+      "created_at_utc": "2026-11-16T04:32:29+00:00"
+    },
+    {
+      "thread_hash": "ff2124de981b5d3f4d0b7c591dcd1cbcbb8aeb0e92a3b1a867af1f44721e6a81",
+      "parent_thread_hash": "a8f28bea13f6c2312e51e8f2809571d34ae48228b08cc4c4601105f5b48fd3a5",
+      "role": "delegate",
+      "model": "gpt-6.1-sol",
+      "total_tokens": 1326963,
+      "created_at_utc": "2026-11-16T04:35:24+00:00"
+    },
+    {
+      "thread_hash": "afb59a95aa82a9191f3969902a0e136c21216eb80d941ed426d11224375afb36",
+      "parent_thread_hash": "a8f28bea13f6c2312e51e8f2809571d34ae48228b08cc4c4601105f5b48fd3a5",
+      "role": "delegate",
+      "model": "gpt-6.1-sol",
+      "total_tokens": 771253,
+      "created_at_utc": "2026-11-16T04:35:28+00:00"
+    },
+    {
+      "thread_hash": "04e7ec854fc4587487fd17ac5a53f867a6c8032abbb996e4ca434809d54a995c",
+      "parent_thread_hash": "a8f28bea13f6c2312e51e8f2809571d34ae48228b08cc4c4601105f5b48fd3a5",
+      "role": "delegate",
+      "model": "gpt-6.1-sol",
+      "total_tokens": 1401130,
+      "created_at_utc": "2026-11-16T04:35:33+00:00"
+    },
+    {
+      "thread_hash": "43272b7f7b7667fb7059b499b682abac60b1f6553ce4f7caef0843125bef7745",
+      "parent_thread_hash": null,
+      "role": "root",
+      "model": "gpt-6.1-sol",
+      "total_tokens": 5430790,
+      "created_at_utc": "2026-11-16T05:24:09+00:00"
+    },
+    {
+      "thread_hash": "6d89737c3b140293a3da3dfdddd69c2d040a907bd2ca775963c60958ecfa827c",
+      "parent_thread_hash": "43272b7f7b7667fb7059b499b682abac60b1f6553ce4f7caef0843125bef7745",
+      "role": "delegate",
+      "model": "gpt-6.1-sol",
+      "total_tokens": 2043570,
+      "created_at_utc": "2026-11-16T05:24:50+00:00"
+    },
+    {
+      "thread_hash": "457b3a5fd4629844d1c448ac1ae4f1c49170ea25d490e26f779dd49565e796cf",
+      "parent_thread_hash": null,
+      "role": "root",
+      "model": "gpt-6.1-sol",
+      "total_tokens": 29498216,
+      "created_at_utc": "2026-11-25T04:12:21+00:00"
+    },
+    {
+      "thread_hash": "4a474187c29f5b964839a3be2d1e803455d372a3efcfa18a8aba4ff9e6cd4ade",
+      "parent_thread_hash": "457b3a5fd4629844d1c448ac1ae4f1c49170ea25d490e26f779dd49565e796cf",
+      "role": "delegate",
+      "model": "gpt-6.1-sol",
+      "total_tokens": 2196393,
+      "created_at_utc": "2026-11-25T04:12:34+00:00"
+    },
+    {
+      "thread_hash": "54d63a0f8b05ef3d0fa28a5365063b9617a63ee60e53fc75306c7ab3731e3c63",
+      "parent_thread_hash": "457b3a5fd4629844d1c448ac1ae4f1c49170ea25d490e26f779dd49565e796cf",
+      "role": "delegate",
+      "model": "gpt-6.1-sol",
+      "total_tokens": 4285970,
+      "created_at_utc": "2026-11-25T04:17:50+00:00"
+    }
+  ],
+  "limitations": [
+    "Cumulative counters include repeated cached context; they are not unique document tokens.",
+    "Counters are a snapshot and may increase while a selected thread is active.",
+    "These counters are not invoices. No Codex dollar estimate is derived from API rates.",
+    "No input/output/cache breakdown or billing amount is available from these counters."
+  ]
+}

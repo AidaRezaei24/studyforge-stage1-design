@@ -193,8 +193,9 @@ signed-out playback and selected frames across all twelve feature segments were 
 final live sample run passed 23 checks across all twelve features using 11 actual provider requests;
 see [live evidence](docs/live-verification.json) and the
 [runtime usage ledger](docs/runtime-usage.json). Do not treat the repository as
-ready for submission until measured usage accounting and final
-submission steps are complete.
+ready for submission until the final course submission steps are complete.
+[Usage accounting](docs/ai-usage-accounting.md) now records scoped Codex counters,
+subscription access and the separately estimated API cost.
 
 Retrieval is a deterministic local lexical index instead of embeddings; scanned
 PDFs require OCR before import. Citation validation verifies source identity, not
@@ -209,9 +210,20 @@ The report now includes screenshots for F01-F12 and explicit original requiremen
 The [follow-up review](docs/professor-review.md) records fixes, video observations
 and evidence provenance. A [29-second GUI-then-CLI supplement](docs/video/gui-then-cli.mp4)
 shows the same progress task in the professor's requested order using clearly labeled
-excerpts from your original recording. All 53 automated tests pass. After the owner updated the
+excerpts from your original recording. All 59 automated tests pass. After the owner updated the
 local API key, [the current live run](docs/nov24-live-verification.json) passed
 23 checks across all twelve features using 11 actual provider requests.
 [Standalone subprocess checks](docs/nov24-cli-verification.json) also pass.
 The earlier [failed authentication attempt](docs/nov24-live-check.json) is retained
 separately from the successful retry and prior November 12 evidence.
+
+## AI usage and money costs
+
+The [accounting record](docs/ai-usage-accounting.md) replaces the earlier unavailable
+development totals with a fixed, scoped snapshot: **127,032,805 Codex tokens**
+across 13 project chats/agents. Codex used the existing Plus subscription, with no
+additional Codex credits per owner confirmation. Recorded application validation
+used **29,131 tokens across 35 requests**, estimated at **US$0.0199456**.
+Subscription fees, API estimates and the overlapping historical account-dashboard
+record are reported separately. The owner requested estimates rather than a billing
+export; these numbers are not presented as a combined project invoice.

@@ -205,7 +205,7 @@ reminders before that final run. Acceptance covers the bundled sample, not every
 possible future input. The key remains private in ignored local configuration.
 
 Submission is not complete. The owner will review the application and generated
-output, supply measured AI usage/cost accounting and submit the course
+output and submit the course
 repository URL. The development log lists weekly activity; course compliance
 remains subject to instructor review.
 The original assignment deadline was November 10. The professor's missing-item follow-up specifies November 24. No grade or on-time status is claimed.
@@ -369,6 +369,14 @@ Sections 2-4 account for every original feature and affected class/pattern.
     story.append(PageBreak())
     collaboration = development.split('## Verification evidence and limits')[0]
     markdown('# 5 AI tools and collaboration log\n' + '\n'.join(collaboration.splitlines()[1:]), story)
+    accounting = (ROOT / 'docs/ai-usage-accounting.md').read_text()
+    story.append(PageBreak())
+    markdown('## AI usage and money accounting\n' + section(accounting, 'Recorded totals')
+             + '\nSnapshot: ' + usage['development_tool_totals']['snapshot_at_utc']
+             + '. Counters are added once per explicitly selected project thread and spawned agent; unrelated chats and automatic permission-review agents are excluded. Repeated cached context is included. The raw conversation content and credentials are not published.\n\n'
+             + section(accounting, 'API evidence and arithmetic') + '\n'
+             + section(accounting, 'Pricing sources')
+             + '\nFull method, historical overlapping dashboard scope, snapshot and rebuild command: docs/ai-usage-accounting.md and docs/codex-usage.json.', story)
     story.append(PageBreak())
     markdown('# 6 Development and verification summary\n' + section(development, 'Verification evidence and limits')
              + '\n' + section(development, 'Weekly code activity, Toronto local dates'), story)
@@ -393,7 +401,7 @@ Sections 2-4 account for every original feature and affected class/pattern.
                   + ' total tokens, ' + str(usage['owner_reported_account_usage']['total_requests']) + ' requests and USD '
                   + format(usage['owner_reported_account_usage']['total_spend_usd'], '.2f')
                   + ' displayed total spend for ' + usage['owner_reported_account_usage']['dashboard_date_range']
-                  + ', Default project, all API sources/models/users; reported November 15, 2026; capture time not independently established. This supersedes the earlier USD 0.014 owner report. Spend is displayed rounded; input/output split and dashboard timezone are not shown. The aggregate has not been independently reconciled against a billing export or attributed exclusively to StudyForge. It includes a broader scope than the validation-only ledger above. Codex development-tool token/money totals remain unavailable.\n\n'
+                  + ', Default project, all API sources/models/users; reported November 15, 2026; capture time not independently established. This supersedes the earlier USD 0.014 owner report. Spend is displayed rounded; input/output split and dashboard timezone are not shown. The aggregate has not been independently reconciled against a billing export or attributed exclusively to StudyForge. It includes a broader scope than the validation-only ledger above. Recovered Codex counters and subscription-based access are now documented in Section 5 and docs/ai-usage-accounting.md. The owner authorized recorded API estimates instead of a billing export.\n\n'
                   + 'Live review found an unsupported graph relationship and past-time reminders. Both were corrected and independently reviewed. The final run confirms supported edges, future reminders and stable reminder IDs on retry.')
     markdown(live_text, story)
     story.append(PageBreak())

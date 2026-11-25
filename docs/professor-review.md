@@ -26,7 +26,7 @@ Captured November 24 using the actual local browser application and the successf
 - Added actionable HTTP 401 guidance without exposing credentials or provider response bodies.
 - Corrected report verification: report generation now runs the actual tests and stops if they fail, instead of counting discovery-error placeholders as passing tests.
 
-The full suite passes 53 tests. Compilation, JavaScript syntax, submission-file/credential-pattern scan and diff whitespace checks pass. Browser capture reported no JavaScript errors.
+The full suite passes 59 tests. Compilation, JavaScript syntax, submission-file/credential-pattern scan and diff whitespace checks pass. Browser capture reported no JavaScript errors.
 
 The initial November 24 run passed ingestion and duplicate detection, then stopped at the first AI request with HTTP 401. Its evidence remains in `nov24-live-check.json`. After the owner replaced the credential privately, the fresh isolated retry passed all 23 checks across F01-F12 with 11 actual provider requests (6,868 input and 2,186 output tokens), recorded in `nov24-live-verification.json`. Source comparison confirms the sampled summary and Strategy explanation are supported; the concept graph contains seven source-backed concepts and no invented relationships. Future reminders preserve their IDs on retry, and the focused session completes with three saved tool results. This sample does not establish correctness for arbitrary future inputs. The earlier November 12 evidence is unchanged.
 
@@ -34,4 +34,4 @@ Four real standalone CLI subprocess checks also pass: course listing, file impor
 
 ## Remaining owner actions
 
-Verify final publication and submit the repository URL through the course system. Historical development and billing evidence are outside the three follow-up fixes and have not been rewritten.
+Usage accounting is now documented in ai-usage-accounting.md using recovered Codex counters and owner-authorized API estimates. Verify final publication and submit the repository URL through the course system. Historical development and billing evidence are outside the three follow-up fixes and have not been rewritten.
