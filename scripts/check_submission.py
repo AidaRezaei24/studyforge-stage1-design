@@ -9,7 +9,8 @@ required = ["README.md", ".gitignore", ".env.example", "pyproject.toml",
             "stage2-report.pdf", "docs/demonstrations.md", "docs/architecture.md",
             "docs/live-verification.json", "docs/runtime-usage.json",
             "docs/demo-index.json", "docs/feature-map.md", "docs/professor-review.md",
-            "docs/nov24-live-verification.json", "docs/nov24-cli-verification.json"]
+            "docs/nov24-live-verification.json", "docs/nov24-cli-verification.json",
+            "docs/video/gui-then-cli.mp4", "docs/video/edit-manifest.json"]
 required.extend(f"docs/screenshots/F{number:02d}-gui.png" for number in range(1, 13))
 failures = [f"Missing required file: {name}" for name in required if not (ROOT / name).is_file()]
 result = subprocess.run(["git", "ls-files", "--cached", "--others", "--exclude-standard"],

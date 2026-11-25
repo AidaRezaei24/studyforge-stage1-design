@@ -3,7 +3,9 @@
 **Status: playback and selected feature frames reviewed November 24, 2026.**
 
 Recording: [StudyForge Stage 2 demonstration](https://youtu.be/vovxVKUw2TE).
-The owner supplied the recording and timestamps November 15. Current signed-out playback shows GUI feature results and successful terminal Q&A/progress output. [Review details](professor-review.md) distinguish actual frame observations, transcript review, approval safeguards and the GUI-first ordering caveat. F11 reminders precedes F10 progress in the recording. No claim of every-feature CLI demonstration is made.
+The owner supplied the recording and timestamps November 15. Current signed-out playback shows GUI feature results and successful terminal Q&A/progress output. [Review details](professor-review.md) distinguish actual frame observations, transcript review, approval safeguards and the edited GUI-first supplement. F11 reminders precedes F10 progress in the recording. No claim of every-feature CLI demonstration is made.
+
+Supplement: [GUI first, then the same progress task in the CLI](video/gui-then-cli.mp4). This silent 29.3-second edit uses unaltered excerpts from the original recording; [edit details](video/README.md) disclose the source times and processing.
 
 | Feature | Start | Direct video link |
 | --- | --- | --- |

@@ -193,8 +193,14 @@
       "3:40 Q&A",
       "11:35-11:50 progress"
     ],
-    "gui_progress_result": "12:00",
-    "identical_task_gui_then_cli_order": "not established; progress appears CLI then GUI",
+    "gui_progress_result": "12:03",
+    "identical_task_gui_then_cli_order": "Provided by the clearly labeled reordered supplement; original progress appears CLI then GUI.",
     "details": "docs/professor-review.md"
+  },
+  "supplement": {
+    "video_url": "https://github.com/AidaRezaei24/studyforge-stage1-design/raw/refs/heads/main/docs/video/gui-then-cli.mp4",
+    "repository_path": "docs/video/gui-then-cli.mp4",
+    "description": "Silent 29.3-second edited original excerpts: same course progress task, GUI first then real terminal CLI. Commands/results unaltered.",
+    "edit_manifest": "docs/video/edit-manifest.json"
   }
 }

@@ -207,7 +207,9 @@ limitations are recorded in the report.
 
 The report now includes screenshots for F01-F12 and explicit original requirements.
 The [follow-up review](docs/professor-review.md) records fixes, video observations
-and evidence provenance. All 53 automated tests pass. After the owner updated the
+and evidence provenance. A [29-second GUI-then-CLI supplement](docs/video/gui-then-cli.mp4)
+shows the same progress task in the professor's requested order using clearly labeled
+excerpts from your original recording. All 53 automated tests pass. After the owner updated the
 local API key, [the current live run](docs/nov24-live-verification.json) passed
 23 checks across all twelve features using 11 actual provider requests.
 [Standalone subprocess checks](docs/nov24-cli-verification.json) also pass.

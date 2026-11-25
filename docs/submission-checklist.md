@@ -17,7 +17,7 @@ This checklist distinguishes implemented source from evidence still required.
 | Updated diagrams | Class/use-case views and 9 sequence diagrams cover original 11 interaction shapes | Prepared |
 | AI collaboration log and total costs | Collaboration log; runtime token ledger and explicit price estimate | Dashboard screenshot: 52,645 tokens, 59 requests, USD 0.04 displayed spend, Oct 26-Nov 16; Codex token/cost totals still unavailable |
 | Weekly code commits and links | Development on October 26, October 28 and November 6 includes 5, 6 and 5 production code commits; links in report | Counts recorded; course compliance requires instructor review |
-| Every feature demonstrated on video | Owner supplied [a YouTube recording](https://youtu.be/vovxVKUw2TE); all twelve owner-supplied timestamps are indexed | Selected feature frames and GUI/CLI outputs reviewed November 24; exact GUI-first ordering caveat documented |
+| Every feature demonstrated on video | Owner supplied [a YouTube recording](https://youtu.be/vovxVKUw2TE); all twelve owner-supplied timestamps are indexed | Selected feature frames and GUI/CLI outputs reviewed November 24; GUI-first supplement included |
 | Video access and timestamps | Direct segment links recorded in `demo-index.json`; video played in a signed-out browser session | Playback verified November 24; selected-frame scope documented |
 | Final course submission | Submit the repository URL through the course system | Owner action pending |
 
