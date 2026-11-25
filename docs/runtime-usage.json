@@ -48,7 +48,20 @@
   },
   "estimated_standard_uncached_usd": 0.0137008,
   "measured_account_charge_usd": null,
-  "development_tool_totals": "Not exposed by this coding environment; owner usage export needed.",
+  "development_tool_totals": {
+    "snapshot_evidence": "docs/codex-usage.json",
+    "snapshot_at_utc": "2026-11-25T04:53:42.341637+00:00",
+    "scoped_threads": 13,
+    "recorded_model": "gpt-6.1-sol (thread metadata)",
+    "total_tokens": 127032805,
+    "root_tokens": 96238069,
+    "delegate_tokens": 30794736,
+    "billing_basis": "Owner confirmed ChatGPT subscription with no additional Codex credits; agent runtime used separate API credits. Connected account reports Plus.",
+    "incremental_codex_credit_spend_usd": 0,
+    "subscription_list_price_usd_per_month": 20,
+    "subscription_price_source": "https://learn.chatgpt.com/docs/pricing",
+    "subscription_cost_allocation": "Existing shared Plus subscription. Published USD base price is not an invoice or project-specific allocation; tax, currency conversion and actual monthly receipt were not supplied. Delegates do not constitute another subscription."
+  },
   "scope": "The 24 validation requests listed here only. Excludes later demonstration recording requests and Codex development usage; not a complete project cost total.",
   "owner_reported_account_usage": {
     "total_spend_usd": 0.04,
@@ -70,5 +83,16 @@
     "evidence": "docs/nov24-live-verification.json",
     "initial_failed_attempt": "docs/nov24-live-check.json",
     "actual_billed_cost": "Not measured; consult account billing."
-  }
+  },
+  "recorded_validation_total": {
+    "requests": 35,
+    "input_tokens": 22220,
+    "output_tokens": 6911,
+    "total_tokens": 29131,
+    "estimated_standard_uncached_usd": 0.0199456,
+    "scope": "Original 24 recorded validation requests plus 11 November 24 requests. Original final acceptance is already inside the 24 and is not counted again. The historical account dashboard overlaps and is not added.",
+    "actual_billed_charge_usd": null,
+    "estimate_authorized_by_owner_on": "2026-11-24"
+  },
+  "recorded_development_and_validation_tokens": 127061936
 }
